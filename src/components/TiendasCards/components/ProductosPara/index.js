@@ -1,0 +1,1 @@
+export { ProductosPara } from "./ProductosPara";

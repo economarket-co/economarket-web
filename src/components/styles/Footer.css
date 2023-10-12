@@ -1,0 +1,14 @@
+AppFooter {
+    background-color: #033E8C;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+item{
+    margin-top: 31;
+}
+
+intern{
+
+    margin-top: 18;
+}
