@@ -9,9 +9,9 @@ import carulla from "../assets/CarullaCard.png"
 import error from "../assets/Error.png"
 import { comprobarImagen } from './utilities/GlobalFunctions'
 
-const CardSupermercado = ({tienda}) => {
+const CardSupermercado = ({tienda, activo}) => {
 
-    const [{basket, totalBasket, barato, disponibilidad}, dispatch] = useStatevalue();
+    const [{basket, lower_basket, totalBasket, barato, disponibilidad}, dispatch] = useStatevalue();
 
     const getDisponibilidad = (p) =>{
 
@@ -21,6 +21,14 @@ const CardSupermercado = ({tienda}) => {
             return true;
         } else{
             return false;
+        }
+    }
+    const getData = () =>{
+        if(activo){
+            console.log(">>>",lower_basket[tienda]);
+            return lower_basket[tienda].productos
+        }else{
+            return basket
         }
     }
 
@@ -65,7 +73,7 @@ const CardSupermercado = ({tienda}) => {
     }
     }>
         {
-            barato === tienda &&
+            barato === tienda && !activo &&
             <Grid container sx={{ 
                 justifyContent: "center",
                 alignContent: "center",
@@ -87,7 +95,8 @@ const CardSupermercado = ({tienda}) => {
                 <CardMedia
                     component="img"
                     image={getImage()}
-                    height="100%"
+                    height="100"
+                    width="50"
                 />
         </Grid>
         <CardContent>
@@ -98,7 +107,7 @@ const CardSupermercado = ({tienda}) => {
                         <Table  sx={{width: "100%", maxHeight: "60",  borderCollapse: 'collapse'}}>
                             <TableBody>
                                 {
-                                    basket.map(p =>(
+                                    getData()?.map(p =>(
                                         <TableRow key={p.id}>
                                             <TableCell component="th" sx={{
                                                 fontFamily: "Quicksand",
@@ -142,13 +151,13 @@ const CardSupermercado = ({tienda}) => {
                 }}>
                     <Grid item>    
                         <Typography color="#9D9D9D" variant='body2' fontFamily="Quicksand" fontWeight="500">
-                        {basket.length} productos de tu lista
+                        {!activo ? basket.length : lower_basket[tienda].productos.length} productos de tu lista
                         </Typography>
                     </Grid>
 
                     <Grid item>    
                         <Typography color="#434343" variant='h5' fontFamily="Quicksand" fontWeight={500}>
-                        {totalBasket[tienda]}
+                        {!activo ? totalBasket[tienda]: lower_basket[tienda].total}
                         </Typography>
                     </Grid>
                 </Grid>

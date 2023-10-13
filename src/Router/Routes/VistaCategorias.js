@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from '@mui/material'
+import { Button, Grid, Typography, useMediaQuery } from '@mui/material'
 import React, { useEffect } from 'react'
 import Banners from '../../components/Banners'
 import bg from "../../assets/BackgroundCategorias.jpeg"
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 
 const VistaCategorias = () => {
   const [{categories}, dispatch] = useStatevalue();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() =>{
 
@@ -28,7 +29,7 @@ const VistaCategorias = () => {
 
   }, [dispatch])
 
-
+  const fontSizeM = isMobile && "9px"
   return (
     <Grid container>
         <Banners title="Siempre frescos" imagen={bg} extra="50% en verduras seleccionadas"/>
@@ -50,7 +51,7 @@ const VistaCategorias = () => {
             <Grid marginLeft="2%" container spacing={1} justifyContent="center"> 
               {
                 categories.map(c =>(
-                  <Grid item marginTop="5%" lg={3} md={5} sm={9} xs = {12}>
+                  <Grid item marginTop="5%" lg={3} md={5} sm={3} xs = {5}>
                     <Categorias key={c} categoria={c} />
                   </Grid>
                 ))
@@ -65,20 +66,22 @@ const VistaCategorias = () => {
           backgroundPosition: "center",
           padding: "5%"
         }}>
-            <Grid item width="50%">
-              <Typography variant='h6' color="#FFFFFF" fontFamily="Quicksand" fontWeight={600}>
+            <Grid item width= {!isMobile ? "50%" : "100%"} >
+              <Typography fontSize={isMobile && "11px"} variant={isMobile ? 'subtitle1' : 'h6'} color="#FFFFFF" fontFamily="Quicksand" fontWeight={600}>
               Estás buscando algo más?<br/> Mira todos los productos que manejamos!
               </Typography>
             </Grid>
 
-            <Grid item width="50%" >
-              <Grid container height="100%" width="100%" alignContent="center" justifyContent="end">
+            <Grid item width={!isMobile ? "50%": "100%"} >
+              <Grid container marginTop={isMobile && "3%"} height={!isMobile? "100%": "80%"} width={!isMobile? "100%": "100%"} alignContent="center" justifyContent={!isMobile ? "end": "start"}>
                 <Link to="/productos">
                   <Button outlined sx={{
                     fontFamily: "Quicksand",
                     color: "#033E8C",
                     backgroundColor: "white",
-                    height: "auto"
+                    height: "auto",
+                    fontSize: fontSizeM,
+                    fontWeight: 600 
                   }}>
                     ver todos los productos
                   </Button>

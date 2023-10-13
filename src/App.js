@@ -43,7 +43,6 @@ function App() {
   return (
     <div>
       <Navbar/>
-      <SearchBar open={openSearch}/>  
       <Routes>
         <Route path="/" element = { <Home />}/>
         <Route path="/productos" element = { <VistaProducts />}/>
@@ -51,10 +50,11 @@ function App() {
         <Route path="/carrito" element = { <VistaCarrito />}/>
         <Route path="/promociones" element = { <VistaPromociones />}/>
         <Route path="/favoritos" element = { <VistaFavoritos />}/>
-        <Route path="/login" element = { <Login />}/>
+        <Route path="/login" element = { <Login />}></Route>
         <Route path="/signup" element = { <Registro />}/>
         <Route path="/comparador" element = { <VistaComparador />}/>
       </Routes>
+      <SearchBar open={openSearch}/>  
       <Footer/>
     </div>
 

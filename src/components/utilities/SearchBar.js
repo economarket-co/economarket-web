@@ -13,9 +13,11 @@ const SearchBar = ({open}) => {
 
   const [search, setSearch] = useState("");
   const [{products}, dispatch] = useStatevalue();
-  const [data, setData] = useState(products.slice(0,4));
+  const [data, setData] = useState([]);
 
   useEffect(() =>{
+
+    setData(products.slice(0,4));
 
     const filteredResult = products.filter((p) =>
       p.Descripcion.toLowerCase().includes(search.toLowerCase())
@@ -23,7 +25,7 @@ const SearchBar = ({open}) => {
 
     setData(filteredResult);
 
-  },[search]);
+  },[search, products]);
 
   const handleClose = () =>{
 

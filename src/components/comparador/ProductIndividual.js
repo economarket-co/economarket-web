@@ -9,9 +9,17 @@ import CardComparador from './CardComparador'
 const ProductIndividual = () => {
 
     const [isFavorite, setIsFavorite] = useState(false)
-    const [{selectedProduct, favoritos, tiendas, basket}, dispatch] = useStatevalue()
+    const [{selectedProduct,products, favoritos, tiendas, basket}, dispatch] = useStatevalue()
 
     useEffect(() =>{
+
+        if(!selectedProduct){
+            dispatch({
+                type: actionTypes.SELECT_PRODUCTS,
+                item: products[0]
+            })
+        }
+        
         if(favoritos.find((p) => p.id === selectedProduct.id)){
             setIsFavorite(true)
         }else{
@@ -114,7 +122,7 @@ const ProductIndividual = () => {
                 <Grid container spacing={3} marginTop="2%">
                     {
                         tiendas.map((m) =>(
-                            <Grid item lg = {6} md = {12}>
+                            <Grid item lg = {6} md = {12} sx = {6} xs ={12}>
                                 <CardComparador key={m} tienda={m} />
                             </Grid>
                         ))

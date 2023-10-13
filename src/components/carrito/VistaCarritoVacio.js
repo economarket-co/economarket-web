@@ -1,9 +1,11 @@
-import { Button, Grid, Paper, Typography } from '@mui/material'
+import { Button, Grid, Paper, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { AddShoppingCart} from '@mui/icons-material'
-
+import shopping from "../../assets/Shopping Basket.png"
 const VistaCarritoVacio = () => {
+
+  const isMobile = useMediaQuery("(max-width: 768px)"); 
+  
   return (
 
     <Grid container sx={{
@@ -15,11 +17,57 @@ const VistaCarritoVacio = () => {
       minHeight: "500px", 
       padding: "5%",  
       marginTop: "0.1%"
-  }} spacing={2}>
+  }} spacing={!isMobile ? 2: 0}> 
+
+  {
+    isMobile && <Grid item
+    sx={{
+      width: "100%",
+      textAlign: "center",
+      alignSelf: "end",
+    }}
+    >
+      <Paper height = {!isMobile ? "40%": "100"} sx={{
+              width: "100%",
+              padding:"10% 10% 10% 10%",
+              justifyItems: "start",
+              alignItems: "start",
+              textAlign: "start"
+      }}>
+
+        <Grid container>
+
+          <Grid item>
+            <Typography color="#9D9D9D" fontFamily="Quicksand" fontWeight={600} variant='h6'>
+            Resumen de compra
+            </Typography>
+          </Grid>
+         
+          <Grid item sx={{
+            width: "100%",
+            height: 1.5,
+            marginTop :"2%",
+            marginBottom: "2%",
+            backgroundColor: "#B4B4B4"
+          }}>
+          </Grid>
+
+          <Grid item>
+
+            <Typography variant={isMobile ?'p': "subtitle1"} color="#9D9D9D" fontFamily="Quicksand" fontWeight={500}>
+            Aquí verás información de tu carrito a medida en que ingreses productos
+            </Typography>
+          </Grid>
+
+        </Grid>
+      </Paper>
+    </Grid>
+  }
 
     <Grid item
+      width={!isMobile?"60%" : "100%" }
+      marginTop={isMobile && "5%"}
       sx={{
-        width: "60%",
         height: "100%",
         textAlign: "center"
       }}
@@ -33,7 +81,7 @@ const VistaCarritoVacio = () => {
       }}>
 
         <Grid container sx={{marginBottom: "5%",alignContent: "center", justifyContent: "center"}}>
-          <AddShoppingCart sx={{
+          <img alt = '' src={shopping} style={{
             width: "90px",
             height: "90px"
           }} />
@@ -49,7 +97,7 @@ const VistaCarritoVacio = () => {
 
           <Grid item sx={{marginTop: "5%"}}>
 
-            <Typography variant="p" color="#646464" fontFamily="Quicksand" fontWeight={500}>
+            <Typography variant={!isMobile?"p": "subtitle2"} color="#646464" fontFamily="Quicksand" fontWeight={500}>
             Suma productos y descubre la manera más conveniente de comprarlos
             </Typography>
           </Grid>
@@ -84,10 +132,9 @@ const VistaCarritoVacio = () => {
         alignSelf: "end"
       }}
     >
-
-      <Paper sx={{
+      {
+            !isMobile && <Paper height = {!isMobile ? "40%": "100"} sx={{
               width: "100%",
-              height: "40%",
               padding:"10% 10% 10% 10%",
               justifyItems: "start",
               alignItems: "start",
@@ -101,6 +148,7 @@ const VistaCarritoVacio = () => {
             Resumen de compra
             </Typography>
           </Grid>
+         
           <Grid item sx={{
             width: "100%",
             height: 1.5,
@@ -112,13 +160,16 @@ const VistaCarritoVacio = () => {
 
           <Grid item>
 
-            <Typography variant='p' color="#9D9D9D" fontFamily="Quicksand" fontWeight={500}>
+            <Typography variant={isMobile ?'p': "subtitle1"} color="#9D9D9D" fontFamily="Quicksand" fontWeight={500}>
             Aquí verás información de tu carrito a medida en que ingreses productos
             </Typography>
           </Grid>
 
         </Grid>
       </Paper>
+      }
+
+      
     </Grid>
   </Grid>
   )

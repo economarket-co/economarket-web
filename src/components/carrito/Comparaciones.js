@@ -49,7 +49,6 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
     },
   }));
 
-
 const Comparaciones = () => {
 
     const [activo, setActivo] = useState(true);
@@ -65,32 +64,71 @@ const Comparaciones = () => {
       });
 
       DataService("/tiendas/product", "POST", {"lista_id": basketId})
-          .then(r =>{   
+          .then(r =>{
               setCargando(true);
               console.log("Estoy Cargando??????", cargando);
               let total = {Exito:0, Olimpica:0, Jumbo:0,Carulla:0} 
+              let lower_basket = {
+                Exito: {
+                    productos: [],
+                    total: 0
+                },
+                Olimpica: {
+                    productos: [],
+                    total: 0
+                },
+                Jumbo:{
+                    productos: [],
+                    total: 0
+                },
+                Carulla: {
+                    productos: [],
+                    total: 0
+                }
+              }
               r?.data.forEach(p =>{
                   let bitem = basket.find(bp => p.id === bp.id)
                   p.cantidad = bitem.cantidad
+                  let t_barato = "";
+                  let menorP = Infinity;
                   tiendas.forEach(m =>{
                       if(Object.keys(p[m]).length !== 0){
                           console.log("Price >>>>", p[m].price);
                           console.log("Cantidad >>>>", p.cantidad);
                           total[m] += (p[m].price * p.cantidad)
+                          if(menorP > p[m].price){
+                            menorP = p[m].price
+                            t_barato = m
+                          }
                       }
+                  
+                    })
+                    lower_basket[t_barato].productos.push(p)
                   })
-                  dispatch({
-                      type: actionTypes.PUT_TOTAL_BASKET,
-                      item: total
+                  tiendas.forEach(t =>{
+                    let total = 0
+                    lower_basket[t].productos.forEach(p =>{
+                      total += (p[t].price * p.cantidad)
+                    })
+                    lower_basket[t].total = total
                   })
-                  dispatch({
-                    type: actionTypes.ADD_BARATO,
+
+                  console.log(">>>",lower_basket);
+                dispatch({
+                  type: actionTypes.LOAD_LOWER_BASKET,
+                  item: lower_basket
+                })
+                dispatch({
+                    type: actionTypes.PUT_TOTAL_BASKET,
                     item: total
                 })
-                  console.log(totalBasket);
-              })
-              console.log("Estoy Cargando??????", cargando);
-              setCargando(false);
+                dispatch({
+                  type: actionTypes.ADD_BARATO,
+                  item: total
+                })
+                console.log(totalBasket);
+                console.log("Estoy Cargando??????", cargando);
+                setCargando(false);
           })
           .catch(e =>{
               console.log("Error al obtener los datos", e);
@@ -120,7 +158,7 @@ const Comparaciones = () => {
           <Grid item container justifyContent="center" alignItems="center" marginTop="2%">
             <Grid item>
               <Typography color="#434343" variant='p' fontFamily="Quicksand" fontWeight={500}>
-                Comprando todo en el mismo supermercado
+                {!activo ? "Comprando todo en el mismo supermercado" : "Buscando la alternativa mas economica" }
               </Typography>
             </Grid>
             <Grid item marginLeft={"1%"}>
@@ -144,9 +182,9 @@ const Comparaciones = () => {
               {
                 tiendas.map(m =>(
                   <Grid sx={
-                    m === barato ? {transform: 'translateY(-12.5%)'} : {}
+                    m === barato && !activo ? {transform: 'translateY(-12.5%)'} : {}
                   } item lg = {3} md = {6} marginTop={"5%"}>
-                      <CardSupermercado key={m} tienda={m} />
+                      <CardSupermercado key={m} tienda={m} activo={activo} />
                     </Grid>
                 ))
               }

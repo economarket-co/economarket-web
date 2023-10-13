@@ -1,10 +1,46 @@
-import { Button, Grid, InputBase, Paper, Typography } from '@mui/material'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Button, Dialog, DialogContent, Grid, InputBase, Paper, Typography, useMediaQuery } from '@mui/material'
+import React, { useState } from 'react'
+import { Link, redirect} from 'react-router-dom'
 import google from "../../assets/Google.png"
 import facebook from "../../assets/Faceboo.png"
+import { auth } from '../../Firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { useStatevalue } from '../../StateProvider'
+import { actionTypes } from '../../reducer'
 
 const SignIn = () => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [{user}, dispatch] = useStatevalue();
+  const [isError, setError] = useState([false,""]);
+
+  const signin = (e) =>{
+
+    e.preventDefault();
+    
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential)  =>{
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: userCredential.user
+        })
+
+        setError([false, ""]);
+        redirect("/")
+      })
+      .catch(e =>{
+        setError([true, e])
+      })
+
+  }
+
+  const cerrar =  () =>{
+    setError([false, ""])
+  }
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const border = !isMobile &&"36px";
   return (
 
     <Grid container justifyContent="end" sx={{
@@ -12,12 +48,52 @@ const SignIn = () => {
       display: "flex",
     }}>
 
-      <Paper sx={{
-        borderStartStartRadius: "36px",
-        borderBottomLeftRadius: "36px",
+      <Dialog open={isError[0]} onClose={cerrar}>
+
+        <DialogContent>
+        <Grid container padding="0px 0px" direction="column" marginTop = "5%" marginBottom="8%" alignItems="center" textAlign="center">
+              <Grid item paddingTop="3%">
+                  <Typography color="#B6B6B6" fontWeight={600} variant='h3' fontFamily="Quicksand">
+                      :(
+                  </Typography>
+              </Grid>
+              <Grid item paddingTop="5%">
+                  <Typography color="#434343" fontWeight={600} variant='h6' fontFamily="Quicksand">
+                  Error al iniciar sesion
+                  </Typography>
+              </Grid>
+
+              <Grid item paddingTop="5%">
+                  <Typography color="red" fontWeight={600} variant='h6' fontFamily="Quicksand">
+                  {isError[1].toString()}
+                  </Typography>
+              </Grid>
+
+              <Grid item paddingTop="5%" width="35%" height="15%">
+                    <Button onClick={cerrar} sx={{
+                        fontFamily: "Quicksand",
+                        fontWeight: 600,
+                        color: "#FFFFFF",
+                        backgroundColor: "#033E8C",
+                        width: "100%",
+                        height: "100%"
+                    }}>
+                        Cerrar
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </DialogContent>
+
+      </Dialog>
+
+      <Paper
+      width = {!isMobile ? "50%": "100%"}
+      sx={{
+        borderStartStartRadius: border,
+        borderBottomLeftRadius: border,
         padding: "4%",
         backgroundColor: "#FCFEFF",
-        width: "50%",
       }}>
 
         <Grid container justifyContent="start" direction="column">
@@ -49,6 +125,11 @@ const SignIn = () => {
                 <InputBase sx={{ ml: 3, height: "100%", flex: 1 , fontFamily: "Poppins", color: "#7C838A"}}
                               placeholder="Ingresa tu correo aquí"
                               inputProps={{ 'aria-label': 'Ingresa tu correo aquí' }}
+                              required
+                              id="email"
+                              autoComplete="email"
+                              onChange={e=>setEmail(e.target.value)}
+                              value={email}
                 />
               </Paper>
             </Grid>
@@ -75,6 +156,12 @@ const SignIn = () => {
                 <InputBase sx={{ ml: 3, height: "100%" ,flex: 1 , fontFamily: "Poppins", color: "#7C838A"}}
                               placeholder="Ingresa tu contraseña aquí"
                               inputProps={{ 'aria-label': 'Ingresa tu contraseña aquí' }}
+                              onChange={e=>setPassword(e.target.value)}
+                              value={password}
+                              type="password"
+                              id="password"
+                              autoComplete="current-password"
+                              required
                 />
               </Paper>
             </Grid>
@@ -83,7 +170,7 @@ const SignIn = () => {
           <Grid item sx={{marginTop: "10%", alignContent: "center",justifyContent: "center"}}>
 
             <Grid variant="outlined" container justifyContent="center">
-              <Button sx={{
+              <Button type="submit" variant="contained" onClick={signin} sx={{
                 fontFamily: "Poppins",
                 color:"#FFFFFF",
                 fontWeight: 500,

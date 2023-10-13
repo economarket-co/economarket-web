@@ -1,4 +1,4 @@
-import { Grid, IconButton, InputBase, Paper, Typography } from '@mui/material'
+import { Grid, IconButton, InputBase, Paper, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 import lupa from "../assets/lupa.png"
 import back from "../assets/Rectangle2.png"
@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom'
 const Prefooter = () => {
 
     const [{openSearch}, dispatch] = useStatevalue();
+    
 
     const openSearchBar = () =>{
 
@@ -22,6 +23,10 @@ const Prefooter = () => {
             open: true
         })
     }
+
+    const isMobile = useMediaQuery("(max-width: 768px)");
+    const widthSearch = !isMobile ? "49%": "80%"
+    const fSize = isMobile && "12px"
   return (
     <Grid container sx={{
         backgroundImage:`url('${back}')`,
@@ -33,12 +38,12 @@ const Prefooter = () => {
         <Grid container sx={{textAlign: "center", marginTop: "5%", justifyContent: "center"}}>
 
             <Grid item direction="column" sx ={{color: "#FFFEFE", width: "100%", height: "auto" }}>
-                <Typography variant='p' fontFamily="Quicksand" fontWeight={600}>
+                <Typography variant={!isMobile ? 'p': 'h6'} fontFamily="Quicksand" fontWeight={600}>
                 Encontrar el mejor precio
                 </Typography>
             </Grid>
             <Grid item direction="column" sx ={{color: "#FFFEFE", width: "100%", height: "auto" }}>
-                <Typography variant='h4' fontFamily="DM Serif Display" fontWeight={400}>
+                <Typography variant={!isMobile ? 'h4': 'h5'} fontFamily="DM Serif Display" fontWeight={400}>
                 En solo tres pasos
                 </Typography>
             </Grid>
@@ -46,21 +51,20 @@ const Prefooter = () => {
                 marginTop: "6%"
             }}>
 
-                <Grid container spacing={12}>
+                <Grid container spacing={!isMobile ?12 : 0}>
 
                     <Grid item>
                         <Grid sx={{
                         }}>
                             
                             <IconButton onClick={openSearchBar} sx={{width: "100%", height:"100%"}}>
-                                <img alt='' src={lupa}  width="58.57%" height="83%"/>
+                                <img alt='' src={lupa}  width={!isMobile ? "58.57%": "20%"} height={!isMobile ? "82%": "20%"}/>
                             </IconButton>
                         </Grid>
-                        <Grid sx={{
-                            marginTop: "12.8%"
+                        <Grid marginTop={isMobile ? "1%" : "12.8%"}  sx={{
                         }}>    
-                            <Typography variant='p' fontFamily="Quicksand" color="white" fontWeight={600}>
-                            Busca tu producto
+                            <Typography fontSize={isMobile && "11.55px"} variant={!isMobile ?'p': "subtitle2" } fontFamily="Quicksand" color="white" fontWeight={600}>
+                            Busca <br/> tu producto
                             </Typography>
                         </Grid>
                     </Grid>
@@ -70,16 +74,15 @@ const Prefooter = () => {
                         }}>
                             <Link to="/carrito">
                                 <IconButton sx={{width: "100%", height:"100%"}}>
-                                    <img alt='' src={cart}  width="58.57%" height="83%"/>
+                                    <img alt='' src={cart}   width={!isMobile ? "58.57%": "20%"} height={!isMobile ? "82%": "20%"}/>
                                 </IconButton>
                             </Link>
                             
                         </Grid>
-                        <Grid sx={{
-                            marginTop: "15%"
+                        <Grid marginTop={isMobile ? "1%" : "15%"} sx={{
                         }}>    
-                            <Typography variant='p' fontFamily="Quicksand" color="white" fontWeight={600}>
-                            Añádelo al carrito
+                            <Typography fontSize={isMobile && "11.55px"} variant={!isMobile ?'p': "subtitle1" } fontFamily="Quicksand" color="white" fontWeight={600}>
+                            Añádelo <br/>al carrito
                             </Typography>
                         </Grid>
                     </Grid>
@@ -89,15 +92,14 @@ const Prefooter = () => {
                         }}>
                             <Link to="/comparador">
                                 <IconButton sx={{width: "100%", height:"100%"}}>
-                                    <img alt='' src={scales}  width="58.57%" height="82%"/>
+                                    <img alt='' src={scales}  width={!isMobile ? "58.57%": "20%"} height={!isMobile ? "82%": "20%"}/>
                                 </IconButton>
                             </Link>
                         </Grid>
-                        <Grid sx={{
-                            marginTop: "4.8%"
+                        <Grid marginTop={isMobile ? "1%" : "4.8%"} sx={{
                         }}>    
-                            <Typography variant='p' fontFamily="Quicksand" color="white" fontWeight={600}>
-                            Compara los precios
+                            <Typography fontSize={isMobile && "11.55px"} variant={!isMobile ?'p': "subtitle1" } fontFamily="Quicksand" color="white" fontWeight={600}>
+                            Compara <br/> los precios
                             </Typography>
                         </Grid>
                     </Grid>
@@ -111,7 +113,7 @@ const Prefooter = () => {
                 height:"auto",
             }}> 
                 <Grid>
-                    <Typography variant='h3' fontFamily="DM Serif Display" color="#033E8C" fontWeight={400}>
+                    <Typography variant={!isMobile ? 'h3' : 'h6'} fontFamily="DM Serif Display" color="#033E8C" fontWeight={400}>
                     Así que cuéntanos,
                     </Typography>
                 </Grid>
@@ -125,9 +127,9 @@ const Prefooter = () => {
                          p: 'auto', 
                          display: 'flex', 
                          alignItems: 'center', 
-                         width: "49%", 
                          height: "100%",
-                         margin: "auto",
+                         width: widthSearch,
+                         margin: "auto",    
                          borderRadius: "300px"
                         }}
                     >
@@ -135,7 +137,7 @@ const Prefooter = () => {
                             <SearchIcon />
                         </IconButton>
                         <InputBase
-                            sx={{ ml: 1, flex: 1 , fontFamily: "Inter", color: "#033E8C"}}
+                            sx={{ ml: 1, flex: 1 , fontSize: fSize ,fontFamily: "Inter", color: "#033E8C"}}
                             placeholder="¿Que producto estas buscando?"
                             inputProps={{ 'aria-label': '¿Que producto estas buscando?' }}
                         />
@@ -151,7 +153,7 @@ const Prefooter = () => {
             background: "none",
             marginTop: "2.5%"
         }}>
-            <img alt='' src={fondo} width="68.5%" height="82%"/> 
+            <img alt='' src={fondo} width={!isMobile ? "68.5%": "100%"} height={!isMobile ? "82%": "100%"}/> 
         </Grid>
     </Grid>
     

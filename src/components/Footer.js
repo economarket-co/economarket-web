@@ -1,6 +1,6 @@
 import React from 'react'
 import "./styles/Footer.css"
-import { Box, Container, CssBaseline, Grid, Typography, InputBase, Paper, Button } from '@mui/material'
+import { Box, Container, CssBaseline, Grid, Typography, InputBase, Paper, Button, useMediaQuery } from '@mui/material'
 import { Language, MailOutline, WhatsApp } from '@mui/icons-material'
 import logo from "../assets/Group 79.svg"
 
@@ -12,7 +12,10 @@ export const Footer = () => {
       color: "white",
     },
   }
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
+    <Grid>
+
     <Box 
       component="footer"
       sx={{backgroundColor: "#033E8C", p: 6}}
@@ -70,9 +73,9 @@ export const Footer = () => {
 
                 <Grid item direction="column" sx={{width: "auto", height: "auto",marginLeft: "1.4%", textAlign: "start"}}>
 
-                  <Grid sx ={{ width: "92%"}}item><Typography variant='p' fontWeight={400} sx={{width: "100%"}}>+57 economarket</Typography></Grid>
-                  <Grid sx={{marginTop: "4.5%", width: "92%"}} item><Typography variant='p' fontWeight={400} sx={{width: "100%"}}>@economarket</Typography></Grid>
-                  <Grid sx={{marginTop: "4.5%", width: "92%"}} item><Typography variant='p' fontWeight={400} sx={{width: "100%"}}>economarket@gmail.com</Typography></Grid>
+                  <Grid sx ={{ width: "92%"}}item><Typography  variant={!isMobile ? 'p': 'subtitle1'} fontWeight={400} sx={{width: "100%"}}>+57 economarket</Typography></Grid>
+                  <Grid sx={{marginTop: "4.5%", width: "92%"}} item><Typography variant={!isMobile ? 'p': 'subtitle2'} fontWeight={400} sx={{width: "100%"}}>@economarket</Typography></Grid>
+                  <Grid marginTop={!isMobile ? "4.5%": "6.5%" } sx={{ width: "92%"}} item><Typography  variant={!isMobile ? 'p': 'subtitle2'} fontWeight={400} sx={{width: "100%"}}>economarket@gmail.com</Typography></Grid>
                 </Grid>
               </Grid>
           </Grid>
@@ -88,20 +91,19 @@ export const Footer = () => {
             <Grid container sx={{
               // width: "71%", 
               height: "auto",
-              marginTop: "10.8%"
+              marginTop: "10.8%",
+              justifyItems: "start"
             }}
             direction = "row"
             >
-              <Grid item direction = "column">
+              <Grid>
               <Paper
                 component="form"
                 sx={{
-                      p: 'auto', 
-                      display: 'flex', 
+                      // display: 'flex', 
                       alignItems: 'start', 
                       width: "100%", 
                       height: "100%",
-                      margin: "auto",
                     }}
                 >
                   <InputBase
@@ -113,7 +115,7 @@ export const Footer = () => {
                 </Paper>
               </Grid>
 
-              <Grid item sx={{marginLeft: "4.89%"}} direction = "column">
+              <Grid item>
 
                 <Button 
                   variant="contained" 
@@ -134,5 +136,6 @@ export const Footer = () => {
         </Grid>
       </Container>
     </Box>
+    </Grid>
   )
 }

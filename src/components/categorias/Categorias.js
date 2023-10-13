@@ -1,4 +1,4 @@
-import { Card, CardContent,Typography} from '@mui/material'
+import { Card, CardContent,Typography, useMediaQuery} from '@mui/material'
 import React, { useState } from 'react'
 import { dataCategorias as data } from './Categorias-Object'
 import { Link } from 'react-router-dom';
@@ -6,12 +6,15 @@ import { useStatevalue } from '../../StateProvider';
 import { actionTypes } from '../../reducer';
 
 const Categorias = ({categoria}) => {
+  const isMobile = useMediaQuery("(max-width: 768px)"); 
   const [isHovered, setIsHovered] = useState(false);
   const [{selectedCategoria}, dispatch] = useStatevalue();
+  const widthCard = !isMobile ? '250px' : "91px"
+  const heightCard = !isMobile ? '300px' : "116px"
 
   const cardStyles = {
-    width: '250px',
-    height: '300px',
+    maxWidth: widthCard,
+    maxHeight: heightCard,
     borderRadius: '8px',
     overflow: 'hidden',
     transition: 'transform 0.3s',
@@ -32,7 +35,7 @@ const Categorias = ({categoria}) => {
   //   height: "30px"
   // }
   const textStyles = {
-    padding: '16px',
+    padding: '8%' ,
     position: 'absolute',
     bottom: '0',
     left: '0',
@@ -45,7 +48,7 @@ const Categorias = ({categoria}) => {
 
   const imageStyles = {
     transform: isHovered ? 'translateY(-10px)' : 'translateY(0)',
-    transition: 'transform 0.3s',
+    transition: 'transform 0.7s',
     width: '100%',
     height: 'auto',
     position: 'relative',
@@ -72,7 +75,7 @@ const Categorias = ({categoria}) => {
 
   return (
     <>
-    <Link to="/productos" style={{ textDecoration: 'none' }} onClick={() =>selectCategory}>
+    <Link to="/productos" style={{ textDecoration: 'none' }} onClick={selectCategory}>
         <Card
           style={cardStyles}
           onMouseEnter={handleMouseEnter}
@@ -80,7 +83,7 @@ const Categorias = ({categoria}) => {
         >
           <img alt='' style={imageStyles} src={!isHovered ? data[categoria].imagen1: data[categoria].imagen2}/>
           <CardContent style={textStyles}>
-              <Typography color={isHovered ? data[categoria].color: "#FFFFFF"} style={textStyles} variant='h6' fontFamily="DM Serif Display" fontWeight={400}>
+              <Typography fontSize={isMobile && "9.4px"} color={isHovered ? data[categoria].color: "#FFFFFF"} style={textStyles} variant='h6' fontFamily="DM Serif Display" fontWeight={400}>
               {data[categoria].label}
               </Typography>
           </CardContent>

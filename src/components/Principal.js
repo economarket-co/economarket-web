@@ -1,41 +1,44 @@
 import React from 'react'
-import { Button, Grid, Typography } from '@mui/material'
+import { Button, Grid, Typography, useMediaQuery } from '@mui/material'
 import { Link } from 'react-router-dom'
-// import bienvenida from "../assets/Bienvenida.png"
+import bg from "../assets/Fondoeconomarket.mov"
+ // import bienvenida from "../assets/Bienvenida.png"
 
 export const Principal = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)"); 
   return (
-    <Grid container position="static" sx={{
-      width: "fixed" , 
-      Height: "fixed",
-      display: 'flex',
+    <Grid container paddingBottom={isMobile ? "16%": "10%" } sx={{
       justifyContent: 'center',
-      backgroundImage: `url("https://s3-alpha-sig.figma.com/img/ea21/a301/996251dd5ef07c126479287e69cc5e17?Expires=1696809600&Signature=O7KyI9Qg4cdeQFGOmoRUfpCESx~7XIdVRvXwN2a5X5w5q9mwrfey31eOcigq9EAvt3aGaC~itRegcNSOjyf4fZNhw3YLEqGGefY8zKVlcSOllnPnzU3VXKWYdo2jS5kDGy89MKYgv-H1S4I~~AcrAPLu0iFsXDDSz-yZvmjMLfehbfRD~lxquzsrN2ToO0XB2~mkc4VpM2fH-Wc16N8kqtakYfwerF~M7YgUzLDKLg11yCwEVFNKxnGi6G7yVWkIxwMU5IUmfDY6Qp5QMux8RJ2IoZpUEusgg6nrFJcUIDuwlTSLQmhVlEF-Fv6N7iQHywrs2Ql5MFL6UEw3jVNnZA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4")`,
       paddingLeft: "16.66%",
       paddingRight: "16.66%",
-      paddingBottom: "16.66%",
-      paddingTop: "16.66%",
-      backgroundPosition: 'center',
-      backgroundSize: "cover",
-      boxSizing: "inherit",
-      textAlign: "center"
+      paddingTop: "10%",
+      textAlign: "center",
       }}>
-
+          <video src={bg} autoPlay muted loopc height={isMobile ? '110%' : "100%"} style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+        }}>
+          Your browser does not support the video tag.
+        </video>
         <Grid item direction="column" sx ={{color: "white", width: "100%", height: "auto" }}>
-          <Typography fontFamily="DM Serif Display" variant='h2' fontWeight={400}>
+          <Typography fontFamily="DM Serif Display" variant={!isMobile ?'h1': "h4"} fontWeight={400}>
           Lo que buscas, al mejor precio 
           </Typography>
         </Grid>
 
         <Grid item direction="column" sx ={{color: "white", marginTop: "3.32%", width: "100%", height: "auto"}}>
-          <Typography fontFamily="Quicksand">
+          <Typography variant={!isMobile ? 'h6': "body2"} fontFamily="Quicksand">
           En Economarket puedes comparar los precios del mismo producto en diferentes supermercados. Añade productos a tu carrito y encuentra los precios perfectos para tu mercado.
           </Typography>
         </Grid>
-        <Grid item direction="column" sx= {{marginTop: "12.8%"}}>
+        <Grid item direction="column" sx= {{marginTop: "5.8%"}}>
         
         <Link to="/productos">
-          <Button variant="contained" sx={{fontFamily: "DM Serif Display", backgroundColor: "#F28705"}}>Empieza a mercar</Button>
+          <Button variant="contained" sx={{maxHeight: "100%",fontFamily: "Quicksand", color: "#033E8C" ,backgroundColor: "white"}}>Empieza a mercar</Button>
         </Link>
         </Grid>
     </Grid>

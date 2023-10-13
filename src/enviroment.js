@@ -1,2 +1,2 @@
-export const baseUrl = "http://localhost:5500"
+export const baseUrl = "https://5zkpp938-5500.use2.devtunnels.ms/"
 

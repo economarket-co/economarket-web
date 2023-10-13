@@ -1,5 +1,5 @@
 import { AddShoppingCart, Favorite, FavoriteBorder } from '@mui/icons-material'
-import { Button, Card, CardContent, CardMedia, Grid, IconButton, Typography } from '@mui/material'
+import { Button, Card, CardContent, CardMedia, Grid, IconButton, Typography, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import tagIcon from "../assets/tag_icon.svg"
 import { useStatevalue } from '../StateProvider'
@@ -76,15 +76,22 @@ const Product = ({imagen, descripcion, id, isFavorite=false, unidad, disp}) => {
     item: products[id - 1]
    })}
 
+   const isMobile = useMediaQuery("(max-width: 768px)")
+   const widthCard = !isMobile ? 229: 80;
+   const heightCard =!isMobile ? 400: 180;
+   const fontMobile = isMobile ? "7.4px": "";
+   const widthMobile = isMobile ? "10px": "";
+   const heightMobile = isMobile ? "10px": "";
+
   return (
     <>
-        <Card onClick={selectProduct} sx={{ maxWidth: 229, maxHeight:400, position: 'relative' }}>
+        <Card onClick={selectProduct} maxWidth={widthCard} maxHeight={heightCard} sx={{position: 'relative' }}>
 
             <CardMedia
                     component="img"
                     alt="Imagen"
-                    width="200" // Ajusta el ancho para que se ajuste a la tarjeta
-                    height="200"
+                    maxWidth= {!isMobile ? "200" : "80"}   // Ajusta el ancho para que se ajuste a la tarjeta
+                    maxHeight={!isMobile ? "200": "80" } 
                     image={imagen}
                     title={descripcion}
                     sx={{
@@ -105,21 +112,21 @@ const Product = ({imagen, descripcion, id, isFavorite=false, unidad, disp}) => {
             </IconButton>
             <CardContent width= "100%" height = "50%">
                 <Link to="/comparador" style={{textDecoration: 'none'}} onClick={selectProduct}>
-                <Typography color="#343434" variant='body2' fontFamily="Quicksand" fontWeight="500">
+                <Typography fontSize={isMobile && "8.4px"} color="#343434" variant={!isMobile ? 'body2': "subtitle2" } fontFamily="Quicksand" fontWeight="500">
                 {descripcion}
                 </Typography>
                 </Link>
-                <Typography variant='caption' fontWeight={400} fontFamily="Quicksand" color="#646464">
+                <Typography fontSize={isMobile && "8.4px"} variant='caption' fontWeight={400} fontFamily="Quicksand" color="#646464">
                 {unidad !== " " ? unidad : "1 unidad" }
                 </Typography>
                 <Grid container width="100%" height="1%" direction="row">
-                    <Grid width="10%" item><img alt='' src={tagIcon}/></Grid>
+                    <Grid width="10%" item><img width={isMobile && "5px"} height={isMobile &&"5px"} alt='' src={tagIcon}/></Grid>
                     <Grid item width="90%" sx={{marginTop:"3%"}}>
                         <Typography 
                                     color="#646464" 
                                     fontFamily="Quicksand" 
                                     fontWeight="400"
-                                    fontSize="9.04px"
+                                    fontSize={!isMobile ? "9.04px": "6px" }
                                 >
                         {disponibilidad()}
                         </Typography>
@@ -127,8 +134,15 @@ const Product = ({imagen, descripcion, id, isFavorite=false, unidad, disp}) => {
                 </Grid>
 
                 <Grid container justifyContent="center" marginTop="5%" marginBottom ="-5%">
-                    <Button onClick={addToBasket} variant="contained" sx={{width: "100%", fontFamily: "Quicksand", fontWeight: "600", color:"#FFFFFF", backgroundColor:"#01CC5E"}}>
-                    Agregar <AddShoppingCart sx={{marginLeft: "5%"}}/>
+                    <Button onClick={addToBasket} variant="contained" 
+                    sx={{
+                        fontSize: fontMobile,
+                        width: "100%", 
+                        fontFamily: "Quicksand", 
+                        fontWeight: "600", 
+                        color:"#FFFFFF", 
+                        backgroundColor:"#01CC5E"}}>
+                    Agregar <AddShoppingCart sx={{marginLeft: "5%", width: widthMobile, height: heightMobile}}/>
                     </Button>
                 </Grid>
 

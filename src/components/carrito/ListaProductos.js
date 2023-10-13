@@ -1,5 +1,5 @@
 import { Delete, ShoppingCartCheckout } from '@mui/icons-material'
-import { Button, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import { Button, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import Comparaciones from './Comparaciones';
 import { useStatevalue } from '../../StateProvider';
@@ -18,6 +18,8 @@ const ListaProductos = ({data}) => {
   const toggleSegundoComponente = () => {
     setMostrarSegundoComponente(!mostrarSegundoComponente);
   };
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const deleteItem = (p) =>{
     let newBasket = basket;
@@ -43,7 +45,10 @@ const ListaProductos = ({data}) => {
         item: newBasket
       })
     }
+
   }
+
+
 
     const getDisponibilidad = () =>{
 
@@ -78,12 +83,80 @@ const ListaProductos = ({data}) => {
           minHeight: "500px", 
           padding: "5%",  
           marginTop: "0.1%"
-      }} spacing={2}>
+      }} spacing={!isMobile ?2 : 0}>
+
+        {
+          isMobile && <Grid item
+          sx={{
+            width: "100%",
+            textAlign: "center",
+            alignSelf: "end"
+          }}
+        >
+    
+          <Paper sx={{
+                  width: "100%",
+                  minHeight: "65%",
+                  padding:"10% 10% 10% 10%",
+                  justifyItems: "start",
+                  alignItems: "start",
+                  textAlign: "start"
+          }}>
+    
+            <Grid container>
+    
+              <Grid item>
+                <Typography color="#9D9D9D" fontFamily="Quicksand" fontWeight={600} variant='h6'>
+                Resumen de compra
+                </Typography>
+              </Grid>
+              <Grid item sx={{
+                width: "100%",
+                height: 1.5,
+                marginTop :"2%",
+                marginBottom: "2%",
+                backgroundColor: "#B4B4B4"
+              }}>
+              </Grid>
+    
+              <Grid item>
+    
+                <Typography variant='p' color="#9D9D9D" fontFamily="Quicksand" fontWeight={500}>
+                  Tienes {data.length } items en tu carrito.
+                  <br/>
+                  <br/>
+                  {getDisponibilidad()} de tus productos no se encuentran en algunos supermercados. Revisa las listas y verifica que las alternativas sean de tu agrado.
+                </Typography>
+              </Grid>
+    
+            </Grid>
+
+            <Grid item sx={{marginTop: "10%", width:"80%", height:"20%"}}>
+              <Button sx={{
+                  height: "70%",
+                  width: "100%",
+                  color: "#fff",
+                  fontFamily: "Quicksand",
+                  fontWeight: 500,
+                  backgroundColor: "#01CC5E", 
+                  "&:hover": {
+                      backgroundColor: "#01CC5E", // Fondo del botón en estado hover
+                      color: "#fff", // Color del texto en estado hover
+                  }}}
+                onClick={toggleSegundoComponente}
+              >
+                 ver comparaciones
+              </Button>
+            </Grid>
+          </Paper>
+        </Grid>
+        }
     
         <Grid item
+          marginTop={isMobile && "5%"}
+          marginBotton={isMobile && "5%"}
+          width={isMobile ? "100%" : "60%"}
           sx={{
-            width: "60%",
-            height: "100%",
             textAlign: "center"
           }}
         >
@@ -165,8 +238,9 @@ const ListaProductos = ({data}) => {
               </TableContainer>
           </Paper>
         </Grid>
-    
-        <Grid item
+
+        {
+          !isMobile && <Grid item
           sx={{
             width: "35%",
             height: "100%",
@@ -231,7 +305,11 @@ const ListaProductos = ({data}) => {
             </Grid>
           </Paper>
         </Grid>
+        }
+    
+        
       </Grid>
+
       <Comparaciones data={data} />
     </>
   )

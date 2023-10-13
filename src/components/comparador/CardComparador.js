@@ -3,7 +3,7 @@ import exito from "../../assets/ExitoCard.png"
 import jumbo from "../../assets/JumboCard.png"
 import olimpica from "../../assets/OlimpicaCard.png"
 import carulla from "../../assets/CarullaCard.png"
-import { Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, Grid, Typography, useMediaQuery } from '@mui/material'
 import { useStatevalue } from '../../StateProvider'
 
 const CardComparador = ({tienda}) => {
@@ -76,6 +76,7 @@ const CardComparador = ({tienda}) => {
             default : 
         }
     }
+    const isMobile = useMediaQuery("(max-width: 768px)"); 
 
   return (
     <Card sx={{
@@ -85,11 +86,12 @@ const CardComparador = ({tienda}) => {
         height: "100%"
     }}>
 
-        <Grid container sx={{width:"100%", height:60 , backgroundColor: getColor() }}>
+        <Grid container height={!isMobile ? 100 : 50} sx={{width:"100%", backgroundColor: getColor() }}>
                 <CardMedia
                     component="img"
                     image={getImage()}
                     height="100%"
+                    width= {50}
                 />
         </Grid>
 

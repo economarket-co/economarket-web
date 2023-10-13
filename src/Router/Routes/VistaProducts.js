@@ -1,8 +1,8 @@
-import { Grid, Paper } from '@mui/material'
+import { Grid, Paper, useMediaQuery } from '@mui/material'
 import React, { useEffect } from 'react'
 import bg from "../../assets/BackgroundProducts.jpeg"
 import Banners from '../../components/Banners'
-import Filters from '../../components/Filters'
+import Filters, { VistaMobile } from '../../components/Filters'
 import Products from '../../components/Products'
 
 const VistaProducts = () => {
@@ -11,25 +11,30 @@ const VistaProducts = () => {
     window.scrollTo(0, 0);
   }, [])
 
+  const isMobile = useMediaQuery("(max-width: 768px)"); 
+
   const title = "Productos"
   return (
     <>
       <Grid container>
         <Banners title = {title} imagen = {bg}/>
-        <Grid container direction="row">
-          <Grid item 
-                direction="column"
-                width="25%"
-                height={1499}
-                sx={{marginRight: "2%"}}
-          ><Paper sx={{width: "100", height:" 100%"}}>
-            <Filters />
-          </Paper>
-            
-          </Grid>
+        <Grid container direction={!isMobile ? "row": "column"}>
+          
+           { !isMobile ? 
+           <Grid item 
+              direction="column"
+              width="25%"
+              height={1499}
+              sx={{marginRight: "2%"}}
+          >
+           <Filters /> </Grid> : 
+           <Grid item>
+            <VistaMobile />
+           </Grid>
+           }            
           <Grid item  
                 direction="column"
-                width="73%"
+                width={!isMobile ?"73%" : "100%"}
                 sx={{
                   padding: "2.2% 5.24% 2.2% 5.24%",
                   overflow: "auto",

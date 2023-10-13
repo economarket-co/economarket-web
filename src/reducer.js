@@ -13,7 +13,28 @@ export const initialState = {
     openSidebar: false,
     selectedProduct: null,
     selectedCategoria: null,
-    openSearch: false
+    openSearch: false,
+    // selectedFiltroTiendas: []
+    selectedFiltroTiendas: null,
+    lower_basket: {
+        Exito: {
+            productos: [],
+            total: 0
+        },
+        Olimpica: {
+            productos: [],
+            total: 0
+        },
+        Jumbo:{
+            productos: [],
+            total: 0
+        },
+        Carulla: {
+            productos: [],
+            total: 0
+        }
+      }
+    
 }
 
 export const actionTypes = {
@@ -33,7 +54,9 @@ export const actionTypes = {
     ADD_FAVORITE: "ADD_FAVORITE",
     OPEN_SIDEBAR: "OPEN_SIDEBAR",
     SELECT_PRODUCTS: "SELECT_PRODUCTS",
-    OPEN_SEARCH: "OPEN_SEARCH"
+    OPEN_SEARCH: "OPEN_SEARCH",
+    ADD_SELECTED_TIENDAS: "ADD_SELECTED_TIENDAS",
+    LOAD_LOWER_BASKET: "LOAD_LOWER_BASKET"
 }
 
 export const getBasketTotal = (basket) =>{
@@ -43,6 +66,18 @@ export const getBasketTotal = (basket) =>{
 const reducer = (state, action) =>{
 
     switch(action.type){
+
+        case "LOAD_LOWER_BASKET":
+        return{
+            ...state,
+            lower_basket: action.item
+        }
+
+        case "ADD_SELECTED_TIENDAS":
+        return{
+            ...state,
+            selectedFiltroTiendas: action.tiendas
+        }
 
         case "OPEN_SEARCH":
         return{

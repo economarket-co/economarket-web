@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Typography, useMediaQuery } from '@mui/material'
 // import axios from 'axios';
 import React from 'react'
 import back from "../assets/Sección de categorías.png"
@@ -31,11 +31,12 @@ const Categories = () => {
         "Proteina",
         "Lacteos"
     ]
+    const isMobile = useMediaQuery("(max-width: 768px)");
 
 
   return (
 
-    <Grid container position="static"
+    <Grid container
     sx={{
         backgroundImage:`url('${back}')` ,
         // backgroundPosition: 'center',
@@ -44,20 +45,19 @@ const Categories = () => {
         height: "fixed", 
         textAlign: "center",
         justifyItems: "center",
-        display: 'flex',
         boxSizing: "inherit",
     }}>
 
         
         <Grid container sx={{marginTop:"15%" }} direction="column">
             <Grid item sx ={{color: "#033E8C", width: "100%", height: "auto"}}>
-                <Typography fontFamily="DM Serif Display" variant='h2' fontWeight={400}>
+                <Typography fontFamily="DM Serif Display" variant={!isMobile ? 'h2' : 'h6'} fontWeight={400}>
                 Revisa nuestras categorías 
                 </Typography>
             </Grid>
 
             <Grid item sx ={{color: "#171717", width: "100%", height: "auto"}}>
-                <Typography fontFamily="Quicksand" variant='p' fontWeight={400}>
+                <Typography fontFamily="Quicksand" variant={!isMobile ? 'p': "subtitle1"} fontWeight={400}>
                 Los productos más buscados, organizados para ti 
                 </Typography>
             </Grid>
@@ -69,10 +69,10 @@ const Categories = () => {
             alignItems: "center",
             paddingBottom: "15%"
             }} 
-        spacing={3} padding="6%">
+        spacing={1} padding="6%">
             {
                 categories.map(m =>(
-                    <Grid item lg={3} md={6} sm={8} xs ={12}>
+                    <Grid item lg={2} md={4} sm={2} xs ={4}>
                         <Categorias key={m} categoria={m} />
                     </Grid>
                 ))

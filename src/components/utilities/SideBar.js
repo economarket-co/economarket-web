@@ -1,4 +1,4 @@
-import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Typography, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
     
 const SideBar = () => {
     const [open, setOpen] = useState(false)
+    const isMobile = useMediaQuery("(max-width: 768px)");
     return (
         <>
         <IconButton onClick={() => setOpen(true)}>
             <MenuIcon />
         </IconButton>   
             <Drawer 
-                anchor='left'
+                anchor={!isMobile ? 'left': 'right'}
                 open = {open}
                 onClose={() => setOpen(false)}
             >
