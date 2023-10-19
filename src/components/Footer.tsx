@@ -22,9 +22,11 @@ export default function Footer() {
 
             </div>
 
-            <div className="text-white">
-                <h4 className="text-lg font-semibold">Recibe actualizaciones siguiendo nuestro News Letter</h4>
-                <p className="text-sm font-thin">Dejanos tu información y nosotros nos escargamos del resto</p>
+            <div className="flex flex-col gap-6 text-white">
+                <div>
+                    <h4 className="text-lg font-semibold">Recibe actualizaciones siguiendo nuestro News Letter</h4>
+                    <p className="text-sm font-thin">Dejanos tu información y nosotros nos escargamos del resto</p>
+                </div>
 
                 <form className="flex gap-2">
                     <Input type="text" placeholder="Correo electrónico" />
