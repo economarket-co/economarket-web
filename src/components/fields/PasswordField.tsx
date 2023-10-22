@@ -23,6 +23,7 @@ export default function PasswordField(props: PropsType) {
                 value={props.value}
                 placeholder='Ingresa tu contraseña'
                 onChange={(e) => props.setValue(e.target.value)}
+                className="w-[300px]"
                 endContent={
                     <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                         {isVisible ? (

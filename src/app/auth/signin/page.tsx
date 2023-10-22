@@ -12,8 +12,9 @@ export default function Signin() {
     const [password, setPassword] = useState('');
 
     return (
-        <div className="flex w-full justify-end">
-            <form className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-5 border rounded-md py-8">
+        <div className="flex w-full justify-end relative">
+            <img src='/images/login-bg.jpeg' className="absolute w-full max-h-[100vh] z-[-10] object-fit"/>
+            <form className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-5 border rounded-md py-8 bg-white">
                 <h1 className="font-size-[26px] font-semibold">Crea una cuenta para ti</h1>
 
                 <TextField

@@ -22,6 +22,7 @@ export function TextField(props: FieldProps) {
                 value={props.value}
                 onValueChange={props.onChange}
                 isDisabled={props.isDisable}
+                className="w-[300px]"
             />
         </div>
     )
