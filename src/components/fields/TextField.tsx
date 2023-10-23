@@ -22,7 +22,7 @@ export function TextField(props: FieldProps) {
                 value={props.value}
                 onValueChange={props.onChange}
                 isDisabled={props.isDisable}
-                className="w-[400px] text-[20px]"
+                className="w-[270px] lg:w-[400px] text-[20px]"
                 classNames={
                     {
                         input: "text-[20px]",

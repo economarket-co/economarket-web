@@ -30,7 +30,7 @@ export default function SearchBar() {
     }
 
     return (
-        <div className="sm:w-[10rem] md:w-[34rem] relative">
+        <div className="sm:w-[10rem] md:w-[34rem] relative hidden lg:block">
             <Input
                 // value={productName}
                 onChange={(e) => handleSearch(e.target.value)}

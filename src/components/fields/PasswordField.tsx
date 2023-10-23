@@ -23,7 +23,7 @@ export default function PasswordField(props: PropsType) {
                 value={props.value}
                 placeholder='Ingresa tu contraseña'
                 onChange={(e) => props.setValue(e.target.value)}
-                className="w-[400px] text-[20px]"
+                className="w-[270px] lg:w-[400px] text-[20px]"
                 classNames={
                     {
                         input: "text-[20px]",

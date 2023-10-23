@@ -48,7 +48,7 @@ export default function CustomNavbar() {
 
                 <SearchBar/>
 
-                <div>
+                <div className='hidden lg:flex'>
                     <Link href="/login">
                         <IconButton sx={{ color: "white" }}>
                             <PersonIcon />

@@ -4,8 +4,6 @@ import SocialNetWorkButton from "@/components/buttons/SocialNetworkButton";
 import PasswordField from "@/components/fields/PasswordField";
 import { TextField } from "@/components/fields/TextField";
 import { handleSigninWithEmail } from "@/utils/auth";
-import { Button } from "@nextui-org/react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
