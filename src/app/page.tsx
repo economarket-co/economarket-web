@@ -57,21 +57,20 @@ export default function Home() {
 
       <Sales />
 
-      <Allies />
+      {/* <Allies /> */}
 
-      <Categories />
+      {/* <Categories /> */}
 
-      <PreFooter />
+      {/* <PreFooter /> */}
     </main >
   )
 
   function Hero() {
     return (
-      <div className='flex flex-col flex-items justify-center items-center text-white relative max-h-[400px] overflow-hidden'>
-        <video src="/videos/home-bg.mp4" className='w-full' autoPlay />
+      <div className='flex flex-col flex-items justify-center items-center text-white relative max-h-[600px] py-16 overflow-hidden'>
+        <video src="/videos/home-bg.mp4" className='absolute min-w-full min-h-full max-w-none ' autoPlay />
 
-        <div className='absolute mx-auto flex flex-col gap-8 items-center z-40 max-w-[1000px] text-center'>
-
+        <div className='mx-auto flex flex-col gap-8 items-center z-40 max-w-[300px] lg:max-w-[1000px] text-center'>
           <h2 className='font-normal text-6xl font-dmserif'>
             Lo que buscas, al mejor precio
           </h2>
@@ -91,7 +90,7 @@ export default function Home() {
 
   function Sales() {
     return (
-      <div className="grid grid-cols-4 gap-2 mx-auto max-w-[80%] my-16">
+      <div className="grid grid-cols-1  lg:grid-cols-4 gap-2 mx-auto max-w-[80%] my-16">
         {
           sales.map((sale, index) => (
             <div className='flex relative rounded-md h-[329px]' style={{ gridColumn: `span ${sale.size}` }}>
