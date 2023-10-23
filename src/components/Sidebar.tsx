@@ -37,7 +37,7 @@ export default function Sidebar() {
                 <Box p={2} width="250px" textAlign="center">
                     {
                         sections.map((section, index) => (
-                            <>
+                            <div key={index}>
                                 <List key={index}>
                                     {
                                         section.links.map((link, index) => (
@@ -48,7 +48,7 @@ export default function Sidebar() {
                                 {
                                     index < sections.length - 1 && <Divider />
                                 }
-                            </>
+                            </div>
                         ))
                     }
 

@@ -14,7 +14,7 @@ export type FieldProps = {
 export function TextField(props: FieldProps) {
     return (
         <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold w-1/5">{props.label}</label>
+            <label className="text-[20px] text-inputText font-medium w-1/5 font-poppins">{props.label}</label>
             <Input
                 isRequired={props.isRequired}
                 type={props.type || "text"}
@@ -22,7 +22,13 @@ export function TextField(props: FieldProps) {
                 value={props.value}
                 onValueChange={props.onChange}
                 isDisabled={props.isDisable}
-                className="w-[300px]"
+                className="w-[400px] text-[20px]"
+                classNames={
+                    {
+                        input: "text-[20px]",
+                        inputWrapper: "font-normal px-4 h-[50px] text-inputText",
+                    }
+                }
             />
         </div>
     )

@@ -31,9 +31,9 @@ export default function Signin() {
 
     return (
         <div className="flex w-full justify-end relative">
-            <img src='/images/login-bg.jpeg' className="absolute w-full max-h-[100vh] z-[-10] object-fit" />
-            <form onSubmit={handleSignin} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-5 border rounded-md py-8 bg-white">
-                <h1 className="font-size-[26px] font-semibold">Crea una cuenta para ti</h1>
+            <img src='/images/login-bg.jpeg' className="absolute w-full max-h-full z-[-10] object-fit" />
+            <form onSubmit={handleSignin} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-6 border rounded-md py-8 bg-white">
+                <h1 className="text-[26px] font-semibold">{`Inicia sesión`}</h1>
 
                 <TextField
                     label="Correo"
@@ -50,11 +50,18 @@ export default function Signin() {
                     setValue={setPassword}
                 />
 
-                <Button type="submit" isLoading={loading} color="success" className="text-white py-[10px] px-[70px]">Iniciar Sesión</Button>
+                <button    
+                    type="submit" 
+                    disabled={loading} 
+                    color="success" 
+                    className="text-white font-poppins text-[24px] font-medium px-14 bg-[#01CC5E] rounded-lg py-2"
+                >
+                    Iniciar Sesión
+                </button>
 
-                <div className="flex flex-col items-center gap-2 text-lg">
-                    <span>¿Ya tienes una cuenta?</span>
-                    <a href="/auth/signin" className="text-green-600">Inicia Sesión</a>
+                <div className="flex flex-col lg:flex-row items-center gap-2 text-lg">
+                    <span className="text-inputText">{`¿Aún no tienes una cuenta?`}</span>
+                    <a href="/auth/signup" className="text-green-600">Registrate</a>
                 </div>
 
                 <div className="flex flex-col gap-4 justify-center items-center lg:flex-row">

@@ -3,7 +3,7 @@ import { Button, Input } from "@nextui-org/react"
 
 export default function Footer() {
     return (
-        <div className="flex w-full justify-center items-center bg-[#033E8C] gap-28 py-12">
+        <div className="flex flex-col lg:flex-row w-full justify-center items-center bg-[#033E8C] gap-28 py-12 justify-self-end self-end">
             <div className="flex flex-col gap-4">
                 <img src='/icons/logo.png' alt="Logo" className="w-[150px] h-[75px]" />
 

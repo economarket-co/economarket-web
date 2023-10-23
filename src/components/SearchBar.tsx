@@ -30,7 +30,7 @@ export default function SearchBar() {
     }
 
     return (
-        <div className="sm:w-[10rem] md:w-[40rem] relative">
+        <div className="sm:w-[10rem] md:w-[34rem] relative">
             <Input
                 // value={productName}
                 onChange={(e) => handleSearch(e.target.value)}
@@ -52,14 +52,14 @@ export default function SearchBar() {
 
             {
                 products.length > 0 &&
-                <div className={`absolute z-50 bg-white sm:w-[10rem] md:w-[40rem]
+                <div className={`absolute z-50 bg-white sm:w-[10rem] md:w-[34rem]
                 flex flex-col gap-4 max-h-[400px] overflow-y-auto px-2 py-2 rounded-b-md shadow-md`}
                 >
                     {
                         products.map((product: any) => (
                             <a href="/" key={product.id} className="flex gap-4 items-center hover:bg-gray-100">
                                 <img src={product.img} className="w-14 h-14 object-cover" />
-                                <p className="text-black text-lg">{product.Descripcion}</p>
+                                <p className="text-base font-quicksand text-content">{product.Descripcion}</p>
                             </a>
                         ))
                     }

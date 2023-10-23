@@ -17,13 +17,19 @@ export default function PasswordField(props: PropsType) {
 
     return (
         <div className="flex flex-col gap-1">
-            <label className="text-sm font-semibold w-1/5">{props.label}</label>
+            <label className="text-[20px] font-medium text-inputText w-1/5 font-poppins">{props.label}</label>
             <Input
                 isRequired
                 value={props.value}
                 placeholder='Ingresa tu contraseña'
                 onChange={(e) => props.setValue(e.target.value)}
-                className="w-[300px]"
+                className="w-[400px] text-[20px]"
+                classNames={
+                    {
+                        input: "text-[20px]",
+                        inputWrapper: "font-normal px-4 h-[50px] text-inputText",
+                    }
+                }
                 endContent={
                     <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                         {isVisible ? (

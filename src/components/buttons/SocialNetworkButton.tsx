@@ -8,19 +8,17 @@ type PropsType = {
 }
 export default function SocialNetWorkButton(props: PropsType) {  
     return (
-        <Button
-            onPress={(e) => handleSignInWithProvider(props.provider)}
-            variant="bordered"
-            className="py-[17px]"
-            startContent={
-                <img
-                    width="30"
-                    height="30" 
-                    src={`/icons/${props.provider}.svg`}
-                />
-            }
+        <button
+            onClick={(e) => handleSignInWithProvider(props.provider)}
+            
+            className="flex gap-2 border-2 rounded-2xl items-center font-poppins text-inputText px-5 py-[8px]"
         >
+            <img
+                width="30"
+                height="30" 
+                src={`/icons/${props.provider}.svg`}
+            />
             Inicia Sesión con {props.provider}
-        </Button>
+        </button>
     )
 }
