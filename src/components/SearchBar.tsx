@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function SearchBar() {
+type SearchBarProps = {
+    nonNavbar?: boolean
+}
+
+export default function SearchBar(props: SearchBarProps) {
     const [productName, setProductName] = useState('');
     const [products, setProducts] = useState([]);
 
@@ -34,12 +38,12 @@ export default function SearchBar() {
             <Input
                 // value={productName}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="z-50"
+                className={`z-50 ${props.nonNavbar && 'shadow-lg'} `}
                 classNames={{
                     base: "w-full  h-8 z-50",
                     mainWrapper: "h-5 z-50",
                     input: "text-md",
-                    inputWrapper: "h-8 font-normal text-default-500 bg-white dark:bg-default-500/20",
+                    inputWrapper: `h-8 font-normal text-default-500 bg-white dark:bg-default-500/20 ${props.nonNavbar && 'border'}`
                 }}
                 placeholder="¿Qué producto estás buscando?"
                 size="md"

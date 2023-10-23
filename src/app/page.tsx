@@ -140,37 +140,39 @@ export default function Home() {
 
   function PreFooter() {
     return (
-      <div className='flex flex-col flex-items items-center text-white relative' >
+      <div className='flex flex-col items-center text-white relative' >
         <img src="/images/prefooter-bg.png" className='max-h-[900px] w-full' />
 
-        <div className='absolute mx-auto flex flex-col py-6 gap-8 items-center z-50 max-w-[1000px] text-white'>
+        <div className='absolute mx-auto flex flex-col justify-between h-3/5 py-6 gap-8 items-center z-50 max-w-[1000px] text-white'>
           <div className='text-center'>
-            <p className='font-quicksand text-3xl text-white'>Encontrar el mejor precio</p>
+            <p className='font-quicksand text-2xl text-white'>Encontrar el mejor precio</p>
             <p className='font-dmserif text-6xl font-semibold'>En solo tres pasos</p>
           </div>
 
           <div className='flex gap-6 justify-center'>
-            <div>
-              <p>Busca tu producto</p>
+            <div className='flex flex-col items-center'>
+              <img src='/icons/search.svg' className='h-14' alt='search icon' />
+              <p className='font-quicksand text-xl font-semibold'>Busca tu producto</p>
             </div>
 
-            <div>
-              <p>Añadelo al carrito</p>
+            <div className='flex flex-col items-center'>
+              <img src='/icons/shopping-cart.svg' className='h-14' alt='search icon' />
+              <p className='font-quicksand text-xl font-semibold'>Añadelo al carrito</p>
             </div>
 
-            <div>
-              <p>Compara los precios</p>
+            <div className='flex flex-col items-center'>
+              <img src='/icons/scales.svg' className='h-14' alt='search icon' />
+              <p className='font-quicksand text-xl font-semibold'>Compara los precios</p>
             </div>
           </div>
 
-          <div>
-            <h3>{`Así que cuentanos`}</h3>
+          <div className='flex flex-col gap-4 text-center'>
+            <h3 className='text-[#033E8C] font-dmserif text-6xl'>{`Así que cuentanos`}</h3>
 
-            <SearchBar />
+            <SearchBar nonNavbar />
           </div>
         </div>
       </div>
-
     )
   }
 }
