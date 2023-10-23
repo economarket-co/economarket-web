@@ -13,6 +13,7 @@ const config: Config = {
       fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
+        dmserif: ['DM Serif Display', 'serif'],
       },
       colors: {
         content: '#6B7280',

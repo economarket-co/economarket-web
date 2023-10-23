@@ -9,13 +9,13 @@ export default function Home() {
     {
       title: '¡Nuestras mejores promociones!',
       content: 'Apuntate a nuestro News Letter para no perderte ninguno de nuestros descuentos.',
-      image: '/images/ejemplo.png',
+      image: '/images/ejemplo0.png',
       size: 2
     },
     {
       title: `50% OFF`,
       content: `en citricos seleccionados`,
-      image: '/images/ejemplo1.jpeg',
+      image: '/images/ejemplo1.png',
       link: '/',
       size: 1
     },
@@ -29,7 +29,7 @@ export default function Home() {
     {
       title: `Siempre frescos`,
       content: `50% en verduras seleccionadas`,
-      image: '/images/ejemplo3.png',
+      image: '/images/ejemplo3-2.png',
       link: '/',
       size: 1
     },
@@ -49,7 +49,7 @@ export default function Home() {
   ]
 
   return (
-    <main className="flex min-h-screen flex-col ">
+    <main className="flex min-w-full flex-col ">
       <Hero />
 
       <Sales />
@@ -85,16 +85,16 @@ export default function Home() {
       <div className="grid grid-cols-4 gap-2 mx-auto max-w-[80%] my-16">
         {
           sales.map((sale, index) => (
-            <div className='relative rounded-md h-[329px]' style={{ gridColumn: `span ${sale.size}` }}>
+            <div className='flex relative rounded-md h-[329px]' style={{ gridColumn: `span ${sale.size}` }}>
               <Image src={sale.image} layout='fill' objectFit="cover" className='w-full rounded-md -z-10' alt={sale.image} />
-              <div className="flex flex-col justify-center h-full text-white gap-2 ">
-                <div className="text-2xl font-bold">{sale.title}</div>
-                <div className="text-sm">{sale.content}</div>
+              <div className="flex flex-col justify-end h-full text-white gap-2 px-4 py-6">
+                <div className="font-dmserif text-5xl">{sale.title}</div>
+                <div className="font-poppins text-xl">{sale.content}</div>
                 <div className="text-sm">
                   {
                     sale.link &&
-                    <Link href={sale.link}>
-                      <Button className='bg-[#F28705] text-white text-lg rounded-md px-6 py-4 font-bold'>Ver más</Button>
+                    <Link href={sale.link} className='font-quicksand underline text-xl'>
+                      {`Ver más`}
                     </Link>
 
                   }
