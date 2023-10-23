@@ -10,8 +10,10 @@ import PersonIcon from '@mui/icons-material/Person';
 // import logo from "../assets/Group 79.svg"
 import { Favorite, ShoppingCart } from '@mui/icons-material';
 import Link from 'next/link';
+
+import SideBar from '@/components/Sidebar';
+
 // import { useStatevalue } from '../StateProvider';
-// import SideBar from './utilities/SideBar';
 // import { actionTypes } from '../reducer';
 
 export default function CustomNavbar() {
@@ -38,7 +40,7 @@ export default function CustomNavbar() {
             }}
         >
             <Toolbar className='ToolBar'>
-                {/* <SideBar /> */}
+                <SideBar />
                 <Link href="/">
                     <IconButton>
                         <img alt='' width={70} height={70} src="/icons/logo.png" />
