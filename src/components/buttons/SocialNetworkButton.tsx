@@ -1,5 +1,5 @@
 'use client';
-import { handleSignInWithProvider } from "@/utils/handleSignin";
+import { handleSignInWithProvider } from "@/utils/auth";
 import { Button } from "@nextui-org/react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
