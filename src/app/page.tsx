@@ -1,8 +1,10 @@
 'use client';
 import SearchBar from '@/components/SearchBar';
-import { Button } from '@nextui-org/react';
+import { Button, Card, CardBody, CardFooter } from '@nextui-org/react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import categories from '@/mock/categories.json';
 
 export default function Home() {
 
@@ -56,6 +58,8 @@ export default function Home() {
       <Sales />
 
       <Allies />
+
+      <Categories />
 
       <PreFooter />
     </main >
@@ -138,6 +142,29 @@ export default function Home() {
     )
   }
 
+  function Categories() {
+    return (
+      <div className='flex flex-col items-center h-fit text-white relative py-16' >
+        <img src="/images/categories-bg.png" className='absolute w-full' />
+
+        <div className='mx-auto flex flex-col justify-between h-3/5 gap-8 items-center z-50 max-w-[80%] grow text-white'>
+          <div className='flex flex-col gap-3 text-center'>
+            <h3 className='text-[#033E8C] font-dmserif text-6xl'>Revisa nuestras categorías</h3>
+            <p className='font-quicksand text-[#171717] text-lg'>Los productos más buscados, organizados para ti </p>
+          </div>
+
+          <div className='flex gap-6 flex-wrap'>
+            {
+              categories.map((category, index) => (
+                <CategoryCard title={category.name} img={category.img} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   function PreFooter() {
     return (
       <div className='flex flex-col items-center text-white relative' >
@@ -173,6 +200,24 @@ export default function Home() {
           </div>
         </div>
       </div>
+    )
+  }
+
+  type CategoryCardProps = {
+    title: string,
+    img: string
+  }
+
+  function CategoryCard(props: CategoryCardProps) {
+    return (
+      <Card className='hover:font-semibold cursor-pointer hover:-translate-y-6'>
+        <CardBody className='p-0 h-[190px] w-[200px]'>
+          <img className='h-full object-cover' src={props.img} alt={props.title} />
+        </CardBody>
+        <CardFooter className='bg-green-500 text-center'>
+          <p className='font-dmserif text-lg text-center w-full text-white'>{props.title}</p>
+        </CardFooter>
+      </Card>
     )
   }
 }
