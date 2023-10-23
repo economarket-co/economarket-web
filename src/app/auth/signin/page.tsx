@@ -3,7 +3,9 @@
 import SocialNetWorkButton from "@/components/buttons/SocialNetworkButton";
 import PasswordField from "@/components/fields/PasswordField";
 import { TextField } from "@/components/fields/TextField";
+import { handleSigninWithEmail, handleSignupWithEmail } from "@/utils/handleSignin";
 import { Button } from "@nextui-org/react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 
 export default function Signin() {
@@ -13,7 +15,7 @@ export default function Signin() {
 
     return (
         <div className="flex w-full justify-end relative">
-            <img src='/images/login-bg.jpeg' className="absolute w-full max-h-[100vh] z-[-10] object-fit"/>
+            <img src='/images/login-bg.jpeg' className="absolute w-full max-h-[100vh] z-[-10] object-fit" />
             <form className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-5 border rounded-md py-8 bg-white">
                 <h1 className="font-size-[26px] font-semibold">Crea una cuenta para ti</h1>
 
@@ -38,7 +40,7 @@ export default function Signin() {
                     setValue={setPassword}
                 />
 
-                <Button color="success" className="text-white py-[10px] px-[70px]">Iniciar Sesión</Button>
+                <Button onPress={(e) => handleSigninWithEmail(email, password)} color="success" className="text-white py-[10px] px-[70px]">Iniciar Sesión</Button>
 
                 <div className="flex flex-col items-center gap-2 text-lg">
                     <span>¿Ya tienes una cuenta?</span>
