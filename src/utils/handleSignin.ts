@@ -5,7 +5,7 @@ export async function handleSignInWithProvider  (provider:  "google" | "facebook
 
     try {
         const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: "google",
+            provider: provider,
             options: {
                 redirectTo: window.location.origin + "/api/auth/signin",
                 queryParams: {
