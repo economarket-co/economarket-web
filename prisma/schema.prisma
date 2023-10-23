@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id            Int           @id @default(autoincrement())
+  name          String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  subCategories SubCategory[]
+}
+
+model SubCategory {
+  id         Int      @id @default(autoincrement())
+  name       String
+  categoryId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Proudct {
+  id            Int            @id @default(autoincrement())
+  name          String
+  img           String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  linkCarulla  String?
+  linkExito    String?
+  linkJumbo    String?
+  linkOlimpica String?
+  ProductPrices ProductPrice[]
+}
+
+model ProductPrice {
+  id        Int      @id @default(autoincrement())
+  proudctId Int
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  proudct   Proudct  @relation(fields: [proudctId], references: [id])
+}
+
+enum Company {
+  Olimpica
+  Carulla
+  Exito
+  Jumbo
+}

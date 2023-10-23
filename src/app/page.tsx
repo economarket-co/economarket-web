@@ -106,4 +106,8 @@ export default function Home() {
       </div>
     )
   }
+
+  function Allies() {
+    
+  }
 }
