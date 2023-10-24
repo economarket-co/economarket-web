@@ -11,7 +11,7 @@ export default function Sidebar() {
         {
             links: [
                 { name: 'Inicio', href: '/' },
-                { name: 'Categorias', href: '/categorias' },
+                { name: 'Categorias', href: '/categories' },
                 { name: 'Comparador de precios', href: '/comparador' },
                 { name: 'Todos los productos', href: '/productos' },
             ]

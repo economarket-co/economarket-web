@@ -1,56 +1,14 @@
 'use client';
 import SearchBar from '@/components/SearchBar';
-import { Button, Card, CardBody, CardFooter } from '@nextui-org/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import categories from '@/mock/categories.json';
+import CategoryCard from '@/components/cards/Category';
+
+import sales from '@/mock/sales.json'
 
 export default function Home() {
-
-  const sales = [
-    {
-      title: '¡Nuestras mejores promociones!',
-      content: 'Apuntate a nuestro News Letter para no perderte ninguno de nuestros descuentos.',
-      image: '/images/ejemplo0.png',
-      size: 2
-    },
-    {
-      title: `50% OFF`,
-      content: `en citricos seleccionados`,
-      image: '/images/ejemplo1.png',
-      link: '/',
-      size: 1
-    },
-    {
-      title: `Súper Promo`,
-      content: `Hatsu y otras bebidas`,
-      image: '/images/ejemplo2.jpeg',
-      link: '/',
-      size: 1
-    },
-    {
-      title: `Siempre frescos`,
-      content: `50% en verduras seleccionadas`,
-      image: '/images/ejemplo3-2.png',
-      link: '/',
-      size: 1
-    },
-    {
-      title: `Tiempo de mecato!!`,
-      content: `Descuentos en colombina`,
-      image: '/images/ejemplo4.png',
-      link: '/',
-      size: 1
-    },
-    {
-      title: `¿Tu despensa lo necesita? ¡Nosotros lo encontramos!`,
-      image: '/images/ejemplo5.png',
-      link: '/',
-      size: 2
-    }
-  ]
-
   return (
     <main className="flex min-w-full flex-col overflow-hidden ">
       <Hero />
@@ -67,7 +25,7 @@ export default function Home() {
 
   function Hero() {
     return (
-      <div className='flex flex-col flex-items justify-center items-center text-white relative max-h-[600px] py-16 overflow-hidden'>
+      <div className='flex flex-col flex-items justify-center items-center text-white relative min-h-screen py-16 overflow-hidden'>
         <video src="/videos/home-bg.mp4" className='absolute min-w-full min-h-full max-w-none ' autoPlay />
 
         <div className='mx-auto flex flex-col gap-8 items-center z-40 max-w-[300px] lg:max-w-[1000px] text-center'>
@@ -80,7 +38,7 @@ export default function Home() {
           </div>
           <div >
             <Link href="/productos">
-              <button className='bg-[#F28705] text-white text-lg rounded-md px-6 py-4 font-bold'>Empieza a mercar</button>
+              <button className='bg-[#F28705] text-white text-lg rounded-md px-6 py-2 shadow-md font-dmserif font-bold'>Empieza a mercar</button>
             </Link>
           </div>
         </div>
@@ -151,7 +109,7 @@ export default function Home() {
             <p className='font-quicksand text-[#171717] text-lg'>Los productos más buscados, organizados para ti </p>
           </div>
 
-          <div className='flex gap-6 justify-center flex-wrap'>
+          <div className='flex gap-8 justify-center flex-wrap'>
             {
               categories.map((category, index) => (
                 <CategoryCard title={category.name} img={category.img} />
@@ -174,19 +132,19 @@ export default function Home() {
             <p className='font-dmserif text-4xl md:text-6xl font-semibold'>En solo tres pasos</p>
           </div>
 
-          <div className='flex gap-6 justify-center'>
-            <div className='flex flex-col items-center'>
-              <img src='/icons/search.svg' className='h-14' alt='search icon' />
-              <p className='font-quicksand text-base md:text-xl font-semibold'>Busca tu producto</p>
+          <div className='flex gap-6 justify-center items-center text-center'>
+            <div className='grid items-center justify-center'>
+              <img src='/icons/search.svg' className='h-8 md:h-14 mx-auto' alt='search icon' />
+              <p className='font-quicksand text-base  md:text-xl font-semibold'>Busca tu producto</p>
             </div>
 
             <div className='flex flex-col items-center'>
-              <img src='/icons/shopping-cart.svg' className='h-14' alt='search icon' />
+              <img src='/icons/shopping-cart.svg' className='h-8 md:h-14' alt='search icon' />
               <p className='font-quicksand text-md md:text-xl font-semibold'>Añadelo al carrito</p>
             </div>
 
             <div className='flex flex-col items-center'>
-              <img src='/icons/scales.svg' className='h-14' alt='search icon' />
+              <img src='/icons/scales.svg' className='h-8 md:h-14' alt='search icon' />
               <p className='font-quicksand text-md md:text-xl font-semibold'>Compara los precios</p>
             </div>
           </div>
@@ -198,24 +156,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    )
-  }
-
-  type CategoryCardProps = {
-    title: string,
-    img: string
-  }
-
-  function CategoryCard(props: CategoryCardProps) {
-    return (
-      <Card className='hover:font-semibold cursor-pointer hover:-translate-y-6'>
-        <CardBody className='p-0 h-[190px] w-[200px]'>
-          <img className='h-full object-cover' src={props.img} alt={props.title} />
-        </CardBody>
-        <CardFooter className='bg-green-500 text-center'>
-          <p className='font-dmserif text-lg text-center w-full text-white'>{props.title}</p>
-        </CardFooter>
-      </Card>
     )
   }
 }

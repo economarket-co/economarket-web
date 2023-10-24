@@ -1,0 +1,42 @@
+[
+    {
+      "title": "¡Nuestras mejores promociones!",
+      "content": "Apuntate a nuestro News Letter para no perderte ninguno de nuestros descuentos.",
+      "image": "/images/ejemplo0.png",
+      "size": 2
+    },
+    {
+      "title": "50% OFF",
+      "content": "en citricos seleccionados",
+      "image": "/images/ejemplo1.png",
+      "link": "/",
+      "size": 1
+    },
+    {
+      "title": "Súper Promo",
+      "content": "Hatsu y otras bebidas",
+      "image": "/images/ejemplo2.jpeg",
+      "link": "/",
+      "size": 1
+    },
+    {
+      "title": "Siempre frescos",
+      "content": "50% en verduras seleccionadas",
+      "image": "/images/ejemplo3-2.png",
+      "link": "/",
+      "size": 1
+    },
+    {
+      "title": "Tiempo de mecato!!",
+      "content": "Descuentos en colombina",
+      "image": "/images/ejemplo4.png",
+      "link": "/",
+      "size": 1
+    },
+    {
+      "title": "¿Tu despensa lo necesita? ¡Nosotros lo encontramos!",
+      "image": "/images/ejemplo5.png",
+      "link": "/",
+      "size": 2
+    }
+]
