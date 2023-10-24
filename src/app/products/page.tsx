@@ -4,10 +4,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import ProductCard from "@/components/cards/ProductsCard";
 import ProductsFilter from "@/components/ProductsFilter";
+import { Spinner } from "@nextui-org/react";
 
 export default function ProductsPage() {
     const [products, setProducts] = useState<any[]>([]);
-    const [ loading, setLoading ] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const [categories, setCategories] = useState<[]>([]);
     const [supermarkets, setSupermarkets] = useState<[]>([]);
@@ -80,7 +81,11 @@ export default function ProductsPage() {
                     <h1 className="font-dmserif text-6xl">Todos los productos</h1>
 
                     <div className="flex flex-wrap gap-10 justify-start">
-                        {   !loading &&  
+                        {loading ?
+                            <div className="flex w-full justify-center">
+                                <Spinner size="lg"/>
+                            </div>
+                            :
                             products.map(product =>
                                 <ProductCard name={product.Descripcion} img={product.img} unidad={"500 Gr"} companies={["Éxito, Carulla, Olímpica, Jumbo"]} />
                             )
@@ -88,7 +93,6 @@ export default function ProductsPage() {
                     </div>
                 </div>
             </div>
-
 
         </main>
     )
