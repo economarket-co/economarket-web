@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import categories from '@/mock/categories.json';
-import CategoryCard from '@/components/cards/Category';
+import CategoryCard from '@/components/cards/CategoryCard';
 
 import sales from '@/mock/sales.json'
 
@@ -75,13 +75,13 @@ export default function Home() {
 
   function Allies() {
     return (
-      <div className='flex flex-col flex-items justify-center items-center text-white relative'>
-        <img src="/images/allies-bg.png" className='absolute min-w-full min-h-full max-w-full' />
+      <div className='flex flex-col flex-items justify-center items-center text-white relative md:min-h-[400px] lg:min-h-[600px]'>
+        <img src="/images/allies-bg.png" className='absolute min-w-full min-h-full max-w-full -z-10' />
 
         <div className='mx-auto py-5 flex flex-col gap-8 items-center z-50 max-w-[1000px]'>
           <img src="/images/logo-white.png" />
 
-          <div className='text-[18px] px-4 font-medium text-center font-quicksand max-w-[700px]'>
+          <div className='text-[18px] px-4 font-medium text-center font-quicksand max-w-[500px] lg:max-w-[700px] grow'>
             Economarket es tu socio para una experiencia de compra ganadora. Colaboramos con reconocidos supermercados
             de cadena como Éxito, Carulla, Jumbo y Olímpica para ofrecerte una herramienta que te permite encontrar
             los mejores precios. Nos dedicamos a simplificar tu vida diaria, ahorrándote tiempo y dinero
@@ -123,8 +123,8 @@ export default function Home() {
 
   function PreFooter() {
     return (
-      <div className='flex flex-col items-center text-white relative min-h-[900px]' >
-        <img src="/images/prefooter-bg.png" className='absolute min-w-full min-h-full max-w-full object-cover' />
+      <div className='flex flex-col items-center text-white relative h-[550px] md:h-[650px] lg:h-[1060px]' >
+        <img src="/images/prefooter-bg.png" className='absolute min-w-full min-h-full max-w-full object-fill max-h-[1100px]' />
 
         <div className='mx-auto px-2 flex flex-col justify-between h-3/5 py-6 gap-8 items-center z-50 max-w-[1000px] text-white'>
           <div className='text-center'>

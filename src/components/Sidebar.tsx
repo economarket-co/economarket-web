@@ -13,7 +13,7 @@ export default function Sidebar() {
                 { name: 'Inicio', href: '/' },
                 { name: 'Categorias', href: '/categories' },
                 { name: 'Comparador de precios', href: '/comparador' },
-                { name: 'Todos los productos', href: '/productos' },
+                { name: 'Todos los productos', href: '/products' },
             ]
         },
         {

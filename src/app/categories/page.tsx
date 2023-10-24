@@ -2,7 +2,7 @@
 import { Grid, Typography, useMediaQuery } from "@mui/material";
 
 import categories from '@/mock/categories.json';
-import CategoryCard from "@/components/cards/Category";
+import CategoryCard from "@/components/cards/CategoryCard";
 import Link from "next/link";
 import LinkButton from "@/components/buttons/LinkButton";
 
