@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 type SearchBarProps = {
     nonNavbar?: boolean
+    setProduct?: any
 }
 
 export default function SearchBar(props: SearchBarProps) {
@@ -31,6 +32,12 @@ export default function SearchBar(props: SearchBarProps) {
             console.error(error);
             toast.error('Error al cargar los productos');
         }
+    }
+
+    async function handleClick(product: any) {
+        setProducts([]);
+
+        props.setProduct(product);
     }
 
     return (
@@ -61,10 +68,14 @@ export default function SearchBar(props: SearchBarProps) {
                 >
                     {
                         products.map((product: any) => (
-                            <a href="/" key={product.id} className="flex gap-4 items-center py-2 hover:bg-gray-100">
-                                <img src={product.img} className="w-14 h-14 object-cover" />
-                                <p className="text-base font-quicksand text-content">{product.Descripcion}</p>
-                            </a>
+                            props.setProduct ? 
+                                <button onClick={e => handleClick(product)}  key={product.id} className="flex gap-4 items-center py-2 hover:bg-gray-100"> 
+                                    <ProductContent img={product.img} Descripcion={product.Descripcion} />
+                                </button>
+                            :
+                                <a href="/" key={product.id} className="flex gap-4 items-center py-2 hover:bg-gray-100">
+                                    <ProductContent img={product.img} Descripcion={product.Descripcion} />
+                                </a>
                         ))
                     }
                 </div>
@@ -72,5 +83,15 @@ export default function SearchBar(props: SearchBarProps) {
 
         </div>
 
+
     )
+
+    function ProductContent(props: { img: string, Descripcion: string }) {
+        return (
+            <>
+                <img src={props.img} className="w-14 h-14 object-cover" />
+                <p className="text-base font-quicksand text-content">{props.Descripcion}</p>
+            </>
+        )
+    }
 }

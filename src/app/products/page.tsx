@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import ProductCard from "@/components/cards/ProductsCard";
 import ProductsFilter from "@/components/ProductsFilter";
 import { Spinner } from "@nextui-org/react";
+import HeroWithBg from "@/components/HeroWithBg";
 
 export default function ProductsPage() {
     const [products, setProducts] = useState<any[]>([]);
@@ -58,13 +59,7 @@ export default function ProductsPage() {
 
     return (
         <main className="flex min-w-full flex-col overflow-hidden ">
-            <div className='flex flex-col flex-items justify-center text-white relative py-16 overflow-hidden'>
-                <img src="/images/products/products-bg.png" className='absolute min-w-full min-h-full max-w-full -z-10' />
-
-                <div className="flex gap-4 items-center text-white divide-x-2 px-16">
-                    <h1 className="font-dmserif text-6xl max-w-[200px]">Productos</h1>
-                </div>
-            </div>
+            <HeroWithBg title="Productos" BgImage="/images/products/products-bg.png" />
 
             <div className="flex">
                 <ProductsFilter

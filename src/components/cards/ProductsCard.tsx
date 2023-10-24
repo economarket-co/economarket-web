@@ -1,4 +1,5 @@
 import { Card, CardBody, CardFooter, Button } from "@nextui-org/react"
+import AddToCartButton from "../buttons/AddToCartButton"
 
 type ProductCardProps = {
     name: string,
@@ -20,8 +21,8 @@ export default function ProductCard(props: ProductCardProps) {
                 <p className='font-quicksand text-xs text-[#646464] '>{props.unidad}</p>
                 <div className="flex gap-2">
                     <img src='/icons/price-tag.svg' /><p className='font-quicksand text-xs text-[#646464]'>Éxito, carulla, Olímpica, Jumbo</p>
+                    <AddToCartButton/>
                 </div>
-                <Button className="bg-[#01CC5E] text-white w-full rounded-md" endContent={<img src="/icons/add-to-shopping-cart.svg" />}>Agregar</Button>
             </CardFooter>
         </Card>
     )
