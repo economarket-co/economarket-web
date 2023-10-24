@@ -52,16 +52,16 @@ export default function Home() {
   ]
 
   return (
-    <main className="flex min-w-full flex-col ">
+    <main className="flex min-w-full flex-col overflow-hidden ">
       <Hero />
 
       <Sales />
 
-      {/* <Allies /> */}
+      <Allies />
 
-      {/* <Categories /> */}
+      <Categories />
 
-      {/* <PreFooter /> */}
+      <PreFooter />
     </main >
   )
 
@@ -117,20 +117,19 @@ export default function Home() {
 
   function Allies() {
     return (
-      <div className='flex flex-col flex-items justify-center items-center text-white relative' >
-        <img src="/images/allies-bg.png" className='max-h-[900px] w-full' />
+      <div className='flex flex-col flex-items justify-center items-center text-white relative'>
+        <img src="/images/allies-bg.png" className='absolute min-w-full min-h-full max-w-full' />
 
-        <div className='absolute mx-auto py-5 flex flex-col gap-8 items-center z-50 max-w-[1000px]'>
-
+        <div className='mx-auto py-5 flex flex-col gap-8 items-center z-50 max-w-[1000px]'>
           <img src="/images/logo-white.png" />
 
-          <div className='text-[18px] font-medium text-center font-quicksand max-w-[700px]'>
+          <div className='text-[18px] px-4 font-medium text-center font-quicksand max-w-[700px]'>
             Economarket es tu socio para una experiencia de compra ganadora. Colaboramos con reconocidos supermercados
             de cadena como Éxito, Carulla, Jumbo y Olímpica para ofrecerte una herramienta que te permite encontrar
             los mejores precios. Nos dedicamos a simplificar tu vida diaria, ahorrándote tiempo y dinero
             con transparencia y seguridad.
           </div>
-          <div className='flex flex:col lg:flex-row justify-between gap-10'>
+          <div className='flex flex-col lg:flex-row justify-between gap-10'>
             <img src="/images/logo-exito.svg" />
             <img src="/images/logo-jumbo.svg" />
             <img src="/images/logo-carulla.svg" />
@@ -152,7 +151,7 @@ export default function Home() {
             <p className='font-quicksand text-[#171717] text-lg'>Los productos más buscados, organizados para ti </p>
           </div>
 
-          <div className='flex gap-6 flex-wrap'>
+          <div className='flex gap-6 justify-center flex-wrap'>
             {
               categories.map((category, index) => (
                 <CategoryCard title={category.name} img={category.img} />
@@ -166,34 +165,34 @@ export default function Home() {
 
   function PreFooter() {
     return (
-      <div className='flex flex-col items-center text-white relative' >
-        <img src="/images/prefooter-bg.png" className='max-h-[900px] w-full' />
+      <div className='flex flex-col items-center text-white relative min-h-[900px]' >
+        <img src="/images/prefooter-bg.png" className='absolute min-w-full min-h-full max-w-full object-cover' />
 
-        <div className='absolute mx-auto flex flex-col justify-between h-3/5 py-6 gap-8 items-center z-50 max-w-[1000px] text-white'>
+        <div className='mx-auto px-2 flex flex-col justify-between h-3/5 py-6 gap-8 items-center z-50 max-w-[1000px] text-white'>
           <div className='text-center'>
-            <p className='font-quicksand text-2xl text-white'>Encontrar el mejor precio</p>
-            <p className='font-dmserif text-6xl font-semibold'>En solo tres pasos</p>
+            <p className='font-quicksand text-lg md:text-2xl text-white'>Encontrar el mejor precio</p>
+            <p className='font-dmserif text-4xl md:text-6xl font-semibold'>En solo tres pasos</p>
           </div>
 
           <div className='flex gap-6 justify-center'>
             <div className='flex flex-col items-center'>
               <img src='/icons/search.svg' className='h-14' alt='search icon' />
-              <p className='font-quicksand text-xl font-semibold'>Busca tu producto</p>
+              <p className='font-quicksand text-base md:text-xl font-semibold'>Busca tu producto</p>
             </div>
 
             <div className='flex flex-col items-center'>
               <img src='/icons/shopping-cart.svg' className='h-14' alt='search icon' />
-              <p className='font-quicksand text-xl font-semibold'>Añadelo al carrito</p>
+              <p className='font-quicksand text-md md:text-xl font-semibold'>Añadelo al carrito</p>
             </div>
 
             <div className='flex flex-col items-center'>
               <img src='/icons/scales.svg' className='h-14' alt='search icon' />
-              <p className='font-quicksand text-xl font-semibold'>Compara los precios</p>
+              <p className='font-quicksand text-md md:text-xl font-semibold'>Compara los precios</p>
             </div>
           </div>
 
           <div className='flex flex-col gap-4 text-center'>
-            <h3 className='text-[#033E8C] font-dmserif text-6xl'>{`Así que cuentanos`}</h3>
+            <h3 className='text-[#033E8C] font-dmserif text-4xl md:text-6xl'>{`Así que cuentanos`}</h3>
 
             <SearchBar nonNavbar />
           </div>

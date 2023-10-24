@@ -34,7 +34,7 @@ export default function SearchBar(props: SearchBarProps) {
     }
 
     return (
-        <div className="sm:w-[10rem] md:w-[34rem] relative hidden lg:block">
+        <div className={`sm:w-[10rem] md:w-[34rem] relative ${!props.nonNavbar && 'hidden'} lg:block`}>
             <Input
                 // value={productName}
                 onChange={(e) => handleSearch(e.target.value)}
