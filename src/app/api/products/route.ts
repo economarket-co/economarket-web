@@ -1,4 +1,4 @@
-import { getProducts } from "@/controllers/Product.Controller";
+import { getProducts } from "@/controllers/Product.controller";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
