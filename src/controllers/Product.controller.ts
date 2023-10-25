@@ -1,7 +1,5 @@
-import prisma from "@/db/clien";
-import { createProductOdt } from "@/odt/Product/createProduct.od";
 
-import data from '@/mock/datos_diarios.json'
+import { productsPrices } from '@/mock/products';
 
 // export async function createProduct(product: createProductOdt) {
 //     const newProduct = await prisma.proudct.create({
@@ -12,9 +10,15 @@ import data from '@/mock/datos_diarios.json'
 //     })
 // }
 
-export async function getProducts(name?: string) {
-    return name ?
-        data.filter((product) => product.Descripcion.toLocaleLowerCase().includes(name.toLocaleLowerCase()))
+export async function getProducts(name?: string, id?: number | undefined) {
+    let products = name ?
+        productsPrices.filter((product) => product.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()))
         :
-        data;
+        productsPrices;
+
+    if (id) {
+        products = products.filter((product) => product.id === id);
+    }
+
+    return products;
 }

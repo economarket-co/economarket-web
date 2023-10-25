@@ -3,9 +3,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProductCard from "./cards/ProductsCard";
+import { ProductFull } from "@/odt/Product/productFull";
 
 export default function SuggestionsSection() {
-    const [productsSuggestion, setProductsSuggestion] = useState<any[]>([]);
+    const [productsSuggestion, setProductsSuggestion] = useState<ProductFull[]>([]);
 
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -35,7 +36,12 @@ export default function SuggestionsSection() {
             <div className="flex gap-4 overflow-x-scroll p-4">
                 {
                     productsSuggestion.map((product) => (
-                        <ProductCard img={product.img} unidad="500 Gr" companies={["Éxito, Carulla, Olímpica, Jumbo"]} name={product.Descripcion} />
+                        <ProductCard 
+                            image={product.image} 
+                            unidad="500 Gr" 
+                            prices={product.productPrices} 
+                            name={product.name} 
+                        />
                     ))
                 }
             </div>

@@ -1,14 +1,17 @@
 // app/providers.tsx
 'use client';
 
-import {NextUIProvider} from '@nextui-org/react'
+import CartProvider from '@/Context/CartContext';
+import { NextUIProvider } from '@nextui-org/react'
 import { Toaster } from 'react-hot-toast';
 
-export function Providers({children}: { children: React.ReactNode }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <NextUIProvider>
-      <Toaster/>
-      {children}
+      <CartProvider>
+        <Toaster />
+        {children}
+      </CartProvider>
     </NextUIProvider>
   )
 }

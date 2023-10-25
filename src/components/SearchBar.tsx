@@ -4,6 +4,7 @@ import { Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ProductFull } from "@/odt/Product/productFull";
 
 type SearchBarProps = {
     nonNavbar?: boolean
@@ -67,14 +68,14 @@ export default function SearchBar(props: SearchBarProps) {
                 flex flex-col max-h-[400px] overflow-y-auto px-2 py-2 rounded-b-md shadow-md`}
                 >
                     {
-                        products.map((product: any) => (
+                        products.map((product: ProductFull) => (
                             props.setProduct ? 
                                 <button onClick={e => handleClick(product)}  key={product.id} className="flex gap-4 items-center py-2 hover:bg-gray-100"> 
-                                    <ProductContent img={product.img} Descripcion={product.Descripcion} />
+                                    <ProductContent img={product.image} name={product.name} />
                                 </button>
                             :
                                 <a href="/" key={product.id} className="flex gap-4 items-center py-2 hover:bg-gray-100">
-                                    <ProductContent img={product.img} Descripcion={product.Descripcion} />
+                                    <ProductContent img={product.image} name={product.name} />
                                 </a>
                         ))
                     }
@@ -86,11 +87,11 @@ export default function SearchBar(props: SearchBarProps) {
 
     )
 
-    function ProductContent(props: { img: string, Descripcion: string }) {
+    function ProductContent(props: { img: string, name: string }) {
         return (
             <>
                 <img src={props.img} className="w-14 h-14 object-cover" />
-                <p className="text-base font-quicksand text-content">{props.Descripcion}</p>
+                <p className="text-base font-quicksand text-content">{props.name}</p>
             </>
         )
     }

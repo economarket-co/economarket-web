@@ -24,31 +24,47 @@ model SubCategory {
   category   Category @relation(fields: [categoryId], references: [id])
 }
 
-model Proudct {
+model Product {
   id            Int            @id @default(autoincrement())
   name          String
-  img           String
+  image        String
+  quantityPerUnit String
+  unit      String
+  linkCarulla   String?
+  linkExito     String?
+  linkJumbo     String?
+  linkOlimpica  String?
+  ProductPrices ProductPrice[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  linkCarulla  String?
-  linkExito    String?
-  linkJumbo    String?
-  linkOlimpica String?
-  ProductPrices ProductPrice[]
 }
 
+// instance of a product in a store at a given time
 model ProductPrice {
   id        Int      @id @default(autoincrement())
   proudctId Int
   price     Float
+  superMarket SuperMarket
+  proudct   Product  @relation(fields: [proudctId], references: [id])
+  cartItems CartItem[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  proudct   Proudct  @relation(fields: [proudctId], references: [id])
 }
 
-enum Company {
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  priceId  Int
+  proudct   ProductPrice  @relation(fields: [priceId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// supermarkets
+enum SuperMarket {
   Olimpica
   Carulla
   Exito
   Jumbo
 }
+
