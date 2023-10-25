@@ -12,7 +12,6 @@ export async function GET(request: NextRequest) {
   const code = requestUrl.searchParams.get('code')
   const fullName = requestUrl.searchParams.get('fullName');
 
-  console.log(fullName);
   if (code) {
     console.log('with provider')
     const supabase = createRouteHandlerClient({ cookies })

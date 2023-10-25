@@ -4,8 +4,6 @@ import { Session } from "@supabase/auth-helpers-nextjs";
 
 export async function createUser(session: Session) {
     // check if user exists
-    console.log(session.user);
-    
     const userData: User = {
         id: session.user.id,
         email: session.user.email || null,

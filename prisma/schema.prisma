@@ -12,6 +12,9 @@ model User {
   email String? @unique
   fullName String
   phone String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt() @default(now()) 
+  cart Cart?
 }
 
 model Category {
@@ -60,13 +63,24 @@ model ProductPrice {
   proudct     Product     @relation(fields: [proudctId], references: [id])
 }
 
-model CartItem {
+model Cart {
   id        Int          @id @default(autoincrement())
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
-  priceId   Int
+  userEmail    String?    @unique
+  user        User?        @relation(fields: [userEmail], references: [email])
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id        Int          @id @default(autoincrement())
   quantity  Int
-  proudct   ProductPrice @relation(fields: [priceId], references: [id])
+  cartId    Int
+  Card      Cart         @relation(fields: [cartId], references: [id])
+  productId Int
+  product   ProductPrice @relation(fields: [productId], references: [id])
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 }
 
 enum SuperMarket {

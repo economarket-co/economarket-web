@@ -27,7 +27,6 @@ export default function Signin() {
         }
     }
 
-
     return (
         <div className="flex w-full justify-end relative">
             <img src='/images/login-bg.jpeg' className="absolute w-full max-h-full z-[-10] object-fit" />
