@@ -1,6 +1,6 @@
 import { Product } from "@prisma/client"
 
-export type cardItemWithProduct = {
+export type cartItemWithProduct = {
     id: number,
     priceId: number,
     product: Product,

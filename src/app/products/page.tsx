@@ -49,7 +49,7 @@ export default function ProductsPage({ searchParams }: any) {
                     categories: categories.length > 0 ? categories.join(',') : undefined,
                     superMarkets: superMarkets.length > 0 ? superMarkets.join(',') : undefined,
                     priceRange: priceRange,
-                    id: Number(searchParams.id)
+                    ids: searchParams.id
                 }
             })
 

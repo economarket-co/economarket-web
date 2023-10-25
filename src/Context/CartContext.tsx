@@ -1,10 +1,10 @@
 "use client";
 import { CreateCardItem } from "@/odt/CardItem/createCardItem.odt";
-import { cardItemWithProduct } from "@/types/cartItem";
+import { cartItemWithProduct } from "@/types/cartItem";
 import { createContext, useEffect, useState } from "react";
 
 type CartContextType = {
-  cartItems: cardItemWithProduct[], 
+  cartItems: cartItemWithProduct[], 
   addToCart: (item: CreateCardItem, quantity: number) => void, 
   removeFromCart: (id: number) => void
 }
@@ -16,7 +16,7 @@ export const CartContext = createContext<CartContextType>({
 });
 
 export default function CartProvider({ children }: any) {
-  const [cartItems, setCartItems] = useState<cardItemWithProduct[]>([]);
+  const [cartItems, setCartItems] = useState<cartItemWithProduct[]>([]);
 
   useEffect(() => {
     const cart = localStorage.getItem("cart");
