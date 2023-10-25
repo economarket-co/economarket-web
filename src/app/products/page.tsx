@@ -6,9 +6,10 @@ import ProductCard from "@/components/cards/ProductsCard";
 import ProductsFilter from "@/components/ProductsFilter";
 import { Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
+import { ProductFull } from "@/odt/Product/productFull";
 
 export default function ProductsPage() {
-    const [products, setProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState<ProductFull[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     const [categories, setCategories] = useState<[]>([]);
@@ -82,7 +83,7 @@ export default function ProductsPage() {
                             </div>
                             :
                             products.map(product =>
-                                <ProductCard name={product.Descripcion} img={product.img} unidad={"500 Gr"} companies={["Éxito, Carulla, Olímpica, Jumbo"]} />
+                                <ProductCard name={product.name} image={product.image} prices={product.productPrices} unidad={product.unit} />
                             )
                         }
                     </div>
