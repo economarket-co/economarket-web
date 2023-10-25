@@ -53,18 +53,18 @@ export default function CustomNavbar() {
                 <SearchBar/>
 
                 <div className='hidden lg:flex'>
-                    <Link href="/login">
+                    <Link href="/auth/signin">
                         <IconButton sx={{ color: "white" }}>
                             <PersonIcon />
                         </IconButton>
                     </Link>
 
-                    <Link href="/favoritos">
+                    <Link href="/favorites">
                         <IconButton sx={{ color: "white" }}>
                             <Favorite />
                         </IconButton>
                     </Link>
-                    <Link href="/carrito">
+                    <Link href="/cart">
                         <IconButton sx={{ color: "white" }}>
                             <Badge badgeContent={cartItems.length} color="secondary">
                                 <ShoppingCart />

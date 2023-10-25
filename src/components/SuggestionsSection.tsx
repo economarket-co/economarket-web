@@ -37,10 +37,7 @@ export default function SuggestionsSection() {
                 {
                     productsSuggestion.map((product) => (
                         <ProductCard 
-                            image={product.image} 
-                            unidad="500 Gr" 
-                            prices={product.productPrices} 
-                            name={product.name} 
+                            product={product}
                         />
                     ))
                 }

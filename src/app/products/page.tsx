@@ -83,7 +83,7 @@ export default function ProductsPage() {
                             </div>
                             :
                             products.map(product =>
-                                <ProductCard name={product.name} image={product.image} prices={product.productPrices} unidad={product.unit} />
+                                <ProductCard product={product} />
                             )
                         }
                     </div>

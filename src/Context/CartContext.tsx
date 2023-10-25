@@ -5,7 +5,7 @@ import { createContext, useEffect, useState } from "react";
 
 type CartContextType = {
   cartItems: cardItemWithProduct[], 
-  addToCart: (item: CreateCardItem) => void, 
+  addToCart: (item: CreateCardItem, quantity: number) => void, 
   removeFromCart: (id: number) => void
 }
 
@@ -31,7 +31,8 @@ export default function CartProvider({ children }: any) {
     saveCart();
   }, [cartItems]);
   
-  const addToCart = (item: CreateCardItem) => {
+  const addToCart = (item: CreateCardItem, quantity: number) => {
+    console.log(item);
     const itsInCart = cartItems.find((i) => i.product.id === item.product.id);
 
     //@ts-ignore
@@ -41,8 +42,11 @@ export default function CartProvider({ children }: any) {
 
     if (itemIndex >= 0) {
       const updatedItems = [...cartItems];
-      updatedItems[itemIndex].quantity += item.quantity;
+      updatedItems[itemIndex].quantity += quantity;
       updatedItems[itemIndex].id += itemIndex;
+
+      if (updatedItems[itemIndex].quantity === 0 ) updatedItems.splice(itemIndex, 1);
+
       return setCartItems(updatedItems);
     }
   };
