@@ -20,6 +20,7 @@ export default function Signin() {
         try {
             await handleSigninWithEmail(email, password);
         } catch (error) {
+            console.error(error);
             toast.error('Error iniciando sesión');
         } finally {
             setLoading(false);

@@ -3,9 +3,7 @@
 import SocialNetWorkButton from "@/components/buttons/SocialNetworkButton";
 import PasswordField from "@/components/fields/PasswordField";
 import { TextField } from "@/components/fields/TextField";
-import { handleSigninWithEmail, handleSignupWithEmail } from "@/utils/auth";
-import { Button } from "@nextui-org/react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { handleSignupWithEmail } from "@/utils/auth";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -20,7 +18,7 @@ export default function Signin() {
         setLoading(true);
 
         try {
-            await handleSignupWithEmail(email, password);
+            await handleSignupWithEmail(email, password, fullName);
         } catch (error) {
             toast.error('Error iniciando sesión');
         } finally {
