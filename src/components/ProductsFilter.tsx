@@ -21,7 +21,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
     }
     return (
         <div className="flex flex-col w-[300px] gap-7 divide-y-1 min-h-full bg-white border-r px-10 py-10"
-            style={{ boxShadow: "0px 4px 26px 0px rgba(0, 0, 0, 0.45);" }}
+            style={{ boxShadow: "0px 4px 26px 0px rgba(0, 0, 0, 0.45)" }}
         >
             <h3 className="font-quicksand text-3xl font-semibold">Filtros</h3>
 

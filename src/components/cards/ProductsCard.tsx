@@ -10,7 +10,7 @@ type ProductCardProps = {
 
 export default function ProductCard(props: ProductCardProps) {
     return (
-        <Card className='w-[220px] border' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
+        <Card className='w-[220px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
             <CardBody className='p-0 h-[190px] border-b'>
                 <img className='h-full object-fill' src={props.img} alt={props.name} />
             </CardBody>
@@ -21,8 +21,8 @@ export default function ProductCard(props: ProductCardProps) {
                 <p className='font-quicksand text-xs text-[#646464] '>{props.unidad}</p>
                 <div className="flex gap-2">
                     <img src='/icons/price-tag.svg' /><p className='font-quicksand text-xs text-[#646464]'>Éxito, carulla, Olímpica, Jumbo</p>
-                    <AddToCartButton/>
                 </div>
+                <AddToCartButton />
             </CardFooter>
         </Card>
     )
