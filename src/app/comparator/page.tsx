@@ -35,13 +35,13 @@ export default function Comparator() {
         <main className="flex min-w-full flex-col overflow-hidden ">
             <HeroWithBg title="Comparador de precios" BgImage="/images/comparator/comparator-bg.png" />
 
-            <div className="flex flex-col items-center pt-20 gap-16 min-h-screen px-4">
+            <div className="flex flex-col items-center py-20 gap-16 min-h-full grow">
                 <div className="flex flex-col gap-3 text-center">
                     <h2 className="font-quicksand text-3xl font-semibold">Escoge un producto y  compáralo en nuestros supermercado</h2>
                     <p className="font-quicksand text-lg font-medium text-[#646464]">Suma productos y descubre la manera más conveniente de comprarlos</p>
                 </div>
 
-                <div className="flex flex-col items-center gap-6">
+                <div className="flex flex-col items-center h-full gap-6">
 
                     <SearchBar setProduct={setProduct} nonNavbar />
 
