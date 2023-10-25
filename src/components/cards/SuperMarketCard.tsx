@@ -6,7 +6,7 @@ type SuperMarketCardProps = {
     img: string,
     price?: number | null
     unit: string,
-    quantityPerUnit: string,
+    quantityPerUnit: number,
     unitPrice?: number | null
 }
 export function SuperMarketCard(props: SuperMarketCardProps) {
@@ -17,7 +17,7 @@ export function SuperMarketCard(props: SuperMarketCardProps) {
             </CardBody>
             <CardFooter className="flex flex-col gap-2">
                 <p className="font-quicksand text-3xl font-medium">{props.price ? formatCurrency(props.price) : "No disponible"}</p>
-                <p className="font-quicksand text-lg text-[#646464]">{props.quantityPerUnit}</p>
+                <p className="font-quicksand text-lg text-[#646464]">{props.quantityPerUnit} {props.unit}</p>
                 <p className="font-quicksand text-lg text-[#646464]">
                     {
                         !props.unitPrice ?

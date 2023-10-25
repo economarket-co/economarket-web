@@ -69,7 +69,7 @@ export default function Comparator() {
                                                 price={ofert.price}
                                                 unit={product.unit}
                                                 quantityPerUnit={product.quantityPerUnit}
-                                                unitPrice={ofert ? ofert.price / 1 : null}
+                                                unitPrice={ofert ? ofert.price / product.quantityPerUnit : null}
                                             />
                                         )
                                     }

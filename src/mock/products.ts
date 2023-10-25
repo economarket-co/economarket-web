@@ -7,7 +7,7 @@ export const productsPrices: ProductFull[] = [
         image: "https://exitocol.vtexassets.com/arquivos/ids/19739772/Huevo-Aa-Rojo-30und-Pet-1037843_a.jpg?v=638308599012630000",
         createdAt: new Date(),
         updatedAt: new Date(),
-        quantityPerUnit: "500 Gr",
+        quantityPerUnit: 500,
         unit: "Gr",
         linkCarulla: "https://carulla.vtexassets.com/arquivos/ids/13652529/Huevo-Aa-Rojo-30und-Pet-1037843_a.jpg?v=638308598998570000",
         linkExito: "https://exitocol.vtexassets.com/arquivos/ids/19739772/Huevo-Aa-Rojo-30und-Pet-1037843_a.jpg?v=638308599012630000",
