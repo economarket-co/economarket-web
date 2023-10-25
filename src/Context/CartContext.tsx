@@ -1,7 +1,7 @@
 "use client";
 import { CreateCardItem } from "@/odt/CardItem/createCardItem.odt";
 import { cardItemWithProduct } from "@/types/cartItem";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 type CartContextType = {
   cartItems: cardItemWithProduct[], 
@@ -9,7 +9,7 @@ type CartContextType = {
   removeFromCart: (id: number) => void
 }
 
-const CartContext = createContext<CartContextType>({
+export const CartContext = createContext<CartContextType>({
   cartItems: [],
   addToCart: () => { },
   removeFromCart: () => { },
@@ -18,29 +18,24 @@ const CartContext = createContext<CartContextType>({
 export default function CartProvider({ children }: any) {
   const [cartItems, setCartItems] = useState<cardItemWithProduct[]>([]);
 
+  useEffect(() => {
+    console.log(cartItems)
+  }, [cartItems])
+  
   const addToCart = (item: CreateCardItem) => {
+    const itsInCart = cartItems.find((i) => i.product.id === item.product.id);
+
     //@ts-ignore
-    setCartItems((prevItems) => {
-      const itsInCart = prevItems.find((i) => i.product.id === item.product.id);
+    if (!itsInCart) return setCartItems([...cartItems, item]);
 
-      if (!itsInCart) return [...prevItems, item];
+    const itemIndex = cartItems.findIndex((i) => i.product.id === item.product.id);
 
-      // check if priceId is the same
-      const priceIsTheSame = itsInCart.priceId === item.priceId;
-
-      if (!priceIsTheSame) return [...prevItems, item];
-      
-      const itemIndex = prevItems.findIndex((i) => i.product.id === item.product.id);
-
-      if (itemIndex >= 0) {
-        const updatedItems = [...prevItems];
-        updatedItems[itemIndex].quantity += item.quantity;
-        updatedItems[itemIndex].id += itemIndex;
-        return updatedItems;
-      }
-
-      return [...prevItems, item];
-    });
+    if (itemIndex >= 0) {
+      const updatedItems = [...cartItems];
+      updatedItems[itemIndex].quantity += item.quantity;
+      updatedItems[itemIndex].id += itemIndex;
+      return setCartItems(updatedItems);
+    }
   };
 
   const removeFromCart = (id: number) => {

@@ -9,11 +9,15 @@ import Link from 'next/link';
 
 import SideBar from '@/components/Sidebar';
 import SearchBar from './SearchBar';
+import { CartContext } from "@/Context/CartContext";
+import { useContext } from 'react';
 
 // import { useStatevalue } from '../StateProvider';
 // import { actionTypes } from '../reducer';
 
 export default function CustomNavbar() {
+    const { cartItems } = useContext(CartContext);
+
     // const [{basket},dispatch] = useStatevalue();  
 
     // const openSearch = () =>{
@@ -62,7 +66,7 @@ export default function CustomNavbar() {
                     </Link>
                     <Link href="/carrito">
                         <IconButton sx={{ color: "white" }}>
-                            <Badge badgeContent={0} color="secondary">
+                            <Badge badgeContent={cartItems.length} color="secondary">
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>

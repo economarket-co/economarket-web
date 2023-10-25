@@ -1,7 +1,7 @@
 import { ProductPrice, Product } from "@prisma/client"
 
 export type CreateCardItem = {
-    priceId: number,
+    priceId?: number,
     product: Product,
     quantity: number
 }

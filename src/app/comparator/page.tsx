@@ -55,7 +55,7 @@ export default function Comparator() {
                                     alt={product.name}
                                     style={{ boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.25)" }}
                                 />
-                                <AddToCartButton />
+                                <AddToCartButton product={product} quantity={1} />
                             </div>
 
                             <div className="flex flex-col gap-4">
