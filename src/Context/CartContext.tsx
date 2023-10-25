@@ -32,7 +32,6 @@ export default function CartProvider({ children }: any) {
   }, [cartItems]);
   
   const addToCart = (item: CreateCardItem, quantity: number) => {
-    console.log(item);
     const itsInCart = cartItems.find((i) => i.product.id === item.product.id);
 
     //@ts-ignore

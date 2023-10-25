@@ -22,49 +22,49 @@ model SubCategory {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   category   Category @relation(fields: [categoryId], references: [id])
+  products   Product[]
 }
 
 model Product {
-  id            Int            @id @default(autoincrement())
-  name          String
-  image        String
+  id              Int            @id @default(autoincrement())
+  name            String
+  image           String
   quantityPerUnit Int
-  unit      String
-  linkCarulla   String?
-  linkExito     String?
-  linkJumbo     String?
-  linkOlimpica  String?
-  ProductPrices ProductPrice[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  unit            String
+  subCategoryId   Int
+  SubCategory     SubCategory    @relation(fields: [subCategoryId], references: [id])
+  linkCarulla     String?
+  linkExito       String?
+  linkJumbo       String?
+  linkOlimpica    String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  productPrices   ProductPrice[]
 }
 
-// instance of a product in a store at a given time
 model ProductPrice {
-  id        Int      @id @default(autoincrement())
-  proudctId Int
-  price     Float
+  id          Int         @id @default(autoincrement())
+  proudctId   Int
+  price       Float
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   superMarket SuperMarket
-  proudct   Product  @relation(fields: [proudctId], references: [id])
-  cartItems CartItem[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  cartItems   CartItem[]
+  proudct     Product     @relation(fields: [proudctId], references: [id])
 }
 
 model CartItem {
-  id        Int      @id @default(autoincrement())
+  id        Int          @id @default(autoincrement())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  priceId   Int
   quantity  Int
-  priceId  Int
-  proudct   ProductPrice  @relation(fields: [priceId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  proudct   ProductPrice @relation(fields: [priceId], references: [id])
 }
 
-// supermarkets
 enum SuperMarket {
   Olimpica
   Carulla
   Exito
   Jumbo
 }
-

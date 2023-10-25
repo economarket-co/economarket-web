@@ -20,7 +20,6 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
         priceId: props.priceId
     }
 
-    console.log(props);
     return (
         <Button 
             onPress={e => addToCart(product, props.quantity)}

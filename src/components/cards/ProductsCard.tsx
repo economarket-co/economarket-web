@@ -8,6 +8,9 @@ type ProductCardProps = {
 }
 
 export default function ProductCard(props: ProductCardProps) {
+    const avaible = props.product.productPrices?.length > 0;
+    const avaibleAt = avaible ? props.product.productPrices.map(price => price.superMarket).join(',') : 'No disponible';
+
     return (
         <Card className='w-[220px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
             <CardBody className='p-0 h-[190px] border-b'>
@@ -20,9 +23,13 @@ export default function ProductCard(props: ProductCardProps) {
                 <p className='font-quicksand text-xs text-[#646464] '>{props.product.unit}</p>
                 <div className="flex gap-2">
                     <img src='/icons/price-tag.svg' />
-                    <p className='font-quicksand text-xs text-[#646464]'>{props.product.productPrices.map(price => price.superMarket).join(',')}</p>
+                    <p className='font-quicksand text-xs text-[#646464]'>
+                        {
+                           avaibleAt
+                        }
+                    </p>
                 </div>
-                <AddToCartButton 
+                <AddToCartButton
                     product={props.product}
                     quantity={1}
                 />

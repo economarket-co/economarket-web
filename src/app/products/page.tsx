@@ -8,15 +8,16 @@ import { Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
 
-export default function ProductsPage() {
+export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     const [categories, setCategories] = useState<[]>([]);
-    const [supermarkets, setSupermarkets] = useState<[]>([]);
+    const [superMarkets, setSupermarkets] = useState<[]>([]);
     const [priceRange, setPriceRange] = useState<number>(0);
 
     const [categoriesList, setCategoriesList] = useState<[]>([]);
+    const [ supermarketsList, setSupermarketsList ] = useState<[]>([]);
 
     useEffect(() => {
         fetchFilters();
@@ -24,7 +25,7 @@ export default function ProductsPage() {
 
     useEffect(() => {
         fetchData();
-    }, [categories, supermarkets, priceRange])
+    }, [categories, superMarkets, priceRange])
 
     async function fetchFilters() {
         try {
@@ -45,11 +46,15 @@ export default function ProductsPage() {
                     'Content-Type': 'application/json'
                 },
                 params: {
-                    categories: categories.join(''),
-                    supermarkets: supermarkets.join(''),
-                    priceRange: priceRange
+                    categories: categories.length > 0 ? categories.join(',') : undefined,
+                    superMarkets: superMarkets.length > 0 ? superMarkets.join(',') : undefined,
+                    priceRange: priceRange,
+                    id: Number(searchParams.id)
                 }
             })
+
+            // delete id from searchParams
+            delete searchParams.id;
             setProducts(res.data)
         } catch (error) {
             console.log(error)
@@ -67,7 +72,7 @@ export default function ProductsPage() {
                     categoriesList={categoriesList}
                     categories={categories}
                     setCategories={setCategories}
-                    supermarkets={supermarkets}
+                    supermarkets={superMarkets}
                     setSupermarkets={setSupermarkets}
                     priceRange={priceRange}
                     setPriceRange={setPriceRange}

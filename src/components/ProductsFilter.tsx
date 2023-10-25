@@ -62,7 +62,9 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                 <h4 className="font-quicksand text-xl">Supermercado</h4>
 
                 <CheckboxGroup
-                    defaultValue={["Exito", "Jumbo", "Olimpica", "Carulla"]}
+                    value={props.supermarkets}
+                    onValueChange={props.setSupermarkets}
+                    // defaultValue={["Exito", "Jumbo", "Olimpica", "Carulla"]}
                 >
                     <Checkbox value="Exito">Exito</Checkbox>
                     <Checkbox value="Jumbo">Jumbo</Checkbox>
