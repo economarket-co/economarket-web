@@ -19,8 +19,17 @@ export default function CartProvider({ children }: any) {
   const [cartItems, setCartItems] = useState<cardItemWithProduct[]>([]);
 
   useEffect(() => {
-    console.log(cartItems)
-  }, [cartItems])
+    const cart = localStorage.getItem("cart");
+
+    if (cart) {
+      setCartItems(JSON.parse(cart));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cartItems.length === 0) return;
+    saveCart();
+  }, [cartItems]);
   
   const addToCart = (item: CreateCardItem) => {
     const itsInCart = cartItems.find((i) => i.product.id === item.product.id);
@@ -41,6 +50,10 @@ export default function CartProvider({ children }: any) {
   const removeFromCart = (id: number) => {
     setCartItems((prevItems) => prevItems.filter((i) => i.id !== id));
   };
+
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }
 
   return (
     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
