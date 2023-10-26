@@ -74,7 +74,7 @@ export default function SearchBar(props: SearchBarProps) {
                                     <ProductContent img={product.image} name={product.name} />
                                 </button>
                             :
-                                <a href={`/products?id=${product.id}`} key={product.id} className="flex gap-4 items-center py-2 hover:bg-gray-100">
+                                <a href={`/comparator?productId=${product.id}`} key={product.id} className="flex gap-4 items-center py-2 hover:bg-gray-100">
                                     <ProductContent img={product.image} name={product.name} />
                                 </a>
                         ))

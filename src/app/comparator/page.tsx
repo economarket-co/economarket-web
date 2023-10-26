@@ -7,12 +7,18 @@ import { SuperMarketCard } from "@/components/cards/SuperMarketCard";
 import SuggestionsSection from "@/components/SuggestionsSection";
 import { ProductFull } from "@/odt/Product/productFull";
 import { ProductPrice, SuperMarket } from "@prisma/client";
+import { RestaurantMenu } from "@mui/icons-material";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 
-export default function Comparator() {
+export default function Comparator({ searchParams }: any) {
     const [product, setProduct] = useState<ProductFull>();
-
     const [prices, setOferts] = useState<(ProductPrice | any)[]>([]);
+
+    useEffect(() => {
+        fetchProduct();
+    }, [])
 
     useEffect(() => {
         if (!product) return;
@@ -30,6 +36,25 @@ export default function Comparator() {
         setOferts(oferts);
         
     }, [product])
+
+    async function fetchProduct() {
+        const id = searchParams.productId;
+
+        if (!id) return 
+
+        try {
+            const product = await axios.get(`/api/products/${id}`, {
+                params: {
+                    ids: id
+                }
+            })
+
+            setProduct(product.data);
+        } catch (error) {
+            console.error();
+            toast.error('Error al cargar el producto');
+        }
+    }
 
     return (
         <main className="flex min-w-full flex-col overflow-hidden ">

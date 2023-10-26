@@ -68,7 +68,7 @@ export default function Categories() {
                     <p>Mira todos los productos que manejamos!</p>
                 </div>
 
-                <LinkButton href="/productos" text="Ver todos los productos" />
+                <LinkButton href="/products" text="Ver todos los productos" />
             </div>
         </main>
     )

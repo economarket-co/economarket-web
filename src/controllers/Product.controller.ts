@@ -3,15 +3,21 @@ import prisma from '@/db/clien';
 import { productsPrices } from '@/mock/products';
 import { SuperMarket } from '@prisma/client';
 
-type filters = {
+type filtersForMany = {
     name?: string,
-    ids?: string[] | undefined, 
-    categories?: string[], 
+    ids?: string[] | undefined,
+    categories?: string[],
     superMarkets?: SuperMarket[]
     userId?: string
 }
 
-export async function getProducts(filters : filters){
+type filtersForOne = {
+    id:  number
+    superMarkets?: SuperMarket[]
+    userId?: string
+}
+
+export async function getProducts(filters: filtersForMany) {
     const products = await prisma.product.findMany({
         where: {
             name: {
@@ -35,6 +41,35 @@ export async function getProducts(filters : filters){
                     }
                 }
             }
+        },
+        include: {
+            productPrices: {
+                where: {
+                    superMarket: {
+                        in: filters.superMarkets || undefined
+                    }
+                },
+            },
+            SubCategory: {
+                include: {
+                    category: true
+                }
+            },
+            favorites: {
+                where: {
+                    userId: filters.userId || undefined
+                }
+            }
+        }
+    });
+
+    return products;
+}
+
+export async function getProduct(filters: filtersForOne) {
+    const products = await prisma.product.findUnique({
+        where: {
+            id: filters.id
         },
         include: {
             productPrices: {
