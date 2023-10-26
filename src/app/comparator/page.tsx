@@ -35,10 +35,10 @@ export default function Comparator() {
         <main className="flex min-w-full flex-col overflow-hidden ">
             <HeroWithBg title="Comparador de precios" BgImage="/images/comparator/comparator-bg.png" />
 
-            <div className="flex flex-col items-center py-20 gap-16 min-h-full grow">
+            <div className="flex flex-col items-center px-4 py-20 gap-16 min-h-full grow">
                 <div className="flex flex-col gap-3 text-center">
-                    <h2 className="font-quicksand text-3xl font-semibold">Escoge un producto y  compáralo en nuestros supermercado</h2>
-                    <p className="font-quicksand text-lg font-medium text-[#646464]">Suma productos y descubre la manera más conveniente de comprarlos</p>
+                    <h2 className="font-quicksand text-xl md:text-3xl font-semibold">Escoge un producto y  compáralo en nuestros supermercado</h2>
+                    <p className="font-quicksand md:text-lg font-medium text-[#646464]">Suma productos y descubre la manera más conveniente de comprarlos</p>
                 </div>
 
                 <div className="flex flex-col items-center h-full gap-6">
@@ -47,11 +47,11 @@ export default function Comparator() {
 
                     {
                         product &&
-                        <div className="flex flex-col lg:flex-row gap-8 mt-10">
+                        <div className="flex flex-col xl:flex-row gap-8 mt-10">
                             <div className="flex flex-col gap-6">
                                 <img
                                     src={product.image}
-                                    className="rounded-lg h-[490px]"
+                                    className="rounded-lg h-[300px] md:h-[490px]"
                                     alt={product.name}
                                     style={{ boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.25)" }}
                                 />

@@ -11,7 +11,7 @@ type SuperMarketCardProps = {
 }
 export function SuperMarketCard(props: SuperMarketCardProps) {
     return (
-        <Card className="w-full lg:w-[200px] xl:w-[320px]">
+        <Card className="w-full lg:w-[300px] xl:w-[320px]">
             <CardBody className="p-0">
                 <img src={props.img} className="h-[110px] object-fill" alt="olimpica" />
             </CardBody>
