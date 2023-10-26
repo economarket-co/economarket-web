@@ -81,7 +81,7 @@ export default function ProductsPage({ searchParams }: any) {
                     maxPrice={100000}
                 />
 
-                <div className="flex flex-col gap-10 items-center md:px-20 py-16 grow">
+                <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
                     <div className="flex">
                         <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Todos los productos</h1>
                     </div>
