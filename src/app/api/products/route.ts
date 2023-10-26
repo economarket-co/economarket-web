@@ -1,8 +1,15 @@
 import { getProducts } from "@/controllers/Product.controller";
 import { SuperMarket } from "@prisma/client";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, res: NextResponse) {
+    const supabase = createRouteHandlerClient({ cookies });
+    const { data, error } = await supabase.auth.getSession();
+
+    if (error) return NextResponse.json({ error }, { status: 500});
+
     const name = req.nextUrl.searchParams.get("name") || "";
     const ids = req.nextUrl.searchParams.get('ids')?.split(',') || undefined;
     let categories = req.nextUrl.searchParams.get('categories')?.split(',') || undefined;
@@ -12,7 +19,7 @@ export async function GET(req: NextRequest) {
     try {
         if (!categories && category ) categories = [category];
 
-        const filters = { name, ids, categories, superMarkets: superMarkets as SuperMarket[] }
+        const filters = { userId: data.session?.user.id , name, ids, categories, superMarkets: superMarkets as SuperMarket[] }
         const products = await  getProducts(filters);
 
         return NextResponse.json(products, { status: 200})

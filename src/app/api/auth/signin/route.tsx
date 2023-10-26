@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
   const fullName = requestUrl.searchParams.get('fullName');
 
   if (code) {
-    console.log('with provider')
     const supabase = createRouteHandlerClient({ cookies })
     await supabase.auth.exchangeCodeForSession(code)
 

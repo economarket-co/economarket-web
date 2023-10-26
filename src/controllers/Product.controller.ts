@@ -8,6 +8,7 @@ type filters = {
     ids?: string[] | undefined, 
     categories?: string[], 
     superMarkets?: SuperMarket[]
+    userId?: string
 }
 
 export async function getProducts(filters : filters){
@@ -48,6 +49,11 @@ export async function getProducts(filters : filters){
                     category: true
                 }
             },
+            favorites: {
+                where: {
+                    userId: filters.userId || undefined
+                }
+            }
         }
     });
 
