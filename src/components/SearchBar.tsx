@@ -15,9 +15,9 @@ export default function SearchBar(props: SearchBarProps) {
     const [productName, setProductName] = useState('');
     const [products, setProducts] = useState([]);
 
-    // useEffect(() => {
-    //     fetchProducts();
-    // }, [productName]);
+    useEffect(() => {
+        handleSearch(productName);
+    }, [productName])
 
     async function handleSearch(productName: string) {
         try {
@@ -44,8 +44,8 @@ export default function SearchBar(props: SearchBarProps) {
     return (
         <div className={`sm:w-[10rem] md:w-[34rem] relative ${!props.nonNavbar && 'hidden'} lg:block`}>
             <Input
-                // value={productName}
-                onChange={(e) => handleSearch(e.target.value)}
+                value={productName}
+                onValueChange={setProductName}
                 className={`z-50 ${props.nonNavbar && 'shadow-lg'} `}
                 classNames={{
                     base: "w-full  h-8 z-50",
@@ -63,7 +63,7 @@ export default function SearchBar(props: SearchBarProps) {
             />
 
             {
-                products.length > 0 &&
+                (products.length > 0 && productName !== "") ?
                 <div className={`absolute z-50 bg-white sm:w-[10rem] md:w-[34rem] divide-y-2 divide-gray-200
                 flex flex-col max-h-[400px] overflow-y-auto px-2 py-2 rounded-b-md shadow-md`}
                 >
@@ -79,7 +79,7 @@ export default function SearchBar(props: SearchBarProps) {
                                 </a>
                         ))
                     }
-                </div>
+                </div> : null
             }
 
         </div>

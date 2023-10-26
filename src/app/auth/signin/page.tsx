@@ -21,7 +21,7 @@ export default function Signin() {
             await handleSigninWithEmail(email, password);
         } catch (error) {
             console.error(error);
-            toast.error('Error iniciando sesión');
+            toast.error('Error, usuario o contraseña incorrectos');
         } finally {
             setLoading(false);
         }
