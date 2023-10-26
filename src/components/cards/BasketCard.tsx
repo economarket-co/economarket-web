@@ -11,6 +11,15 @@ type BasketCardProps = {
 }
 
 export default function BasketCard(props: BasketCardProps) {
+    function hadleBuy() {
+
+        console.log(props.cartProducts)
+        props.cartProducts.forEach(product => {
+            console.log(product.link)
+            window.open(product.link, '_blank');
+        })
+    }
+    
     return (
         <div className={`rounded-3xl overflow-hidden w-[300px] lg:w-[380px] ${props.isBestOption && 'border-3 border-[#01CC5E]'}`}
             style={{ boxShadow: "0px 3.72755px 19.56966px 0px rgba(0, 0, 0, 0.25)" }}
@@ -31,7 +40,7 @@ export default function BasketCard(props: BasketCardProps) {
 
                                     <div className="flex gap-3 items-center">
                                         <p>{product.quantity}</p>
-                                        <Link href={product.link }><img src="/icons/external-link.svg" /></Link>
+                                        <Link href={product.link} target="_blank"><img src="/icons/external-link.svg" /></Link>
                                     </div>
                                 </div>
                             )
@@ -47,7 +56,7 @@ export default function BasketCard(props: BasketCardProps) {
                                 return product ? total + (product.price * product.quantity) : total + 0;
                             }, 0))
                         }</p>
-                    <Button color="success" className="w-full text-white">Comprar</Button>
+                    <Button onPress={hadleBuy} color="success" className="w-full text-white">Comprar</Button>
                 </div>
 
             </div>
