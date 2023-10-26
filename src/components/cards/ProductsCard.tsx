@@ -4,6 +4,7 @@ import AddToCartButton from "../buttons/AddToCartButton";
 import { ProductFull } from "@/odt/Product/productFull";
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 type ProductCardProps = {
     product: ProductFull,
@@ -13,14 +14,27 @@ export default function ProductCard(props: ProductCardProps) {
     const avaible = props.product.productPrices?.length > 0;
     const avaibleAt = avaible ? props.product.productPrices.map(price => price.superMarket).join(',') : 'No disponible';
     const [isFavorite, setIsFavorite] = useState(props.product.favorites.length > 0);
-    const [loading , setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     async function handleAddFavorite() {
         setLoading(true);
-        
-        await axios.post('/api/favorites', {
-            productId: props.product.id,
-        })       
+
+        try {
+            if (!isFavorite) {
+                await axios.post('/api/favorites', {
+                    productId: props.product.id,
+                })
+            } else {
+                await axios.delete('/api/favorites', {
+                    data: {
+                        productId: props.product.id,
+                    }
+                })
+            } 
+        } catch (error) {
+            console.log(error);
+            toast.error("Ha ocurrido un error")
+        }
 
         setIsFavorite(!isFavorite);
         setLoading(false);
@@ -37,7 +51,6 @@ export default function ProductCard(props: ProductCardProps) {
                             :
                             <img src={`/icons/heart.svg `} alt="" className={``} />
                     }
-                    {/* <FavoriteBorder className={`${isFavorite ? 'bg-red-600' : 'bg-transparent'} text-[#64646478]`} /> */}
                 </button>
             </CardBody>
             <CardFooter className='flex flex-col gap-2 px-4 items-start overflow-x-hidden'>
