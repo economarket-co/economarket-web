@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ProductCard from "@/components/cards/ProductsCard";
-import ProductsFilter from "@/components/ProductsFilter";
-import { Spinner } from "@nextui-org/react";
+import ProductsFilter from "@/components/filters/ProductsFilter";
+import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
 
-export default function ProductsPage({ searchParams }: any ) {
+export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -17,7 +17,7 @@ export default function ProductsPage({ searchParams }: any ) {
     const [priceRange, setPriceRange] = useState<number>(0);
 
     const [categoriesList, setCategoriesList] = useState<[]>([]);
-    const [ supermarketsList, setSupermarketsList ] = useState<[]>([]);
+    const [supermarketsList, setSupermarketsList] = useState<[]>([]);
 
     useEffect(() => {
         fetchFilters();
@@ -69,7 +69,7 @@ export default function ProductsPage({ searchParams }: any ) {
         <main className="flex min-w-full flex-col overflow-hidden ">
             <HeroWithBg title="Productos" BgImage="/images/products/products-bg.png" />
 
-            <div className="flex">
+            <div className="flex flex-col lg:flex-row w-full grow bg-[#F6F6F6]">
                 <ProductsFilter
                     categoriesList={categoriesList}
                     categories={categories}
@@ -80,13 +80,16 @@ export default function ProductsPage({ searchParams }: any ) {
                     setPriceRange={setPriceRange}
                     maxPrice={100000}
                 />
-                <div className="flex flex-col gap-10 px-20 py-16">
-                    <h1 className="font-dmserif text-6xl">Todos los productos</h1>
 
-                    <div className="flex flex-wrap gap-10 justify-start">
+                <div className="flex flex-col gap-10 items-center md:px-20 py-16 grow">
+                    <div className="flex">
+                        <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Todos los productos</h1>
+                    </div>
+
+                    <div className="flex flex-wrap gap-10 justify-center md:justify-start">
                         {loading ?
                             <div className="flex w-full justify-center">
-                                <Spinner size="lg"/>
+                                <Spinner size="lg" />
                             </div>
                             :
                             products.map(product =>
