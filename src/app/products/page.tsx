@@ -8,11 +8,11 @@ import { Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
 
-export default function ProductsPage({ searchParams }: any) {
+export default function ProductsPage({ searchParams }: any ) {
     const [products, setProducts] = useState<ProductFull[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const [categories, setCategories] = useState<[]>([]);
+    const [categories, setCategories] = useState<string[]>([]);
     const [superMarkets, setSupermarkets] = useState<[]>([]);
     const [priceRange, setPriceRange] = useState<number>(0);
 
@@ -49,11 +49,13 @@ export default function ProductsPage({ searchParams }: any) {
                     categories: categories.length > 0 ? categories.join(',') : undefined,
                     superMarkets: superMarkets.length > 0 ? superMarkets.join(',') : undefined,
                     priceRange: priceRange,
-                    ids: searchParams.id
+                    ids: searchParams.id,
+                    category: searchParams.category
                 }
             })
 
             // delete id from searchParams
+            delete searchParams.category;
             delete searchParams.id;
             setProducts(res.data)
         } catch (error) {

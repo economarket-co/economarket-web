@@ -2,32 +2,37 @@
     {
         "id": 1,
         "name": "Productos frescos",
-        "img": "/images/categories/frescos.png"
+        "img": "/images/categories/frescos.png",
+        "color": "#01CD5E"
     },
     {
         "id": 2,
         "name": "Bebidas",
-        "img": "/images/categories/bebidas.png"
-
+        "img": "/images/categories/bebidas.png",
+        "color": "#F28705"
     },
     {
         "id": 3,
         "name": "Productos secos",
-        "img": "/images/categories/secos.png"
+        "img": "/images/categories/secos.png",
+        "color": "#01CD5E"
     },
     {
         "id": 4,
         "name": "Enlatados",
-        "img": "/images/categories/enlatados.png"
+        "img": "/images/categories/enlatados.png",
+        "color": "#033E8C"
     },
     {
         "id": 5,
         "name": "Proteínas",
-        "img": "/images/categories/proteinas.png"
+        "img": "/images/categories/proteinas.png",
+        "color": "#F28705"
     },
     {
         "id": 6,
         "name": "Lácteos",
-        "img": "/images/categories/lacteos.png"
+        "img": "/images/categories/lacteos.png",
+        "color": "#378DFF"
     }
 ]

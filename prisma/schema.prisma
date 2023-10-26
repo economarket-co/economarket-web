@@ -8,30 +8,32 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  email String? @unique
-  fullName String
-  phone String?
+  id        String   @id @default(uuid())
+  email     String?  @unique
+  fullName  String
+  phone     String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt() @default(now()) 
-  cart Cart?
+  updatedAt DateTime @default(now()) @updatedAt()
+  cart      Cart?
 }
 
 model Category {
   id            Int           @id @default(autoincrement())
   name          String
+  image         String
+  color         String
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   subCategories SubCategory[]
 }
 
 model SubCategory {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   name       String
   categoryId Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  category   Category  @relation(fields: [categoryId], references: [id])
   products   Product[]
 }
 
@@ -54,21 +56,21 @@ model Product {
 
 model ProductPrice {
   id          Int         @id @default(autoincrement())
-  proudctId   Int
+  productId   Int
   price       Float
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   superMarket SuperMarket
   cartItems   CartItem[]
-  proudct     Product     @relation(fields: [proudctId], references: [id])
+  proudct     Product     @relation(fields: [productId], references: [id])
 }
 
 model Cart {
-  id        Int          @id @default(autoincrement())
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  userEmail    String?    @unique
-  user        User?        @relation(fields: [userEmail], references: [email])
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  userEmail String?    @unique
+  user      User?      @relation(fields: [userEmail], references: [email])
   cartItems CartItem[]
 }
 

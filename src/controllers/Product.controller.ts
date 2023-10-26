@@ -3,27 +3,34 @@ import prisma from '@/db/clien';
 import { productsPrices } from '@/mock/products';
 import { SuperMarket } from '@prisma/client';
 
-export async function getProducts(name?: string, ids?: string[] | undefined, categories?: string[], superMarkets?: SuperMarket[]) {
+type filters = {
+    name?: string,
+    ids?: string[] | undefined, 
+    categories?: string[], 
+    superMarkets?: SuperMarket[]
+}
+
+export async function getProducts(filters : filters){
     const products = await prisma.product.findMany({
         where: {
             name: {
-                contains: name || "",
+                contains: filters.name || "",
                 mode: "insensitive"
             },
             id: {
-                in: ids?.map((id) => Number(id)) || undefined
+                in: filters.ids?.map((id) => Number(id)) || undefined
             },
             SubCategory: {
                 category: {
                     id: {
-                        in: categories?.map((id) => Number(id)) || undefined
+                        in: filters.categories?.map((id) => Number(id)) || undefined
                     }
                 }
             },
             productPrices: {
                 some: {
                     superMarket: {
-                        in: superMarkets || undefined
+                        in: filters.superMarkets || undefined
                     }
                 }
             }
@@ -32,7 +39,7 @@ export async function getProducts(name?: string, ids?: string[] | undefined, cat
             productPrices: {
                 where: {
                     superMarket: {
-                        in: superMarkets || undefined
+                        in: filters.superMarkets || undefined
                     }
                 },
             },

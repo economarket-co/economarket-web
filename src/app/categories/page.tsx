@@ -1,13 +1,27 @@
 'use client';
-import { Grid, Typography, useMediaQuery } from "@mui/material";
 
 import categories from '@/mock/categories.json';
 import CategoryCard from "@/components/cards/CategoryCard";
-import Link from "next/link";
 import LinkButton from "@/components/buttons/LinkButton";
+import { Category } from '@prisma/client';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 export default function Categories() {
-    const isMobile = useMediaQuery("(max-width: 768px)");
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
+    async function fetchCategories() {
+        try {
+            const res = await axios.get('/api/categories');
+            setCategories(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <main className="flex min-w-full flex-col overflow-hidden ">
@@ -31,7 +45,13 @@ export default function Categories() {
                 <div className="flex justify-center gap-7 flex-wrap">
                     {
                         categories.map((category, index) => (
-                            <CategoryCard key={index} title={category.name} img={category.img} />
+                            <CategoryCard 
+                                key={index}  
+                                id={category.id}
+                                title={category.name}
+                                img={category.image}
+                                color={category.color}    
+                            />
                         ))
                     }
                 </div>
