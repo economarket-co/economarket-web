@@ -17,7 +17,6 @@ export async function GET(req: NextRequest, { params }: any) {
         const filters = { id: Number(id), userId: data.session?.user.id}
         const product = await getProduct(filters);
 
-        console.log(product);
         return NextResponse.json(product, { status: 200})
     } catch (error) {
         console.error(error);

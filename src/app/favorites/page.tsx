@@ -7,6 +7,7 @@ import ProductsFilter from "@/components/filters/ProductsFilter";
 import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
+import { Favorite } from "@mui/icons-material";
 
 export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
@@ -41,7 +42,7 @@ export default function ProductsPage({ searchParams }: any) {
     async function fetchData() {
         setLoading(true);
         try {
-            const res = await axios.get('/api/favorites', {
+            const res = await axios.get('/api/products', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -50,7 +51,8 @@ export default function ProductsPage({ searchParams }: any) {
                     superMarkets: superMarkets.length > 0 ? superMarkets.join(',') : undefined,
                     priceRange: priceRange,
                     ids: searchParams.id,
-                    category: searchParams.category
+                    category: searchParams.category,
+                    favorites: true
                 }
             })
 
@@ -83,7 +85,7 @@ export default function ProductsPage({ searchParams }: any) {
 
                 <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
                     <div className="flex">
-                        <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Todos los productos</h1>
+                        <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Tus favoritos</h1>
                     </div>
 
                     <div className="flex flex-wrap gap-10 justify-center md:justify-start">

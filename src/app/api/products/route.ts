@@ -1,4 +1,4 @@
-import { getProducts } from "@/controllers/Product.controller";
+import { getFavoritesProducts, getProducts } from "@/controllers/Product.controller";
 import { SuperMarket } from "@prisma/client";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -15,12 +15,23 @@ export async function GET(req: NextRequest, res: NextResponse) {
     let categories = req.nextUrl.searchParams.get('categories')?.split(',') || undefined;
     const superMarkets = req.nextUrl.searchParams.get('superMarkets')?.split(',') || undefined;
     const category = req.nextUrl.searchParams.get('category') || undefined;
+    const favorites = req.nextUrl.searchParams.get('favorites') || undefined; // only fetch favorite products
 
     try {
         if (!categories && category ) categories = [category];
 
-        const filters = { userId: data.session?.user.id , name, ids, categories, superMarkets: superMarkets as SuperMarket[] }
-        const products = await  getProducts(filters);
+        const filters = { 
+            userId: data.session?.user.id,
+            name, ids, 
+            categories, 
+            superMarkets: superMarkets as SuperMarket[],
+            favorites: favorites === 'true' ? true : undefined
+        }
+
+        console.log(filters.favorites);
+
+        
+        const products = filters.favorites ? await getFavoritesProducts(filters) : await  getProducts(filters);
 
         return NextResponse.json(products, { status: 200})
     } catch (error) {
