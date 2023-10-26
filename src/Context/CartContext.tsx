@@ -24,7 +24,9 @@ export default function CartProvider({ children }: any) {
   const [cartItems, setCartItems] = useState<cartItemWithProduct[]>([]);
 
   useEffect(() => {
-    fetchCartData();
+    const cart = localStorage.getItem("cart");
+
+    if (cart) setCartItems(JSON.parse(cart));
   }, []);
 
   useEffect(() => {
@@ -33,27 +35,22 @@ export default function CartProvider({ children }: any) {
   }, [cartItems]);
 
   const addToCart = async (item: CreateCardItem, quantity: number) => {
-    if (!cart) return await createCart();
-
-    const itsInCart = cart?.cartItems.find((i) => i.product.id === item.product.id);
+    const itsInCart = cartItems.find((i) => i.product.id === item.product.id);
 
     //@ts-ignore
-    // if (!itsInCart) return setCartItems([...cartItems, item]);
+    if (!itsInCart) return setCartItems([...cartItems, item]);
 
-    if (!itsInCart) {
+    const itemIndex = cartItems.findIndex((i) => i.product.id === item.product.id);
 
+    if (itemIndex >= 0) {
+      const updatedItems = [...cartItems];
+      updatedItems[itemIndex].quantity += quantity;
+      updatedItems[itemIndex].id += itemIndex;
+
+      if (updatedItems[itemIndex].quantity === 0) updatedItems.splice(itemIndex, 1);
+
+      return setCartItems(updatedItems);
     }
-    // const itemIndex = cartItems.findIndex((i) => i.product.id === item.product.id);
-
-    // if (itemIndex >= 0) {
-    //   const updatedItems = [...cartItems];
-    //   updatedItems[itemIndex].quantity += quantity;
-    //   updatedItems[itemIndex].id += itemIndex;
-
-    //   if (updatedItems[itemIndex].quantity === 0) updatedItems.splice(itemIndex, 1);
-
-    //   return setCartItems(updatedItems);
-    // }
   };
 
   const removeFromCart = (id: number) => {
