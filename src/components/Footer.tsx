@@ -1,7 +1,24 @@
 "use client";
 import { Button, Input } from "@nextui-org/react"
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Footer() {
+    const [email, setEmail] = useState("");
+    
+    async function handleSubmit(e: any) {
+        e.preventDefault();
+        
+        try {
+            const res = await axios.post("/api/newsletter", { email });
+
+            toast.success("Gracias por suscribirte");
+        } catch (error) {
+            toast.error("Ha ocurrido un error");
+        }
+    }
+
     return (
         <div className={`
             grid grid-cols-2  gap-8 px-4 
@@ -32,8 +49,8 @@ export default function Footer() {
                     <p className="text-sm lg:text-lg font-thin">Dejanos tu información y nosotros nos escargamos del resto</p>
                 </div>
 
-                <form className="flex flex-col lg:flex-row gap-2">
-                    <Input type="email" placeholder="Correo electrónico" className="text-black" />
+                <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-2">
+                    <Input value={email} onValueChange={setEmail} type="email" placeholder="Correo electrónico" className="text-black" />
                     <Button type="submit" color="success" className="text-white py-[10px] px-[30px]">Suscribete</Button>
                 </form>
             </div>

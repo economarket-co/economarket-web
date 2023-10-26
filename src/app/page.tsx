@@ -95,7 +95,7 @@ export default function Home() {
   function Allies() {
     return (
       <div className='flex flex-col flex-items justify-center items-center text-white relative md:min-h-[400px] lg:min-h-[600px]'>
-        <img src="/images/allies-bg.png" className='absolute min-w-full min-h-full max-w-full -z-10' />
+        <img src="/images/allies-bg.png" className='absolute min-w-full min-h-full max-w-full max-h-[300px] -z-10' />
 
         <div className='mx-auto py-5 flex flex-col gap-8 items-center z-50 max-w-[1000px]'>
           <img src="/images/logo-white.png" />
