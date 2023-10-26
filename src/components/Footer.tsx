@@ -21,8 +21,8 @@ export default function Footer() {
 
     return (
         <div className={`
-            grid grid-cols-2  gap-8 px-4 
-            lg:flex w-full justify-center items md:gap-28 py-12 
+            grid grid-cols-2  gap-5 px-4 
+            lg:flex w-full justify-center items-start lg:gap-28 py-12 
             bg-[#033E8C]  justify-self-end self-end`}
         >
             <div className="flex flex-col gap-4 mx-auto">
@@ -43,7 +43,7 @@ export default function Footer() {
 
             </div>
 
-            <div className="col-span-2 mx-auto flex flex-col gap-6 text-white">
+            <div className="col-span-2 mx-auto flex flex-col gap-6 justify-start text-white">
                 <div>
                     <h4 className="text-lg lg:text-2xl font-semibold">Recibe actualizaciones siguiendo nuestro News Letter</h4>
                     <p className="text-sm lg:text-lg font-thin">Dejanos tu información y nosotros nos escargamos del resto</p>
