@@ -28,9 +28,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
             favorites: favorites === 'true' ? true : undefined
         }
 
-        console.log(filters.favorites);
-
-        
         const products = filters.favorites ? await getFavoritesProducts(filters) : await  getProducts(filters);
 
         return NextResponse.json(products, { status: 200})

@@ -1,6 +1,5 @@
 
 import prisma from '@/db/clien';
-import { productsPrices } from '@/mock/products';
 import { SuperMarket } from '@prisma/client';
 
 type filtersForMany = {

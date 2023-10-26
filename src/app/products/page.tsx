@@ -93,7 +93,7 @@ export default function ProductsPage({ searchParams }: any) {
                             </div>
                             :
                             products.map(product =>
-                                <ProductCard product={product} />
+                                <ProductCard key={product.id} product={product} />
                             )
                         }
                     </div>

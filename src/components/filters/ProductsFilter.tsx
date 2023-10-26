@@ -57,7 +57,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                         >
                             {
                                 props.categoriesList.map((category: any) => (
-                                    <Checkbox value={category.id}>{category.name}</Checkbox>
+                                    <Checkbox key={category.id} value={category.id}>{category.name}</Checkbox>
                                 ))
                             }
                         </CheckboxGroup>
@@ -117,7 +117,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                 >
                     {
                         props.categoriesList.map((category: any) => (
-                            <Checkbox value={category.id}>{category.name}</Checkbox>
+                            <Checkbox key={category.id} value={category.id}>{category.name}</Checkbox>
                         ))
                     }
                 </CheckboxGroup>

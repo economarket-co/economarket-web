@@ -37,6 +37,7 @@ export default function SuggestionsSection() {
                 {
                     productsSuggestion.map((product) => (
                         <ProductCard 
+                            key={product.id}
                             product={product}
                         />
                     ))

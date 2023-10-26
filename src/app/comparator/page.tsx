@@ -89,6 +89,7 @@ export default function Comparator({ searchParams }: any) {
                                     {
                                         prices.map(ofert =>
                                             <SuperMarketCard
+                                                key={ofert.superMarket}
                                                 name={product.name}
                                                 img={`/images/supermarkets/${ofert.superMarket}.png`}
                                                 price={ofert.price}

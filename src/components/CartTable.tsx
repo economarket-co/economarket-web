@@ -19,8 +19,8 @@ export default function CartTable(props: CartTableProps) {
 
             <div className="flex flex-col gap-3 divide-y">
                 {
-                    props.cartItems.map(item => (
-                        <div className="flex items-center justify-between font-medium py-3">
+                    props.cartItems.map((item, index) => (
+                        <div key={index} className="flex items-center justify-between font-medium py-3">
                             <div className="flex gap-3 items-center">
                                 <img src={item.product.image} alt={item.product.image} className="h-12" />
                                 <p>{item.product.name}</p>
