@@ -30,7 +30,7 @@ export default function Signin() {
     return (
         <div className="flex w-full justify-end relative">
             <img src='/images/login-bg.jpeg' className="absolute w-full max-h-full z-[-10] object-fit" />
-            <form onSubmit={handleSignin} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-6 border rounded-md py-8 bg-white">
+            <form onSubmit={handleSignin} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-6 border rounded-md py-16 xl:min-h-[800px] bg-white">
                 <h1 className="text-[26px] font-semibold">{`Inicia sesión`}</h1>
 
                 <TextField

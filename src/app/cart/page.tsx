@@ -12,6 +12,7 @@ import { formatCurrency } from "../utils";
 import BasketCard from "@/components/cards/BasketCard";
 import CartResume from "@/components/CartResume";
 import CartTable from "@/components/CartTable";
+import SuggestionsSection from "@/components/SuggestionsSection";
 
 export default function Cart() {
     const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
@@ -133,7 +134,7 @@ export default function Cart() {
 
                     <Switch isSelected={allInOnerMarket} onValueChange={setAllInOneMarket} />
 
-                    <div className="flex flex-wrap gap-8 justify-center">
+                    {/* <div className="flex flex-wrap gap-8 justify-center">
                         {
                             cartItemsBySuperMarket.map((basket: any) => (
                                 <BasketCard
@@ -145,9 +146,11 @@ export default function Cart() {
                                 />
                             ))
                         }
-                    </div>
+                    </div> */}
                 </div>
             </div>
+
+            <SuggestionsSection />
 
         </main>
     )
