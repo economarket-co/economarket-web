@@ -4,10 +4,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import ProductCard from "@/components/cards/ProductsCard";
 import ProductsFilter from "@/components/filters/ProductsFilter";
-import { Select, SelectItem, Spinner } from "@nextui-org/react";
+import { Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
-import { Favorite } from "@mui/icons-material";
+import { Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
@@ -20,8 +20,10 @@ export default function ProductsPage({ searchParams }: any) {
     const [categoriesList, setCategoriesList] = useState<[]>([]);
     const [supermarketsList, setSupermarketsList] = useState<[]>([]);
 
+    const [session, setSession] = useState<Session | null>();
     useEffect(() => {
         fetchFilters();
+
     }, [])
 
     useEffect(() => {
@@ -31,6 +33,12 @@ export default function ProductsPage({ searchParams }: any) {
     async function fetchFilters() {
         try {
             const res = await axios.get('/api/categories');
+
+            const supabase = createClientComponentClient();
+
+            const { data } = await supabase.auth.getSession();
+
+            setSession(data.session);
 
             setCategoriesList(res.data);
         } catch (error) {
@@ -69,38 +77,62 @@ export default function ProductsPage({ searchParams }: any) {
 
     return (
         <main className="flex min-w-full flex-col overflow-hidden ">
-            <HeroWithBg title="Productos" BgImage="/images/products/products-bg.png" />
+            {
+                !session ?
+                    <Modal isOpen={true}>
+                        <ModalContent className="py-10">
+                            <ModalHeader className="">
+                                <p className="text-[#434343] text-4xl text-center w-full">:(</p>
+                            </ModalHeader>
 
-            <div className="flex flex-col lg:flex-row w-full grow bg-[#F6F6F6]">
-                <ProductsFilter
-                    categoriesList={categoriesList}
-                    categories={categories}
-                    setCategories={setCategories}
-                    supermarkets={superMarkets}
-                    setSupermarkets={setSupermarkets}
-                    priceRange={priceRange}
-                    setPriceRange={setPriceRange}
-                    maxPrice={100000}
-                />
+                            <ModalBody className="text-center">
+                                <h3 className="font-quicksand text-[#434343] text-2xl font-bold">Ups! Parece que no has iniciado sesión</h3>
+                                <p className="text-[#646464] font-quicksand text-lg">Ingresa a tu perfil para ver y guardar tus productos favoritos</p>
+                            </ModalBody>
 
-                <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
-                    <div className="flex">
-                        <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Tus favoritos</h1>
-                    </div>
+                            <ModalFooter className="flex justify-center">
+                                <Link className="bg-[#033E8C] text-white py-2 px-8 rounded-lg text-lg" href="/auth/signin">Iniciar sesión</Link>
+                            </ModalFooter>
+                        </ModalContent>
 
-                    <div className="flex flex-wrap gap-10 justify-center md:justify-start">
-                        {loading ?
-                            <div className="flex w-full justify-center">
-                                <Spinner size="lg" />
+                    </Modal>
+                    :
+                    <>
+                        <HeroWithBg title="Favoritos" BgImage="/images/products/products-bg.png" />
+
+                        <div className="flex flex-col lg:flex-row w-full grow bg-[#F6F6F6]">
+                            <ProductsFilter
+                                categoriesList={categoriesList}
+                                categories={categories}
+                                setCategories={setCategories}
+                                supermarkets={superMarkets}
+                                setSupermarkets={setSupermarkets}
+                                priceRange={priceRange}
+                                setPriceRange={setPriceRange}
+                                maxPrice={100000}
+                            />
+
+                            <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
+                                <div className="flex">
+                                    <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Tus favoritos</h1>
+                                </div>
+
+                                <div className="flex flex-wrap gap-10 justify-center md:justify-start">
+                                    {loading ?
+                                        <div className="flex w-full justify-center">
+                                            <Spinner size="lg" />
+                                        </div>
+                                        :
+                                        products.map(product =>
+                                            <ProductCard key={product.id} product={product} />
+                                        )
+                                    }
+                                </div>
                             </div>
-                            :
-                            products.map(product =>
-                                <ProductCard key={product.id} product={product} />
-                            )
-                        }
-                    </div>
-                </div>
-            </div>
+                        </div>
+                    </>
+            }
+
 
         </main>
     )

@@ -12,7 +12,7 @@ export async function middleware(req: any) {
 
   // if (session && pathname.includes('auth')) return NextResponse.redirect(new URL('/dashboard/meetings', req.url)) 
   
-  if (!session && !pathname.includes('/auth')) return NextResponse.redirect(new URL('/auth/signin', req.url))
+  // if (!session && !pathname.includes('/auth')) return NextResponse.redirect(new URL('/auth/signin', req.url))
   return res
 }
 
