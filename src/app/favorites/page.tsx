@@ -98,6 +98,7 @@ export default function ProductsPage({ searchParams }: any) {
                     </Modal>
                     :
                     <>
+
                         <HeroWithBg title="Favoritos" BgImage="/images/products/products-bg.png" />
 
                         <div className="flex flex-col lg:flex-row w-full grow bg-[#F6F6F6]">
@@ -112,23 +113,39 @@ export default function ProductsPage({ searchParams }: any) {
                                 maxPrice={100000}
                             />
 
-                            <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
-                                <div className="flex">
-                                    <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Tus favoritos</h1>
-                                </div>
 
-                                <div className="flex flex-wrap gap-10 justify-center md:justify-start">
-                                    {loading ?
-                                        <div className="flex w-full justify-center">
-                                            <Spinner size="lg" />
+                            {
+                                products.length === 0 ?
+                                    <div className="flex flex-col gap-12 w-full items-center justify-center grow py-24 px-4">
+                                        <img src="/images/heart.svg" alt="corazon" />
+
+                                        <div className="flex flex-col gap-3 text-center">
+                                            <h3 className="font-semibold font-quicksand text-2xl text-[#434343]">No haz agregado nada aún</h3>
+                                            <p className="font-quicksand font-medium text-lg text-[#646464]">Aprovecha tus favoritos para guardar productos que podrías comprar nuevamente</p>
                                         </div>
-                                        :
-                                        products.map(product =>
-                                            <ProductCard key={product.id} product={product} />
-                                        )
-                                    }
-                                </div>
-                            </div>
+
+                                        <Link href="/products" className="bg-[#01CC5E] text-white text-center px-8 py-2 font-bold rounded-md">Empezar a agregar productos</Link>
+                                    </div>
+                                    :
+                                    <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
+                                        <div className="flex">
+                                            <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Tus favoritos</h1>
+                                        </div>
+
+                                        <div className="flex flex-wrap gap-10 justify-center md:justify-start">
+                                            {loading ?
+                                                <div className="flex w-full justify-center">
+                                                    <Spinner size="lg" />
+                                                </div>
+                                                :
+                                                products.map(product =>
+                                                    <ProductCard key={product.id} product={product} />
+                                                )
+                                            }
+                                        </div>
+                                    </div>
+                            }
+
                         </div>
                     </>
             }
