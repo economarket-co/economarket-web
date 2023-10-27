@@ -54,7 +54,6 @@ export default function CartProvider({ children }: any) {
   };
 
   const removeFromCart = (id: number) => {
-    console.log(id, cartItems)
     setCartItems((prevItems) => prevItems.filter((i) => i.product.id !== id));
   };
 

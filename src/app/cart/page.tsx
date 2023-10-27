@@ -66,7 +66,7 @@ export default function Cart() {
 
             switch (supermarket) {
                 case SuperMarket.Exito:
-                    products = updatedCartItems.filter((item) => {
+                    products = updatedCartItems.filter((item: any) => {
                         if (!allInOnerMarket) {
                             return item?.product?.productPrices2[0].priceExito
                         }
@@ -78,7 +78,7 @@ export default function Cart() {
                     });
                     break;
                 case SuperMarket.Carulla:
-                    products = updatedCartItems.filter((item) => {
+                    products = updatedCartItems.filter((item: any) => {
                         if (!allInOnerMarket) {
                             return item?.product?.productPrices2[0].priceCarulla
                         }
@@ -89,7 +89,7 @@ export default function Cart() {
                     });
                     break;
                 case SuperMarket.Jumbo:
-                    products = updatedCartItems.filter((item) => {
+                    products = updatedCartItems.filter((item: any) => {
                         if (!allInOnerMarket) {
                             return item?.product?.productPrices2[0].priceJumbo
                         }
@@ -102,7 +102,7 @@ export default function Cart() {
 
                     break;
                 case SuperMarket.Olimpica:
-                    products = updatedCartItems.filter((item) => {
+                    products = updatedCartItems.filter((item: any) => {
                         if (!allInOnerMarket) {
                             return item?.product?.productPrices2[0].priceOlimpica
                         }
@@ -128,30 +128,6 @@ export default function Cart() {
 
         setCartItemsBySuperMarket(baskets);
     }
-
-    // async function getItemsBySuperMarket(supermarket: SuperMarket) {
-    //     let productsOnMarket = cartItems.map((product) => {
-    //         // find product with updated values
-    //         const productUpdated = products.find(p => p.id === product.product.id);
-
-    //         if (!productUpdated) return null;
-
-    //         // find product price on market
-    //         const productOnMarket = productUpdated.productPrices.find(p => p.superMarket === supermarket);
-
-    //         if (!productOnMarket) return null;
-
-    //         return {
-    //             ...productOnMarket,
-    //             quantity: product.quantity,
-    //             product: productUpdated,
-    //             //@ts-ignore
-    //             link: productUpdated['link' + supermarket]
-    //         }
-    //     }).filter(p => p !== null);
-
-    //     return productsOnMarket;
-    // }
 
     async function getProducts() {
         try {
