@@ -56,7 +56,7 @@ export default function Home() {
             En Economarket puedes comparar los precios del mismo producto en diferentes supermercados. Añade productos a tu carrito y encuentra los precios perfectos para tu mercado.
           </div>
           <div >
-            <Link href="/productos">
+            <Link href="/products">
               <button className='bg-[#F28705] text-white text-lg rounded-md px-6 py-2 shadow-md font-dmserif font-bold'>Empieza a mercar</button>
             </Link>
           </div>
