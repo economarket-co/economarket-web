@@ -34,21 +34,13 @@ export async function getProducts(filters: filtersForMany) {
                     }
                 }
             },
-            productPrices: {
-                some: {
-                    superMarket: {
-                        in: filters.superMarkets || undefined
-                    }
-                }
-            }
         },
         include: {
-            productPrices: {
-                where: {
-                    superMarket: {
-                        in: filters.superMarkets || undefined
-                    }
+            productPrices2: {
+                orderBy: {
+                    createdAt: "desc"
                 },
+                take: 1
             },
             SubCategory: {
                 include: {

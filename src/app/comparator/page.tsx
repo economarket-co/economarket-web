@@ -23,24 +23,43 @@ export default function Comparator({ searchParams }: any) {
     useEffect(() => {
         if (!product) return;
 
-        const superMarkets= [SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica, SuperMarket.Exito];
+        const superMarkets = [SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica, SuperMarket.Exito];
 
         const oferts = superMarkets.map(superMarket => {
-            const price = product.productPrices.find(price => {
-                return  price.superMarket === superMarket
-            });
+            let price = null;
 
-            return price ? price : { superMarket }
-        });
+            switch (superMarket) {
+                case SuperMarket.Carulla:
+                    price = product.productPrices2[0].priceCarulla
+                    break;
+                case SuperMarket.Olimpica:
+                    price = product.productPrices2[0].priceOlimpica
+                    break;
+                case SuperMarket.Exito:
+                    price =  product.productPrices2[0].priceExito
+                    break;
+                case SuperMarket.Jumbo:
+                    price = product.productPrices2[0].priceJumbo
+                    break;
+                default:
+                    price =null;
+                    break;
+            }
+
+            return {
+                superMarket,
+                price
+            }
+        })
 
         setOferts(oferts);
-        
+
     }, [product])
 
     async function fetchProduct() {
         const id = searchParams.productId;
 
-        if (!id) return 
+        if (!id) return
 
         try {
             const product = await axios.get(`/api/products/${id}`, {
@@ -71,13 +90,13 @@ export default function Comparator({ searchParams }: any) {
                     <SearchBar setProduct={setProduct} nonNavbar />
 
                     {
-                        
+
                         product &&
                         <div className="flex flex-col xl:flex-row gap-8 mt-10">
                             <div className="flex flex-col gap-6">
                                 <img
                                     src={product.image}
-                                    className="rounded-lg h-[300px] md:h-[490px]"
+                                    className="rounded-lg h-[300px] md:h-[490px] w-[300px] md:w-[490px] object-fill"
                                     alt={product.name}
                                     style={{ boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.25)" }}
                                 />

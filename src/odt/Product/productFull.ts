@@ -1,6 +1,6 @@
-import { Favorites, Product, ProductPrice } from "@prisma/client";
+import { Favorites, Product, ProductPrice, ProductPrice2 } from "@prisma/client";
 
 export type ProductFull = Product & {
-    productPrices: ProductPrice[],
+    productPrices2: ProductPrice2[],
     favorites: Favorites[]
 }

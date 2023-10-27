@@ -8,12 +8,12 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String?  @unique
+  id        String      @id @default(uuid())
+  email     String?     @unique
   fullName  String
   phone     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt()
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now()) @updatedAt
   cart      Cart?
   favorites Favorites[]
 }
@@ -21,10 +21,10 @@ model User {
 model Category {
   id            Int           @id @default(autoincrement())
   name          String
-  image         String
-  color         String
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
+  color         String
+  image         String
   subCategories SubCategory[]
 }
 
@@ -34,26 +34,27 @@ model SubCategory {
   categoryId Int
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  category   Category  @relation(fields: [categoryId], references: [id])
   products   Product[]
+  category   Category  @relation(fields: [categoryId], references: [id])
 }
 
 model Product {
-  id              Int            @id @default(autoincrement())
+  id              Int             @id @default(autoincrement())
   name            String
   image           String
   quantityPerUnit Int
   unit            String
   subCategoryId   Int
-  SubCategory     SubCategory    @relation(fields: [subCategoryId], references: [id])
   linkCarulla     String?
   linkExito       String?
   linkJumbo       String?
   linkOlimpica    String?
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  productPrices   ProductPrice[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
   favorites       Favorites[]
+  SubCategory     SubCategory     @relation(fields: [subCategoryId], references: [id])
+  productPrices   ProductPrice[]
+  productPrices2  ProductPrice2[]
 }
 
 model ProductPrice {
@@ -65,6 +66,18 @@ model ProductPrice {
   superMarket SuperMarket
   cartItems   CartItem[]
   proudct     Product     @relation(fields: [productId], references: [id])
+}
+
+model ProductPrice2 {
+  id            Int      @id @default(autoincrement())
+  productId     Int
+  priceExito    Int?
+  priceOlimpica Int?
+  priceJumbo    Int?
+  priceCarulla  Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt
+  proudct       Product  @relation(fields: [productId], references: [id])
 }
 
 model Cart {
@@ -80,11 +93,29 @@ model CartItem {
   id        Int          @id @default(autoincrement())
   quantity  Int
   cartId    Int
-  Card      Cart         @relation(fields: [cartId], references: [id])
   productId Int
-  product   ProductPrice @relation(fields: [productId], references: [id])
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
+  Card      Cart         @relation(fields: [cartId], references: [id])
+  product   ProductPrice @relation(fields: [productId], references: [id])
+}
+
+model NewsLetter {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Favorites {
+  userId    String
+  productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@id([userId, productId])
 }
 
 enum SuperMarket {
@@ -92,22 +123,4 @@ enum SuperMarket {
   Carulla
   Exito
   Jumbo
-}
-
-model NewsLetter {
-  id        Int        @id @default(autoincrement())
-  email     String     @unique
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-}
-
-model Favorites {
-  userId String
-  productId Int
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  user User @relation(fields: [userId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
-
-  @@id([userId, productId])
 }

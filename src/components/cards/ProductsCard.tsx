@@ -11,11 +11,12 @@ type ProductCardProps = {
 }
 
 export default function ProductCard(props: ProductCardProps) {
-    const avaible = props.product.productPrices?.length > 0;
-    const avaibleAt = avaible ? props.product.productPrices.map(price => price.superMarket).join(',') : 'No disponible';
+    const productPrice = props.product.productPrices2[0];
+    const avaible = (productPrice.priceCarulla || productPrice.priceExito || productPrice.priceJumbo || productPrice.priceOlimpica);
     const [isFavorite, setIsFavorite] = useState(props.product.favorites.length > 0);
     const [loading, setLoading] = useState(false);
 
+    console.log(productPrice);
     async function handleAddFavorite() {
         setLoading(true);
 
@@ -62,7 +63,10 @@ export default function ProductCard(props: ProductCardProps) {
                     <img src='/icons/price-tag.svg' />
                     <p className='font-quicksand text-xs text-[#646464]'>
                         {
-                            avaibleAt
+                            `${productPrice.priceCarulla ? 'Carulla, ' : ''} 
+                            ${productPrice.priceExito ? 'Éxito, ' : ''} 
+                            ${productPrice.priceJumbo ? 'Jumbo,':  ''} 
+                            ${productPrice.priceOlimpica ? 'Olimpica' : ''}`
                         }
                     </p>
                 </div>
