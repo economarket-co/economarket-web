@@ -30,71 +30,75 @@ export default function Cart() {
     }, [cartItems])
 
     useEffect(() => {
-        getSupermarketsBasket();
+        // getSupermarketsBasket();
         checkAvaibility();
     }, [products])
 
     async function checkAvaibility() {
         // counts products where productPrice is less thant 4
-        const count = products.filter(product => product.productPrices.length < 4).length;
+        const count = products.filter(product => {
+            const price = product.productPrices2[0];
 
-        setNotAvaibleCount(count);
+            return !price.priceCarulla || !price.priceExito || !price.priceJumbo || !price.priceOlimpica;
+        });
+
+        setNotAvaibleCount(count.length);
     }
 
-    async function getSupermarketsBasket() {
-        const supermarkets = [SuperMarket.Exito, SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica];
+    // async function getSupermarketsBasket() {
+    //     const supermarkets = [SuperMarket.Exito, SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica];
 
-        let cheapestSupermarket: SuperMarket | null = null;
-        let cheapestPrice: number = Infinity;
+    //     let cheapestSupermarket: SuperMarket | null = null;
+    //     let cheapestPrice: number = Infinity;
 
-        const basketBySupermarket = await Promise.all(supermarkets.map(async (supermarket) => {
-            const productsOnMarket = await getItemsBySuperMarket(supermarket);
+    //     const basketBySupermarket = await Promise.all(supermarkets.map(async (supermarket) => {
+    //         const productsOnMarket = await getItemsBySuperMarket(supermarket);
 
-            const total = productsOnMarket.reduce((total, product) => {
-                return total + (product ? product.price * product.quantity : 0);
-            }, 0);
+    //         const total = productsOnMarket.reduce((total, product) => {
+    //             return total + (product ? product.price * product.quantity : 0);
+    //         }, 0);
 
-            if (total < cheapestPrice) {
-                cheapestPrice = total;
-                cheapestSupermarket = supermarket;
-            }
+    //         if (total < cheapestPrice) {
+    //             cheapestPrice = total;
+    //             cheapestSupermarket = supermarket;
+    //         }
 
-            return {
-                supermarket,
-                image: `/images/supermarkets/${supermarket}.png`,
-                products: productsOnMarket,
-                total
-            }
-        }));
+    //         return {
+    //             supermarket,
+    //             image: `/images/supermarkets/${supermarket}.png`,
+    //             products: productsOnMarket,
+    //             total
+    //         }
+    //     }));
 
-        // set cheapest supermarket
-        setCartItemsBySuperMarket(basketBySupermarket);
-        setCheapestSupermarket(cheapestSupermarket);
-    }
+    //     // set cheapest supermarket
+    //     setCartItemsBySuperMarket(basketBySupermarket);
+    //     setCheapestSupermarket(cheapestSupermarket);
+    // }
 
-    async function getItemsBySuperMarket(supermarket: SuperMarket) {
-        let productsOnMarket = cartItems.map((product) => {
-            // find product with updated values
-            const productUpdated = products.find(p => p.id === product.product.id);
+    // async function getItemsBySuperMarket(supermarket: SuperMarket) {
+    //     let productsOnMarket = cartItems.map((product) => {
+    //         // find product with updated values
+    //         const productUpdated = products.find(p => p.id === product.product.id);
 
-            if (!productUpdated) return null;
+    //         if (!productUpdated) return null;
 
-            // find product price on market
-            const productOnMarket = productUpdated.productPrices.find(p => p.superMarket === supermarket);
+    //         // find product price on market
+    //         const productOnMarket = productUpdated.productPrices.find(p => p.superMarket === supermarket);
 
-            if (!productOnMarket) return null;
+    //         if (!productOnMarket) return null;
 
-            return {
-                ...productOnMarket,
-                quantity: product.quantity,
-                product: productUpdated,
-                //@ts-ignore
-                link: productUpdated['link' + supermarket]
-            }
-        }).filter(p => p !== null);
+    //         return {
+    //             ...productOnMarket,
+    //             quantity: product.quantity,
+    //             product: productUpdated,
+    //             //@ts-ignore
+    //             link: productUpdated['link' + supermarket]
+    //         }
+    //     }).filter(p => p !== null);
 
-        return productsOnMarket;
-    }
+    //     return productsOnMarket;
+    // }
 
     async function getProducts() {
         try {

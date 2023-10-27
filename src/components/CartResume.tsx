@@ -15,7 +15,7 @@ export default function CartResume(props: CartTableProps) {
 
                 {
                     props.notAvaibleCount > 0 ?
-                        <p>Hay {props.notAvaibleCount} productos no se encuentran en algunos supermercados. Revisa las listas y verifica que las alternativas sean de tu agrado.</p>
+                        <p>Hay {props.notAvaibleCount} productos que no se encuentran en algunos supermercados. Revisa las listas y verifica que las alternativas sean de tu agrado.</p>
 
                         :
                         <p>Todos los productos seleccionados se encuentran disponibles en todos los supermercados</p>
