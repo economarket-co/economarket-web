@@ -75,13 +75,7 @@ export async function getFavoritesProducts(filters: filtersForMany) {
                     }
                 }
             },
-            productPrices: {
-                some: {
-                    superMarket: {
-                        in: filters.superMarkets || undefined
-                    }
-                }
-            },
+            
             favorites: {
                 some: {
                     userId: filters.userId || undefined
@@ -89,12 +83,11 @@ export async function getFavoritesProducts(filters: filtersForMany) {
             }
         },
         include: {
-            productPrices: {
-                where: {
-                    superMarket: {
-                        in: filters.superMarkets || undefined
-                    }
+            productPrices2: {
+                orderBy: {
+                    createdAt: "desc"
                 },
+                take: 1
             },
             SubCategory: {
                 include: {
@@ -118,12 +111,11 @@ export async function getProduct(filters: filtersForOne) {
             id: filters.id
         },
         include: {
-            productPrices: {
-                where: {
-                    superMarket: {
-                        in: filters.superMarkets || undefined
-                    }
+            productPrices2: {
+                orderBy: {
+                    createdAt: "desc"
                 },
+                take: 1
             },
             SubCategory: {
                 include: {

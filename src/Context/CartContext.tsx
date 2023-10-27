@@ -54,7 +54,8 @@ export default function CartProvider({ children }: any) {
   };
 
   const removeFromCart = (id: number) => {
-    setCartItems((prevItems) => prevItems.filter((i) => i.id !== id));
+    console.log(id, cartItems)
+    setCartItems((prevItems) => prevItems.filter((i) => i.product.id !== id));
   };
 
   async function saveCart() {

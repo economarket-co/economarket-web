@@ -15,8 +15,7 @@ export default function ProductCard(props: ProductCardProps) {
     const avaible = (productPrice.priceCarulla || productPrice.priceExito || productPrice.priceJumbo || productPrice.priceOlimpica);
     const [isFavorite, setIsFavorite] = useState(props.product.favorites.length > 0);
     const [loading, setLoading] = useState(false);
-
-    console.log(productPrice);
+    
     async function handleAddFavorite() {
         setLoading(true);
 

@@ -3,7 +3,7 @@ import { CartContext } from "@/Context/CartContext";
 import { ProductFull } from "@/odt/Product/productFull";
 import { cartItemWithProduct } from "@/types/cartItem";
 import { Button, Switch } from "@nextui-org/react";
-import { CartItem, SuperMarket } from "@prisma/client";
+import { CartItem, ProductPrice2, SuperMarket } from "@prisma/client";
 import axios from "axios";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -18,7 +18,7 @@ export default function Cart() {
     const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
     const [notAvaibleCount, setNotAvaibleCount] = useState<number>(0);
     const [products, setProducts] = useState<ProductFull[]>([]);
-    
+
     const [allInOnerMarket, setAllInOneMarket] = useState<boolean>(false);
 
     const [cartItemsBySuperMarket, setCartItemsBySuperMarket] = useState<any>([]);
@@ -30,9 +30,9 @@ export default function Cart() {
     }, [cartItems])
 
     useEffect(() => {
-        // getSupermarketsBasket();
+        getSupermarketsBasket();
         checkAvaibility();
-    }, [products])
+    }, [products, allInOnerMarket])
 
     async function checkAvaibility() {
         // counts products where productPrice is less thant 4
@@ -45,36 +45,89 @@ export default function Cart() {
         setNotAvaibleCount(count.length);
     }
 
-    // async function getSupermarketsBasket() {
-    //     const supermarkets = [SuperMarket.Exito, SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica];
+    async function getSupermarketsBasket() {
+        const supermarkets = [SuperMarket.Exito, SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica];
 
-    //     let cheapestSupermarket: SuperMarket | null = null;
-    //     let cheapestPrice: number = Infinity;
+        const updatedCartItems: any = []
 
-    //     const basketBySupermarket = await Promise.all(supermarkets.map(async (supermarket) => {
-    //         const productsOnMarket = await getItemsBySuperMarket(supermarket);
+        for (const item of cartItems) {
+            const product = products.find(p => p.id === item.product.id);
 
-    //         const total = productsOnMarket.reduce((total, product) => {
-    //             return total + (product ? product.price * product.quantity : 0);
-    //         }, 0);
+            updatedCartItems.push({
+                ...item,
+                product
+            });
+        };
 
-    //         if (total < cheapestPrice) {
-    //             cheapestPrice = total;
-    //             cheapestSupermarket = supermarket;
-    //         }
 
-    //         return {
-    //             supermarket,
-    //             image: `/images/supermarkets/${supermarket}.png`,
-    //             products: productsOnMarket,
-    //             total
-    //         }
-    //     }));
+        const baskets: any[] = [];
+        for (const supermarket of supermarkets) {
+            let products = [];
 
-    //     // set cheapest supermarket
-    //     setCartItemsBySuperMarket(basketBySupermarket);
-    //     setCheapestSupermarket(cheapestSupermarket);
-    // }
+            switch (supermarket) {
+                case SuperMarket.Exito:
+                    products = updatedCartItems.filter((item) => {
+                        if (!allInOnerMarket) {
+                            return item?.product?.productPrices2[0].priceExito
+                        }
+
+                        //check if product is cheaper in another supermarket
+                        const product = item.product.productPrices2[0];
+                        return IsCheapestp(product, product.priceExito);
+
+                    });
+                    break;
+                case SuperMarket.Carulla:
+                    products = updatedCartItems.filter((item) => {
+                        if (!allInOnerMarket) {
+                            return item?.product?.productPrices2[0].priceCarulla
+                        }
+
+                        //check if product is cheaper in another supermarket
+                        const product = item.product.productPrices2[0];
+                        return IsCheapestp(product, product.priceCarulla);
+                    });
+                    break;
+                case SuperMarket.Jumbo:
+                    products = updatedCartItems.filter((item) => {
+                        if (!allInOnerMarket) {
+                            return item?.product?.productPrices2[0].priceJumbo
+                        }
+
+                        //check if product is cheaper in another supermarket
+                        const product = item.product.productPrices2[0];
+                        return IsCheapestp(product, product.priceJumbo) && product.priceJumbo;
+
+                    });
+
+                    break;
+                case SuperMarket.Olimpica:
+                    products = updatedCartItems.filter((item) => {
+                        if (!allInOnerMarket) {
+                            return item?.product?.productPrices2[0].priceOlimpica
+                        }
+
+                        //check if product is cheaper in another supermarket
+                        const product = item.product.productPrices2[0];
+                        return IsCheapestp(product, product.priceOlimpica);
+                    });
+                    break;
+            }
+
+            for (const product of products) {
+                product.link = product.product['link' + supermarket];
+                product.price = product.product.productPrices2[0]['price' + supermarket];
+            }
+
+            baskets.push({
+                supermarket,
+                products,
+                image: `/images/supermarkets/${supermarket}.png`
+            });
+        }
+
+        setCartItemsBySuperMarket(baskets);
+    }
 
     // async function getItemsBySuperMarket(supermarket: SuperMarket) {
     //     let productsOnMarket = cartItems.map((product) => {
@@ -132,13 +185,24 @@ export default function Cart() {
                     <h3 className="font-dmserif text-5xl">Compara los precios</h3>
 
                     <div className="flex flex-col gap-3 font-quicksand font-medium">
-                        <p className="text-lg text-[#434343]">Comprando todo en el mismo supermercado</p>
-                        <p className="text-[#9D9D9D]">Presiona el switch para ver los precios dividiendo la compra por supermercados</p>
+                        {
+                            !allInOnerMarket ?
+                                <>
+                                    <p className="text-lg text-[#434343]">Comprando todo en el mismo supermercado</p>
+                                    <p className="text-[#9D9D9D]">Presiona el switch para ver los precios dividiendo la compra por supermercados</p>
+                                </>
+                                :
+                                <>
+                                    <p className="text-lg text-[#434343]">Dividiendo tus compras en supermercados</p>
+                                    <p className="text-[#9D9D9D]">Presiona el switch para ver el precio de toda la compra en cada supermercado</p>
+                                </>
+
+                        }
                     </div>
 
                     <Switch isSelected={allInOnerMarket} onValueChange={setAllInOneMarket} />
 
-                    {/* <div className="flex flex-wrap gap-8 justify-center">
+                    <div className="flex flex-wrap gap-8 justify-center">
                         {
                             cartItemsBySuperMarket.map((basket: any) => (
                                 <BasketCard
@@ -150,7 +214,7 @@ export default function Cart() {
                                 />
                             ))
                         }
-                    </div> */}
+                    </div>
                 </div>
             </div>
 
@@ -158,4 +222,19 @@ export default function Cart() {
 
         </main>
     )
+}
+
+function IsCheapestp(productPrices: ProductPrice2, price: number) {
+    const cheapest = Math.min(
+        productPrices.priceCarulla ? productPrices.priceCarulla : Infinity,
+        productPrices.priceExito ? productPrices.priceExito : Infinity,
+        productPrices.priceJumbo ? productPrices.priceJumbo : Infinity,
+        productPrices.priceOlimpica ? productPrices.priceOlimpica : Infinity
+    );
+
+    if (cheapest === price) {
+        return true;
+    }
+
+    return false;
 }

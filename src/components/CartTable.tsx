@@ -28,7 +28,7 @@ export default function CartTable(props: CartTableProps) {
                             <div className="flex gap-4 text-xl items-cente text-[#01CC5E]">
                                 {
                                     item.quantity === 1 ?
-                                        <button onClick={e => removeFromCart(item.id)}><img src="/icons/trash.svg" alt="eliminar" className="h-4" /></button>
+                                        <button onClick={e => removeFromCart(item.product.id)}><img src="/icons/trash.svg" alt="eliminar" className="h-4" /></button>
                                         :
                                         <button onClick={e => addToCart(item, -1)}>-</button>
                                 }
