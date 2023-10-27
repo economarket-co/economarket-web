@@ -71,6 +71,7 @@ export default function Comparator({ searchParams }: any) {
                     <SearchBar setProduct={setProduct} nonNavbar />
 
                     {
+                        
                         product &&
                         <div className="flex flex-col xl:flex-row gap-8 mt-10">
                             <div className="flex flex-col gap-6">
