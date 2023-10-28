@@ -11,7 +11,7 @@ export default function CartTable(props: CartTableProps) {
     const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
 
     return (
-        <div className="flex flex-col gap-4 bg-white w-[600px] rounded-xl px-10 py-4 font-quicksand text-[#646464]">
+        <div className="flex flex-col gap-4 bg-white w-[600px] max-h-[800px] overflow-y-auto rounded-xl px-10 py-4 font-quicksand text-[#646464]">
             <div className="flex justify-between font-semibold">
                 <p>Producto</p>
                 <p>Cantidad</p>
@@ -25,10 +25,10 @@ export default function CartTable(props: CartTableProps) {
                                 <img src={item.product.image} alt={item.product.image} className="h-12" />
                                 <p>{item.product.name}</p>
                             </div>
-                            <div className="flex gap-4 text-xl items-cente text-[#01CC5E]">
+                            <div className="flex gap-4 text-xl items-cente text-[#01CC5E] shrink-0">
                                 {
                                     item.quantity === 1 ?
-                                        <button onClick={e => removeFromCart(item.product.id)}><img src="/icons/trash.svg" alt="eliminar" className="h-4" /></button>
+                                        <button onClick={e => removeFromCart(item.product.id)}><img src="/icons/trash.svg" alt="eliminar" className="h-4 w-4" /></button>
                                         :
                                         <button onClick={e => addToCart(item, -1)}>-</button>
                                 }

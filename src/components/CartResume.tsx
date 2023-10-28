@@ -1,13 +1,23 @@
 import { cartItemWithProduct } from "@/types/cartItem"
-import { Button } from "@nextui-org/react"
+import { Button, Link } from "@nextui-org/react"
 
 type CartTableProps = {
     cartItems: cartItemWithProduct[],
     notAvaibleCount: number
 }
 export default function CartResume(props: CartTableProps) {
+    
+    function handleToScrollTo() {
+       // scroll to div with id comparaciones
+        const comparaciones = window.document.getElementById('comparaciones');
+
+        if (!comparaciones) return;
+
+        comparaciones.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
-        <div className="rounded-xl px-14 divide-y bg-white flex flex-col py-10 w-[400px] gap-2 font-quicksand">
+        <div className="rounded-xl px-14 divide-y bg-white flex flex-col py-10 w-[400px] gap-2 font-quicksand h-fit">
             <h2 className="text-[#646464]">Resumen de compra</h2>
 
             <div className="flex flex-col gap-6 pt-3 text-[#9D9D9D]">
@@ -21,7 +31,7 @@ export default function CartResume(props: CartTableProps) {
                         <p>Todos los productos seleccionados se encuentran disponibles en todos los supermercados</p>
                 }
 
-                <Button color="success" className="text-white ">Ver comparaciones</Button>
+                <Button onClick={handleToScrollTo} color="success" className="text-white ">Ver comparaciones</Button>
             </div>
         </div>
     )

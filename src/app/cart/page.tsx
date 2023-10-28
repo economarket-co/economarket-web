@@ -39,6 +39,8 @@ export default function Cart() {
         const count = products.filter(product => {
             const price = product.productPrices2[0];
 
+            if (!price) return true;
+
             return !price.priceCarulla || !price.priceExito || !price.priceJumbo || !price.priceOlimpica;
         });
 
@@ -178,7 +180,7 @@ export default function Cart() {
 
                     <Switch isSelected={allInOnerMarket} onValueChange={setAllInOneMarket} />
 
-                    <div className="flex flex-wrap gap-8 justify-center">
+                    <div className="flex flex-wrap gap-8 justify-center" id="comparaciones">
                         {
                             cartItemsBySuperMarket.map((basket: any) => (
                                 <BasketCard

@@ -1,4 +1,30 @@
 @tailwind base;
+
+:root {
+    --primary: cornflowerblue;
+  }
+  
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary);
+  }
+  
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 5px;
+  }
+
+  
 @tailwind components;
 @tailwind utilities;
 
