@@ -3,6 +3,7 @@ import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListI
 import React, { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
+import { quicksand } from '@/fonts';
 
 export default function Sidebar() {
     const [open, setOpen] = useState(false)
@@ -19,8 +20,8 @@ export default function Sidebar() {
         {
             links: [
                 { name: 'Usuario', href: '/login' },
-                { name: 'Favoritos', href: '/favoritos' },
-                { name: 'Carrito de compras', href: '/carrito' },
+                { name: 'Favoritos', href: '/favorites' },
+                { name: 'Carrito de compras', href: '/cart' },
             ]
         }
     ]
@@ -62,10 +63,7 @@ export default function Sidebar() {
             <ListItem disablePadding>
                 <Link href={props.href}>
                     <ListItemButton onClick={() => setOpen(false)}>
-                        <Typography sx={{
-                            color: '#000000', fontFamily: "Quicksand",
-                            fontWeight: 500
-                        }}>
+                        <Typography className={`${quicksand.className} font-medium text-black`} >
                             {props.label}
                         </Typography>
                     </ListItemButton>

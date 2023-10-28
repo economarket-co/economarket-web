@@ -1,4 +1,5 @@
 import { formatCurrency } from "@/app/utils"
+import { quicksand } from "@/fonts"
 import { Card, CardBody, CardFooter } from "@nextui-org/react"
 
 type SuperMarketCardProps = {
@@ -16,9 +17,9 @@ export function SuperMarketCard(props: SuperMarketCardProps) {
                 <img src={props.img} className="h-[110px] object-fill" alt="olimpica" />
             </CardBody>
             <CardFooter className="flex flex-col gap-2">
-                <p className="font-quicksand text-3xl font-medium">{props.price ? formatCurrency(props.price) : "No disponible"}</p>
-                <p className="font-quicksand text-lg text-[#646464]">{props.quantityPerUnit} {props.unit}</p>
-                <p className="font-quicksand text-lg text-[#646464]">
+                <p className={`${quicksand.className} text-3xl font-medium`}>{props.price ? formatCurrency(props.price) : "No disponible"}</p>
+                <p className={`${quicksand.className} text-lg text-[#646464]`}>{props.quantityPerUnit} {props.unit}</p>
+                <p className={`${quicksand.className} text-lg text-[#646464]`}>
                     {
                         !props.unitPrice ?
                             "No disponible"

@@ -1,4 +1,5 @@
 'use client';
+import { dmserif } from "@/fonts";
 import { Card, CardBody, CardFooter } from "@nextui-org/react"
 import Link from "next/link";
 import { useState } from "react";
@@ -35,7 +36,7 @@ export default function CategoryCard(props: CategoryCardProps) {
                     className='flex justify-center'
                     style={{ backgroundColor: hovered ? "white" : props.color, color: hovered ? props.color : "white" }}
                 >
-                    <p className='font-dmserif text-xl text-center w-ful'>{props.title}</p>
+                    <p className={`${dmserif.className} text-xl text-center w-ful`}>{props.title}</p>
                 </CardFooter>
             </Card>
         </Link>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ProductFull } from "@/odt/Product/productFull";
+import { quicksand } from "@/fonts";
 
 type SearchBarProps = {
     nonNavbar?: boolean
@@ -91,7 +92,7 @@ export default function SearchBar(props: SearchBarProps) {
         return (
             <>
                 <img src={props.img} className="w-14 h-14 object-cover" />
-                <p className="text-base font-quicksand text-content">{props.name}</p>
+                <p className={`${quicksand.className} text-base text-content`}>{props.name}</p>
             </>
         )
     }

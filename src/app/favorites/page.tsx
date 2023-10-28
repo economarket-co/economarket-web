@@ -8,6 +8,7 @@ import { Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
 import { Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { dmserif, quicksand } from "@/fonts";
 
 export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
@@ -86,7 +87,7 @@ export default function ProductsPage({ searchParams }: any) {
                             </ModalHeader>
 
                             <ModalBody className="text-center">
-                                <h3 className="font-quicksand text-[#434343] text-2xl font-bold">Ups! Parece que no has iniciado sesión</h3>
+                                <h3 className={`${quicksand.className} text-[#434343] text-2xl font-bold`}>Ups! Parece que no has iniciado sesión</h3>
                                 <p className="text-[#646464] font-quicksand text-lg">Ingresa a tu perfil para ver y guardar tus productos favoritos</p>
                             </ModalBody>
 
@@ -120,8 +121,8 @@ export default function ProductsPage({ searchParams }: any) {
                                         <img src="/images/heart.svg" alt="corazon" />
 
                                         <div className="flex flex-col gap-3 text-center">
-                                            <h3 className="font-semibold font-quicksand text-2xl text-[#434343]">No haz agregado nada aún</h3>
-                                            <p className="font-quicksand font-medium text-lg text-[#646464]">Aprovecha tus favoritos para guardar productos que podrías comprar nuevamente</p>
+                                            <h3 className={`font-semibold ${quicksand.className} text-2xl text-[#434343]`}>No haz agregado nada aún</h3>
+                                            <p className={`${quicksand.className} font-medium text-lg text-[#646464]`}>Aprovecha tus favoritos para guardar productos que podrías comprar nuevamente</p>
                                         </div>
 
                                         <Link href="/products" className="bg-[#01CC5E] text-white text-center px-8 py-2 font-bold rounded-md">Empezar a agregar productos</Link>
@@ -129,7 +130,7 @@ export default function ProductsPage({ searchParams }: any) {
                                     :
                                     <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
                                         <div className="flex">
-                                            <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Tus favoritos</h1>
+                                            <h1 className={`${dmserif} text-5xl text-center md:text-start md:text-6xl`}>Tus favoritos</h1>
                                         </div>
 
                                         <div className="flex flex-wrap gap-10 justify-center md:justify-start">

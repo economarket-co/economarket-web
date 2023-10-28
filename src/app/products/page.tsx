@@ -7,6 +7,7 @@ import ProductsFilter from "@/components/filters/ProductsFilter";
 import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
+import { dmserif } from "@/fonts";
 
 export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
@@ -83,7 +84,7 @@ export default function ProductsPage({ searchParams }: any) {
 
                 <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
                     <div className="flex">
-                        <h1 className="font-dmserif text-5xl text-center md:text-start md:text-6xl">Todos los productos</h1>
+                        <h1 className={`${dmserif.className} text-5xl text-center md:text-start md:text-6xl`}>Todos los productos</h1>
                     </div>
 
                     <div className="flex flex-wrap gap-10 justify-center md:justify-start">

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { formatCurrency } from "@/app/utils";
 import { Checkbox, CheckboxGroup, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
+import { quicksand } from "@/fonts";
 
 type ProductsFilterProps = {
     categoriesList: any[];
@@ -42,14 +43,14 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                 <button 
                     onClick={(e) => 
                     setIsActive(!isActive)} 
-                    className=" text-start font-quicksand text-base py-4 font-semibold w-full flex gap-2 items-center">
+                    className={`text-start ${quicksand.className} text-base py-4 font-semibold w-full flex gap-2 items-center`}>
                     Filtros
                     <img src="/icons/filter.svg" alt="" className="h-3"/>
                 </button>
 
                 <div className={`${!isActive ? 'hidden' : 'flex flex-col divide-y-1'}`}>
                     <div className="flex flex-col gap-4 py-7">
-                        <h4 className="font-quicksand text-xl">Categoría</h4>
+                        <h4 className={`${quicksand.className} text-xl`}>Categoría</h4>
 
                         <CheckboxGroup
                             value={props.categories}
@@ -64,7 +65,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                     </div>
 
                     <div className="flex flex-col gap-4 py-7">
-                        <h4 className="font-quicksand text-xl">Rango de precios</h4>
+                        <h4 className={`${quicksand.className} text-xl`}>Rango de precios</h4>
 
 
                         <input
@@ -81,7 +82,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                     </div>
 
                     <div className="flex flex-col gap-4 py-7">
-                        <h4 className="font-quicksand text-xl">Supermercado</h4>
+                        <h4 className={`${quicksand.className} text-xl`}>Supermercado</h4>
 
                         <CheckboxGroup
                             value={props.supermarkets}
@@ -105,11 +106,11 @@ export default function ProductsFilter(props: ProductsFilterProps) {
         <div className="flex flex-col w-[300px] gap-7 divide-y-1 min-h-full bg-white border-r px-10 py-10"
             style={{ boxShadow: "0px 4px 26px 0px rgba(0, 0, 0, 0.45)" }}
         >
-            <h3 className="font-quicksand text-3xl font-semibold">Filtros</h3>
+            <h3 className={`${quicksand.className} text-3xl font-semibold`}>Filtros</h3>
 
 
             <div className="flex flex-col gap-4 py-7">
-                <h4 className="font-quicksand text-xl">Categoría</h4>
+                <h4 className={`${quicksand.className} text-xl`}>Categoría</h4>
 
                 <CheckboxGroup
                     value={props.categories}
@@ -124,7 +125,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
             </div>
 
             <div className="flex flex-col gap-4 py-7">
-                <h4 className="font-quicksand text-xl">Rango de precios</h4>
+                <h4 className={`${quicksand.className} text-xl`}>Rango de precios</h4>
 
 
                 <input
@@ -141,7 +142,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
             </div>
 
             <div className="flex flex-col gap-4 py-7">
-                <h4 className="font-quicksand text-xl">Supermercado</h4>
+                <h4 className={`${quicksand.className} text-xl`}>Supermercado</h4>
 
                 <CheckboxGroup
                     value={props.supermarkets}

@@ -3,6 +3,7 @@ import { Category } from "@prisma/client";
 import { useEffect, useState } from "react";
 import CategoryCard from "../cards/CategoryCard";
 import axios from "axios";
+import { dmserif, quicksand } from "@/fonts";
 
 export default function Categories() {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -27,8 +28,8 @@ export default function Categories() {
 
         <div className='mx-auto flex flex-col justify-between h-3/5 gap-8 items-center z-50 max-w-[80%] grow text-white'>
           <div className='flex flex-col gap-3 text-center'>
-            <h3 className='text-[#033E8C] font-dmserif text-6xl'>Revisa nuestras categorías</h3>
-            <p className='font-quicksand text-[#171717] text-lg'>Los productos más buscados, organizados para ti </p>
+            <h3 className={`text-[#033E8C] ${dmserif.className} text-6xl`}>Revisa nuestras categorías</h3>
+            <p className={`${quicksand.className} text-[#171717] text-lg`}>Los productos más buscados, organizados para ti </p>
           </div>
 
           <div className='flex gap-8 justify-center flex-wrap'>

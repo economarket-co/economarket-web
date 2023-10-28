@@ -1,5 +1,6 @@
 "use client";
 import { CartContext } from "@/Context/CartContext";
+import { quicksand } from "@/fonts";
 import { cartItemWithProduct } from "@/types/cartItem"
 import Link from "next/link";
 import { useContext } from "react";
@@ -12,7 +13,7 @@ export default function CartTable(props: CartTableProps) {
     const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
 
     return (
-        <div className="flex flex-col gap-4 bg-white w-[90%]  md:w-[600px] max-h-[800px] overflow-y-auto rounded-xl px-10 py-4 font-quicksand text-[#646464]">
+        <div className={`flex flex-col gap-4 bg-white w-[90%]  md:w-[600px] max-h-[800px] overflow-y-auto rounded-xl px-10 py-4 ${quicksand.className}text-[#646464]`}>
             {
                 cartItems.length > 0  ?
                     <>
@@ -46,8 +47,8 @@ export default function CartTable(props: CartTableProps) {
                     </>
                     : 
                     <div className="flex flex-col gap-8 py-16 text-center justify-center items-center">
-                        <h3 className="font-quicksand font-semibold text-[#434343]">¡Empieza a agregar productos!</h3>
-                        <p className="font-quicksand font-medium text-[#646464]">Suma productos y descubre la manera más conveniente de comprarlos</p>
+                        <h3 className={`${quicksand.className} font-semibold text-[#434343]`}>¡Empieza a agregar productos!</h3>
+                        <p className={`${quicksand.className} font-medium text-[#646464]`}>Suma productos y descubre la manera más conveniente de comprarlos</p>
 
                         <Link href="/products" className="bg-[#01CC5E] text-white px-4 py-2 rounded-md">ver todos los productos</Link>
                     </div>

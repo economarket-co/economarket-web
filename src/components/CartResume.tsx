@@ -1,5 +1,5 @@
-import { cartItemWithProduct } from "@/types/cartItem"
-import { Button, Link } from "@nextui-org/react"
+import { quicksand } from "@/fonts";
+import { cartItemWithProduct } from "@/types/cartItem";
 
 type CartTableProps = {
     cartItems: cartItemWithProduct[],
@@ -17,7 +17,7 @@ export default function CartResume(props: CartTableProps) {
     }
 
     return (
-        <div className="rounded-xl px-14 divide-y bg-white flex flex-col py-10 w-[400px] gap-2 font-quicksand h-fit">
+        <div className={`rounded-xl px-14 divide-y bg-white flex flex-col py-10 w-[400px] gap-2 ${quicksand.className} h-fit`}>
             <h2 className="text-[#646464] text-2xl">Resumen de compra</h2>
 
             <div className="flex flex-col gap-6 pt-3 text-[#9D9D9D] ">

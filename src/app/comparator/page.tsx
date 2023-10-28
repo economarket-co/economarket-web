@@ -7,9 +7,9 @@ import { SuperMarketCard } from "@/components/cards/SuperMarketCard";
 import SuggestionsSection from "@/components/SuggestionsSection";
 import { ProductFull } from "@/odt/Product/productFull";
 import { ProductPrice, SuperMarket } from "@prisma/client";
-import { RestaurantMenu } from "@mui/icons-material";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { quicksand } from "@/fonts";
 
 
 export default function Comparator({ searchParams }: any) {
@@ -81,8 +81,8 @@ export default function Comparator({ searchParams }: any) {
 
             <div className="flex flex-col items-center px-4 py-20 gap-16 min-h-full grow">
                 <div className="flex flex-col gap-3 text-center">
-                    <h2 className="font-quicksand text-xl md:text-3xl font-semibold">Escoge un producto y  compáralo en nuestros supermercado</h2>
-                    <p className="font-quicksand md:text-lg font-medium text-[#646464]">Suma productos y descubre la manera más conveniente de comprarlos</p>
+                    <h2 className={`${quicksand.className} text-xl md:text-3xl font-semibold`}>Escoge un producto y  compáralo en nuestros supermercado</h2>
+                    <p className={`${quicksand.className} md:text-lg font-medium text-[#646464]`}>Suma productos y descubre la manera más conveniente de comprarlos</p>
                 </div>
 
                 <div className="flex flex-col items-center h-full gap-6">
@@ -104,7 +104,7 @@ export default function Comparator({ searchParams }: any) {
                             </div>
 
                             <div className="flex flex-col gap-4">
-                                <p className="font-quicksand text-2xl text-[#646464]">{product.name}</p>
+                                <p className={`${quicksand.className} text-2xl text-[#646464]`}>{product.name}</p>
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-5">
                                     {
                                         prices.map(ofert =>

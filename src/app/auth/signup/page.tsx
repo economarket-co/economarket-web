@@ -3,6 +3,7 @@
 import SocialNetWorkButton from "@/components/buttons/SocialNetworkButton";
 import PasswordField from "@/components/fields/PasswordField";
 import { TextField } from "@/components/fields/TextField";
+import { poppins, quicksand } from "@/fonts";
 import { handleSignupWithEmail } from "@/utils/auth";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
@@ -28,9 +29,9 @@ export default function Signin() {
 
     return (
         <div className="flex w-full justify-end relative overflow-y-hidden">
-            <img src='/images/login-bg.jpeg' className="absolute w-full max-h-full z-[-10] object-fit font-quicksand" />
+            <img src='/images/login-bg.jpeg' className={`absolute w-full max-h-full z-[-10] object-fit ${quicksand.className}`} />
             <form onSubmit={handleSignup} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-5 border rounded-md py-8 bg-white">
-                <h1 className="text-[26px]  font-semibold font-quicksand">Crea una cuenta para ti</h1>
+                <h1 className={`text-[26px]  font-semibold ${quicksand.className}`}>Crea una cuenta para ti</h1>
 
                 <TextField
                     label="Nombre"
@@ -59,7 +60,7 @@ export default function Signin() {
                     type="submit" 
                     disabled={loading} 
                     color="success" 
-                    className="text-white font-poppins text-[24px] font-medium px-14 bg-[#01CC5E] rounded-lg py-2"
+                    className={`text-white ${poppins.className} text-[24px] font-medium px-14 bg-[#01CC5E] rounded-lg py-2`}
                 >Iniciar Sesión</button>
 
                 <div className="flex flex-col lg:flex-row items-center gap-2 text-lg font-poppins">

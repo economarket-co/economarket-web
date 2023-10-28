@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProductCard from "./cards/ProductsCard";
 import { ProductFull } from "@/odt/Product/productFull";
+import { quicksand } from "@/fonts";
 
 export default function SuggestionsSection() {
     const [productsSuggestion, setProductsSuggestion] = useState<ProductFull[]>([]);
@@ -32,7 +33,7 @@ export default function SuggestionsSection() {
     return (
         <div className="flex flex-col gap-6 bg-[#F6F6F6] w-[100vw] px-4 md:px-20 py-20">
 
-            <h4 className="font-quicksand text-[#434343] text-3xl font-medium px-4">Productos que te pueden interesar</h4>
+            <h4 className={`${quicksand.className} text-[#434343] text-3xl font-medium px-4`}>Productos que te pueden interesar</h4>
             <div className="flex gap-4 overflow-x-scroll p-4">
                 {
                     productsSuggestion.map((product) => (

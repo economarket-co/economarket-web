@@ -1,4 +1,5 @@
 import { formatCurrency } from "@/app/utils"
+import { quicksand } from "@/fonts"
 import { Button } from "@nextui-org/react"
 import { SuperMarket } from "@prisma/client"
 import Link from "next/link"
@@ -54,13 +55,13 @@ export default function BasketCard(props: BasketCardProps) {
 
                 <div className="flex flex-col gap-4 border-t-1 text-end py-4">
                     <p className="text-xl text-[#9D9D9D]">{props.cartProducts.length} productos de su lista</p>
-                    <p className="font-quicksand text-4xl text-[#434343]">
+                    <p className={`${quicksand.className} text-4xl text-[#434343]`}>
                         {
                             formatCurrency(props.cartProducts.reduce((total, product) => {
                                 return product ? total + (product.price * product.quantity) : total + 0;
                             }, 0))
                         }</p>
-                    <button onClick={hadleBuy} className="font-quicksand font-semibold text-xl w-full py-4 text-white bg-[#01CC5E] rounded-md">Comprar la lista</button>
+                    <button onClick={hadleBuy} className={`${quicksand.className} font-semibold text-xl w-full py-4 text-white bg-[#01CC5E] rounded-md`}>Comprar la lista</button>
                 </div>
 
             </div>
