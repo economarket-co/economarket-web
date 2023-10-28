@@ -26,11 +26,11 @@ export default function CartProvider({ children }: any) {
   useEffect(() => {
     const cart = localStorage.getItem("cart");
 
+    
     if (cart) setCartItems(JSON.parse(cart));
   }, []);
 
   useEffect(() => {
-    if (cartItems.length === 0) return;
     saveCart();
   }, [cartItems]);
 

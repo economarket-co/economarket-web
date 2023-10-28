@@ -19,9 +19,9 @@ export default function BasketCard(props: BasketCardProps) {
             }, 1000);
         })
     }
-    
+
     return (
-        <div className={`rounded-3xl overflow-hidden w-[500px] lg:w-[400px] ${props.isBestOption && 'border-3 border-[#01CC5E]'}`}
+        <div className={`rounded-3xl overflow-hidden md:w-[500px] lg:w-[400px] ${props.isBestOption && 'border-3 border-[#01CC5E]'}`}
             style={{ boxShadow: "0px 3.72755px 19.56966px 0px rgba(0, 0, 0, 0.25)" }}
         >
             <img src={props.image} alt={props.image} className="w-full h-[140px] lg:h-[120px] object-fill" />
@@ -40,8 +40,8 @@ export default function BasketCard(props: BasketCardProps) {
 
                                     <div className="flex gap-2 items-center">
                                         <p className="flex gap-2">
-                                            <span>{formatCurrency(product.price)}</span> 
-                                            <span>x</span> 
+                                            <span>{formatCurrency(product.price)}</span>
+                                            <span>x</span>
                                             <span>{product.quantity}</span>
                                         </p>
                                         <Link href={product.link} target="_blank"><img src="/icons/external-link.svg" className="h-6 w-6" /></Link>

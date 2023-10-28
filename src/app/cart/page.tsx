@@ -47,6 +47,8 @@ export default function Cart() {
         setNotAvaibleCount(count.length);
     }
 
+    let cheapes = 0;
+
     async function getSupermarketsBasket() {
         const supermarkets = [SuperMarket.Exito, SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica];
 
@@ -65,6 +67,8 @@ export default function Cart() {
         const baskets: any[] = [];
         for (const supermarket of supermarkets) {
             let products = [];
+
+            let total = 0;
 
             switch (supermarket) {
                 case SuperMarket.Exito:
@@ -119,14 +123,20 @@ export default function Cart() {
             for (const product of products) {
                 product.link = product.product['link' + supermarket];
                 product.price = product.product.productPrices2[0]['price' + supermarket];
-            }
+            } 
+
+            total = products.reduce((total: number, product: any) => {
+                return total + (product.price * product.quantity);
+            }, 0);
 
             baskets.push({
                 supermarket,
                 products,
-                image: `/images/supermarkets/${supermarket}.png`
+                image: `/images/supermarkets/${supermarket}.png`,
+                isCheapest: total < cheapes 
             });
         }
+
 
         setCartItemsBySuperMarket(baskets);
     }
@@ -180,12 +190,12 @@ export default function Cart() {
 
                     <Switch isSelected={allInOnerMarket} onValueChange={setAllInOneMarket} />
 
-                    <div className="flex flex-wrap gap-12 lg:gap-8 justify-center" id="comparaciones">
+                    <div className="flex flex-wrap px-6 gap-12 lg:gap-8 justify-center" id="comparaciones">
                         {
                             cartItemsBySuperMarket.map((basket: any) => (
                                 <BasketCard
                                     key={basket.supermarket}
-                                    isBestOption={basket.supermarket === cheapestSupermarket}
+                                    isBestOption={basket.isCheapest}
                                     image={basket.image}
                                     cartProducts={basket.products}
                                     supermarket={basket.supermarket}
