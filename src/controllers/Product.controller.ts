@@ -9,6 +9,7 @@ type filtersForMany = {
     superMarkets?: SuperMarket[]
     userId?: string,
     favorites?: boolean
+    maxPrice: number | undefined
 }
 
 type filtersForOne = {
@@ -34,6 +35,46 @@ export async function getProducts(filters: filtersForMany) {
                     }
                 }
             },
+            
+
+            OR: [
+                {
+                    productPrices2: {
+                        some: {
+                            priceExito: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                },
+                {
+                    productPrices2: {
+                        some: {
+                            priceCarulla: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                },
+                {
+                    productPrices2: {
+                        some: {
+                            priceJumbo: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                },
+                {
+                    productPrices2: {
+                        some: {
+                            priceOlimpica: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                }
+            ]
         },
         include: {
             productPrices2: {
@@ -80,7 +121,45 @@ export async function getFavoritesProducts(filters: filtersForMany) {
                 some: {
                     userId: filters.userId || undefined
                 }
-            }
+            },
+            OR: [
+                {
+                    productPrices2: {
+                        some: {
+                            priceExito: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                },
+                {
+                    productPrices2: {
+                        some: {
+                            priceCarulla: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                },
+                {
+                    productPrices2: {
+                        some: {
+                            priceJumbo: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                },
+                {
+                    productPrices2: {
+                        some: {
+                            priceOlimpica: {
+                                lte: filters.maxPrice || undefined
+                            }
+                        }
+                    }
+                }
+            ]
         },
         include: {
             productPrices2: {

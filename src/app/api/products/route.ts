@@ -14,9 +14,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const ids = req.nextUrl.searchParams.get('ids')?.split(',') || undefined;
     let categories = req.nextUrl.searchParams.get('categories')?.split(',') || undefined;
     const superMarkets = req.nextUrl.searchParams.get('superMarkets')?.split(',') || undefined;
+    const maxPrice = req.nextUrl.searchParams.get('maxPrice') || undefined;
     const category = req.nextUrl.searchParams.get('category') || undefined;
     const favorites = req.nextUrl.searchParams.get('favorites') || undefined; // only fetch favorite products
-
     try {
         if (!categories && category ) categories = [category];
 
@@ -25,7 +25,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
             name, ids, 
             categories, 
             superMarkets: superMarkets as SuperMarket[],
-            favorites: favorites === 'true' ? true : undefined
+            favorites: favorites === 'true' ? true : undefined,
+            maxPrice: maxPrice ? Number(maxPrice) : undefined
         }
 
         const products = filters.favorites ? await getFavoritesProducts(filters) : await  getProducts(filters);

@@ -15,7 +15,7 @@ export default function ProductsPage({ searchParams }: any) {
 
     const [categories, setCategories] = useState<string[]>([]);
     const [superMarkets, setSupermarkets] = useState<[]>([]);
-    const [priceRange, setPriceRange] = useState<number>(0);
+    const [maxPrice, setPriceRange] = useState<number>(0);
 
     const [categoriesList, setCategoriesList] = useState<[]>([]);
     const [supermarketsList, setSupermarketsList] = useState<[]>([]);
@@ -28,7 +28,7 @@ export default function ProductsPage({ searchParams }: any) {
 
     useEffect(() => {
         fetchData();
-    }, [categories, superMarkets, priceRange])
+    }, [categories, superMarkets, maxPrice])
 
     async function fetchFilters() {
         try {
@@ -57,10 +57,10 @@ export default function ProductsPage({ searchParams }: any) {
                 params: {
                     categories: categories.length > 0 ? categories.join(',') : undefined,
                     superMarkets: superMarkets.length > 0 ? superMarkets.join(',') : undefined,
-                    priceRange: priceRange,
+                    maxPrice,
                     ids: searchParams.id,
                     category: searchParams.category,
-                    favorites: true
+                    favorites: true,
                 }
             })
 
@@ -108,7 +108,7 @@ export default function ProductsPage({ searchParams }: any) {
                                 setCategories={setCategories}
                                 supermarkets={superMarkets}
                                 setSupermarkets={setSupermarkets}
-                                priceRange={priceRange}
+                                priceRange={maxPrice}
                                 setPriceRange={setPriceRange}
                                 maxPrice={100000}
                             />
