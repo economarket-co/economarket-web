@@ -5,6 +5,7 @@ import { ProductFull } from "@/odt/Product/productFull";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 type ProductCardProps = {
     product: ProductFull,
@@ -15,9 +16,10 @@ export default function ProductCard(props: ProductCardProps) {
     const avaible = (productPrice?.priceCarulla || productPrice?.priceExito || productPrice?.priceJumbo || productPrice?.priceOlimpica);
     const [isFavorite, setIsFavorite] = useState(props.product.favorites.length > 0);
     const [loading, setLoading] = useState(false);
-    
+
     async function handleAddFavorite() {
         setLoading(true);
+        setIsFavorite(!isFavorite);
 
         try {
             if (!isFavorite) {
@@ -30,13 +32,12 @@ export default function ProductCard(props: ProductCardProps) {
                         productId: props.product.id,
                     }
                 })
-            } 
+            }
         } catch (error) {
             console.log(error);
             toast.error("Ha ocurrido un error")
         }
 
-        setIsFavorite(!isFavorite);
         setLoading(false);
     }
 
@@ -44,14 +45,23 @@ export default function ProductCard(props: ProductCardProps) {
         <Card className='w-[220px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
             <CardBody className='relative p-0 h-[190px] border-b'>
                 <img className='h-full object-fill' src={props.product.image} alt={props.product.name} />
-                <button disabled={loading} onClick={handleAddFavorite} className="absolute right-4 top-4">
+                <motion.button
+                    disabled={loading}
+                    onClick={handleAddFavorite}
+                    className="absolute right-4 top-4"
+                    // animate={{ scale: isFavorite ? 1.2 : 1, 
+                    //     transition: { duration: 0.2}
+                    // }}    
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                >
                     {
                         isFavorite ?
                             <img src={`/icons/favorite.svg `} alt="" className={``} />
                             :
                             <img src={`/icons/heart.svg `} alt="" className={``} />
                     }
-                </button>
+                </motion.button>
             </CardBody>
             <CardFooter className='flex flex-col gap-2 px-4 items-start overflow-x-hidden'>
                 {/* <Tooltip content={props.product.name} placement="bottom"> */}
@@ -64,7 +74,7 @@ export default function ProductCard(props: ProductCardProps) {
                         {
                             `${productPrice?.priceCarulla ? 'Carulla, ' : ''} 
                             ${productPrice?.priceExito ? 'Éxito, ' : ''} 
-                            ${productPrice?.priceJumbo ? 'Jumbo,':  ''} 
+                            ${productPrice?.priceJumbo ? 'Jumbo,' : ''} 
                             ${productPrice?.priceOlimpica ? 'Olimpica' : ''}`
                         }
                     </p>

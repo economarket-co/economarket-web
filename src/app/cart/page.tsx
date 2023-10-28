@@ -151,7 +151,7 @@ export default function Cart() {
 
     return (
         <main className="flex bg-[#EDEDED] min-w-full flex-col gap-8 items-center overflow-hidden pt-10">
-            <div className="flex gap-8">
+            <div className="flex flex-col-reverse items-center px-4 xl:flex-row  gap-8 lg:items-start">
 
                 <CartTable cartItems={cartItems} notAvaibleCount={notAvaibleCount} />
                 <CartResume cartItems={cartItems} notAvaibleCount={notAvaibleCount} />
@@ -180,7 +180,7 @@ export default function Cart() {
 
                     <Switch isSelected={allInOnerMarket} onValueChange={setAllInOneMarket} />
 
-                    <div className="flex flex-wrap gap-8 justify-center" id="comparaciones">
+                    <div className="flex flex-wrap gap-12 lg:gap-8 justify-center" id="comparaciones">
                         {
                             cartItemsBySuperMarket.map((basket: any) => (
                                 <BasketCard

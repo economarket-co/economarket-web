@@ -21,10 +21,10 @@ export default function BasketCard(props: BasketCardProps) {
     }
     
     return (
-        <div className={`rounded-3xl overflow-hidden w-[300px] lg:w-[400px] ${props.isBestOption && 'border-3 border-[#01CC5E]'}`}
+        <div className={`rounded-3xl overflow-hidden w-[500px] lg:w-[400px] ${props.isBestOption && 'border-3 border-[#01CC5E]'}`}
             style={{ boxShadow: "0px 3.72755px 19.56966px 0px rgba(0, 0, 0, 0.25)" }}
         >
-            <img src={props.image} alt={props.image} className="w-full h-[100px] object-fill" />
+            <img src={props.image} alt={props.image} className="w-full h-[140px] lg:h-[120px] object-fill" />
 
             <div className="flex flex-col gap-14 py-8 px-4">
                 <div className="flex flex-col gap-5 h-[500px] overflow-y-auto">
@@ -60,7 +60,7 @@ export default function BasketCard(props: BasketCardProps) {
                                 return product ? total + (product.price * product.quantity) : total + 0;
                             }, 0))
                         }</p>
-                    <Button onPress={hadleBuy} color="success" className="w-full text-white">Comprar</Button>
+                    <button onClick={hadleBuy} className="font-quicksand font-semibold text-xl w-full py-4 text-white bg-[#01CC5E] rounded-md">Comprar la lista</button>
                 </div>
 
             </div>

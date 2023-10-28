@@ -11,7 +11,7 @@ export default function CartTable(props: CartTableProps) {
     const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
 
     return (
-        <div className="flex flex-col gap-4 bg-white w-[600px] max-h-[800px] overflow-y-auto rounded-xl px-10 py-4 font-quicksand text-[#646464]">
+        <div className="flex flex-col gap-4 bg-white w-[90%]  md:w-[600px] max-h-[800px] overflow-y-auto rounded-xl px-10 py-4 font-quicksand text-[#646464]">
             <div className="flex justify-between font-semibold">
                 <p>Producto</p>
                 <p>Cantidad</p>
@@ -20,8 +20,8 @@ export default function CartTable(props: CartTableProps) {
             <div className="flex flex-col gap-3 divide-y">
                 {
                     props.cartItems.map((item, index) => (
-                        <div key={index} className="flex items-center justify-between font-medium py-3">
-                            <div className="flex gap-3 items-center">
+                        <div key={index} className="flex gap-8 items-center justify-between font-medium py-3">
+                            <div className="flex gap-4 items-center">
                                 <img src={item.product.image} alt={item.product.image} className="h-12" />
                                 <p>{item.product.name}</p>
                             </div>
