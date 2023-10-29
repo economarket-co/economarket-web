@@ -17,7 +17,7 @@ export default function PasswordField(props: PropsType) {
 
     return (
         <div className="flex flex-col gap-1">
-            <label className="text-[20px] font-medium text-inputText w-1/5 font-poppins">{props.label}</label>
+            <label className="text-sm md:text-base lg:text-[20px] font-medium text-inputText w-1/5 font-poppins">{props.label}</label>
             <Input
                 isRequired
                 value={props.value}
@@ -26,7 +26,7 @@ export default function PasswordField(props: PropsType) {
                 className="w-[270px] lg:w-[400px] text-[20px]"
                 classNames={
                     {
-                        input: "text-[20px]",
+                        input: "text-sm md:text-base lg:text-[20px]",
                         inputWrapper: "font-normal px-4 h-[50px] text-inputText",
                     }
                 }
