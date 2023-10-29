@@ -6,6 +6,7 @@ import { Category } from '@prisma/client';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { dmserif, quicksand } from "@/fonts";
+import { Divider } from "@nextui-org/react";
 
 export default function Categories() {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -28,10 +29,12 @@ export default function Categories() {
             <div className='flex flex-col flex-items justify-center text-white relative py-16 overflow-hidden'>
                 <img src="/images/categories/categories-bg.png" className='absolute min-w-full min-h-full max-w-full -z-10' />
 
-                <div className="flex md:gap-4 items-center text-white divide-x-2 px-4 md:px-16">
-                    <h1 className={`${dmserif.className} text-4xl md:text-6xl max-w-[200px]`}>Siempre frescos</h1>
+                <div className="flex gap-3 md:gap-4 items-center text-white px-4 md:px-16 lg:gap-10">
+                    <h1 className={`${dmserif.className} text-4xl md:text-6xl max-w-[140px] md:max-w-[200px] w-fit`}>Siempre frescos</h1>
 
-                    <p className={`${quicksand.className} px-4 text-lg md:text-3xl max-w-[300px] opacity-85`}>50% en verduras seleccionadas</p>
+                    <Divider orientation="vertical" className="bg-white" />
+
+                    <p className={`${quicksand.className} text-lg md:text-3xl max-w-[300px] opacity-85`}>50% en verduras seleccionadas</p>
                 </div>
             </div>
 
