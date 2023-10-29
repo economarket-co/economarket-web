@@ -33,6 +33,10 @@ export default function ProductsPage({ searchParams }: any) {
             const res = await axios.get('/api/categories');
 
             setCategoriesList(res.data);
+
+            if (searchParams.category) {
+                setCategories([searchParams.category]);
+            }
         } catch (error) {
             console.error(error);
             toast.error('Error al cargar las categorías');

@@ -40,12 +40,12 @@ export default function ProductsFilter(props: ProductsFilterProps) {
         return (
             <div className="bg-white px-4"
             >
-                <button 
-                    onClick={(e) => 
-                    setIsActive(!isActive)} 
+                <button
+                    onClick={(e) =>
+                        setIsActive(!isActive)}
                     className={`text-start ${quicksand.className} text-base py-4 font-semibold w-full flex gap-2 items-center`}>
                     Filtros
-                    <img src="/icons/filter.svg" alt="" className="h-3"/>
+                    <img src="/icons/filter.svg" alt="" className="h-3" />
                 </button>
 
                 <div className={`${!isActive ? 'hidden' : 'flex flex-col divide-y-1'}`}>
@@ -55,12 +55,26 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                         <CheckboxGroup
                             value={props.categories}
                             onValueChange={props.setCategories}
+                            defaultValue={['1']}
                         >
                             {
-                                props.categoriesList.map((category: any) => (
-                                    <Checkbox key={category.id} value={category.id}>{category.name}</Checkbox>
-                                ))
+                                props.categoriesList.map((category: any) => {
+                                    console.log(category)
+                                    return (
+                                        <Checkbox
+                                            key={category.id.toString()}
+                                            value={category.id.toString()}
+                                            isSelected={props.categories.includes(category.id.toString())}
+                                        >
+                                            {category.name}
+                                        </Checkbox>
+
+                                    )
+                                }
+
+                                )
                             }
+
                         </CheckboxGroup>
                     </div>
 

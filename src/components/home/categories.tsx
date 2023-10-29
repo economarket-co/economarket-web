@@ -32,7 +32,7 @@ export default function Categories() {
             <p className={`${quicksand.className} text-[#171717] text-lg`}>Los productos más buscados, organizados para ti </p>
           </div>
 
-          <div className='flex gap-8 flex-wrap w-fit justify-center lg:justify-start'>
+          <div className='flex gap-8 flex-wrap w-fit justify-center'>
             {
               categories.map((category, index) => (
                 <CategoryCard

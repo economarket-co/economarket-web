@@ -4,16 +4,16 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <div className={`flex flex-col flex-items justify-center items-center overflow-hidden 
-        text-white relative py-16  h-[400px]`}
+        text-white relative py-16 h-[400px] lg:h-[500px]`}
     >
       <video
         src="/videos/home-bg.mp4"
-        className='absolute min-w-full h-[600px] max-w-none object-cover'
+        className='absolute min-w-full h-[600px] lg:h-[800px] max-w-none object-cover'
         autoPlay
       />
 
       <div
-        className="absolute min-w-full h-[600px] max-w-none"
+        className="absolute min-w-full h-[600px] lg:h-[800px] max-w-none"
         style={{
           backdropFilter: "blur(2px)",
           backgroundBlendMode: "hard-light, normal, normal, normal",

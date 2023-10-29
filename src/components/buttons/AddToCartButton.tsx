@@ -21,9 +21,11 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
     }
 
     return (
-        <Button 
-            onPress={e => addToCart(product, props.quantity)}
-            className="bg-[#01CC5E] text-white w-full rounded-md" 
-            endContent={<img src="/icons/add-to-shopping-cart.svg" />}>Agregar</Button>
+        <button 
+            onClick={e => addToCart(product, props.quantity)}
+            className="bg-[#01CC5E] text-white w-full rounded-md flex gap-2 items-center justify-center py-2 px-4" 
+        >
+            <span>Agregar</span> <img src="/icons/add-to-shopping-cart.svg" />
+        </button>
     )
 }

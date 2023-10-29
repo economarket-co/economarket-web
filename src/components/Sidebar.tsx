@@ -27,9 +27,10 @@ export default function Sidebar() {
     ]
     return (
         <>
-            <IconButton onClick={() => setOpen(true)}>
-                <MenuIcon className='text-white' />
-            </IconButton>
+            <MenuIcon 
+                onClick={() => setOpen(true)} 
+                className='text-white  md:w-[50px] md:h-[40px]' 
+            />
             <Drawer
                 anchor='left'
                 open={open}

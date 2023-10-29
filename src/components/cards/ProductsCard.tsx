@@ -43,8 +43,8 @@ export default function ProductCard(props: ProductCardProps) {
     }
 
     return (
-        <Card className='w-[220px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
-            <CardBody className='relative p-0 h-[190px] border-b'>
+        <Card className='w-[230px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
+            <CardBody className='relative p-0 h-[224px] border-b'>
                 <img className='h-full object-fill' src={props.product.image} alt={props.product.name} />
                 <motion.button
                     disabled={loading}
@@ -66,7 +66,7 @@ export default function ProductCard(props: ProductCardProps) {
             </CardBody>
             <CardFooter className='flex flex-col gap-2 px-4 items-start overflow-x-hidden'>
                 {/* <Tooltip content={props.product.name} placement="bottom"> */}
-                <p className={`${quicksand.className} text-sm text-[#343434] overflow-clip`}>{props.product.name}</p>
+                <p className={`${quicksand.className} text-xs text-[#343434] overflow-clip`}>{props.product.name}</p>
                 {/* </Tooltip> */}
                 <p className={`${quicksand.className} text-xs text-[#646464] `}>{props.product.unit}</p>
                 <div className="flex gap-2">

@@ -2,7 +2,7 @@
 // import "./styles/Navbar.css"
 import { AppBar, Badge, IconButton, Toolbar } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
-import { Logout} from '@mui/icons-material';
+import { Logout } from '@mui/icons-material';
 
 // import logo from "../assets/Group 79.svg"
 import { Favorite, ShoppingCart } from '@mui/icons-material';
@@ -15,6 +15,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 export default function CustomNavbar() {
     const { cartItems } = useContext(CartContext);
@@ -48,13 +49,19 @@ export default function CustomNavbar() {
                 width: "100%"
             }}
         >
-            <Toolbar className='flex justify-between items-center py-3 md:px-12'>
+            <Toolbar className='flex gap-2 md:justify-between items-center py-3 px-3 md:px-8'>
 
-                <div>
+                <div className='flex md:gap-3 items-center'>
                     <SideBar />
                     <Link href="/">
                         <IconButton>
-                            <img alt='' width={70} height={70} src="/icons/logo.png" />
+                            <Image
+                                alt='logo'
+                                width={90}
+                                height={45}
+                                src="/icons/logo.png"
+                                className='cursor-pointer w-[50px] h-[24px] md:[75px] md:h-[36px] lg:w-[80px] lg:h-[37px]'
+                            />
                         </IconButton>
                     </Link>
                 </div>
@@ -71,7 +78,7 @@ export default function CustomNavbar() {
                             </Link>
                             : <button onClick={handleSignout}>
                                 <IconButton sx={{ color: "white" }}>
-                                    <Logout/>
+                                    <Logout />
                                 </IconButton>
                             </button>
                     }
