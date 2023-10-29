@@ -22,15 +22,17 @@ export const CartContext = createContext<CartContextType>({
 export default function CartProvider({ children }: any) {
   const [cart, setCart] = useState<CartFull>(); // [value, setValue
   const [cartItems, setCartItems] = useState<cartItemWithProduct[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const cart = localStorage.getItem("cart");
 
-    
     if (cart) setCartItems(JSON.parse(cart));
+    setLoading(false);
   }, []);
 
   useEffect(() => {
+    if (loading) return;
     saveCart();
   }, [cartItems]);
 
@@ -58,6 +60,7 @@ export default function CartProvider({ children }: any) {
   };
 
   async function saveCart() {
+    
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }
 
