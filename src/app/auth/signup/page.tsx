@@ -31,7 +31,7 @@ export default function Signin() {
         <div className="flex w-full justify-end relative overflow-y-hidden">
             <img src='/images/login-bg.jpeg' className={`absolute w-full max-h-full z-[-10] object-fit ${quicksand.className}`} />
             <form onSubmit={handleSignup} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-5 border rounded-md py-8 bg-white">
-                <h1 className={`text-[26px]  font-semibold ${quicksand.className}`}>Crea una cuenta para ti</h1>
+                <h1 className={`${quicksand.className} text-lg md:text-[26px] font-semibold`}>Crea una cuenta para ti</h1>
 
                 <TextField
                     label="Nombre"
@@ -57,13 +57,15 @@ export default function Signin() {
                 />
 
                 <button
-                    type="submit" 
-                    disabled={loading} 
-                    color="success" 
-                    className={`text-white ${poppins.className} text-[24px] font-medium px-14 bg-[#01CC5E] rounded-lg py-2`}
-                >Iniciar Sesión</button>
+                    type="submit"
+                    disabled={loading}
+                    color="success"
+                    className={`text-white ${poppins.className} text-sm md:text-base lg:text-[20px] font-medium px-14 bg-[#01CC5E] rounded-lg py-2 lg:py-3`}
+                >
+                    Registrate
+                </button>
 
-                <div className="flex flex-col lg:flex-row items-center gap-2 text-lg font-poppins">
+                <div className="flex flex-col lg:flex-row items-center gap-2 text-sm md:text-base lg:text-lg">
                     <span className="text-inputText ">¿Ya tienes una cuenta?</span>
                     <a href="/auth/signin" className="text-green-600">Inicia Sesión</a>
                 </div>

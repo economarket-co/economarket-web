@@ -1,14 +1,11 @@
 'use client';
 import { CartContext } from "@/Context/CartContext";
 import { ProductFull } from "@/odt/Product/productFull";
-import { cartItemWithProduct } from "@/types/cartItem";
-import { Button, Switch } from "@nextui-org/react";
-import { CartItem, ProductPrice2, SuperMarket } from "@prisma/client";
+import { Switch } from "@nextui-org/react";
+import { ProductPrice2, SuperMarket } from "@prisma/client";
 import axios from "axios";
-import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { formatCurrency } from "../utils";
 import BasketCard from "@/components/cards/BasketCard";
 import CartResume from "@/components/CartResume";
 import CartTable from "@/components/CartTable";
@@ -62,7 +59,6 @@ export default function Cart() {
                 product
             });
         };
-
 
         const baskets: any[] = [];
         for (const supermarket of supermarkets) {
@@ -120,10 +116,17 @@ export default function Cart() {
                     break;
             }
 
+            let products_copy = [];
+
+            
+
             for (const product of products) {
-                product.link = product.product['link' + supermarket];
-                product.price = product.product.productPrices2[0]['price' + supermarket];
-            } 
+                products_copy.push({
+                    ...product,
+                    link: product.product['link' + supermarket],
+                    price: product.product.productPrices2[0]['price' + supermarket]
+                })
+            }
 
             total = products.reduce((total: number, product: any) => {
                 return total + (product.price * product.quantity);
@@ -131,12 +134,11 @@ export default function Cart() {
 
             baskets.push({
                 supermarket,
-                products,
+                products: products_copy,
                 image: `/images/supermarkets/${supermarket}.png`,
-                isCheapest: total < cheapes 
+                isCheapest: total < cheapes
             });
         }
-
 
         setCartItemsBySuperMarket(baskets);
     }
@@ -192,15 +194,18 @@ export default function Cart() {
 
                     <div className="flex flex-wrap px-6 gap-12 lg:gap-8 justify-center" id="comparaciones">
                         {
-                            cartItemsBySuperMarket.map((basket: any) => (
-                                <BasketCard
-                                    key={basket.supermarket}
+                            cartItemsBySuperMarket.map((basket: any, index: number) => {
+                                console.log(basket)
+                                return (<BasketCard
+                                    key={`${basket.supermarket}-${index}`}
                                     isBestOption={basket.isCheapest}
                                     image={basket.image}
                                     cartProducts={basket.products}
                                     supermarket={basket.supermarket}
                                 />
-                            ))
+                                )
+                            }
+                            )
                         }
                     </div>
                 </div>
