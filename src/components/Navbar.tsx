@@ -48,7 +48,7 @@ export default function CustomNavbar() {
                 width: "100%"
             }}
         >
-            <Toolbar className='flex justify-between items-center py-3'>
+            <Toolbar className='flex justify-between items-center py-3 md:px-12'>
 
                 <div>
                     <SideBar />
