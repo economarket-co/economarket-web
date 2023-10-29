@@ -4,7 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import ProductCard from "@/components/cards/ProductsCard";
 import ProductsFilter from "@/components/filters/ProductsFilter";
-import { Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner } from "@nextui-org/react";
+import { Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner, useDisclosure } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
 import { Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -22,12 +22,15 @@ export default function ProductsPage({ searchParams }: any) {
     const [supermarketsList, setSupermarketsList] = useState<[]>([]);
 
     const [session, setSession] = useState<Session | null>();
+
+    const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
+
     useEffect(() => {
         fetchFilters();
-
     }, [])
 
     useEffect(() => {
+        if (!session) return onOpen();
         fetchData();
     }, [categories, superMarkets, maxPrice])
 
@@ -78,9 +81,25 @@ export default function ProductsPage({ searchParams }: any) {
 
     return (
         <main className="flex min-w-full flex-col overflow-hidden ">
-            {
-                !session ?
-                    <Modal isOpen={true}>
+
+
+            <HeroWithBg title="Favoritos" BgImage="/images/products/products-bg.png" />
+
+            <div className="flex flex-col lg:flex-row w-full grow bg-[#F6F6F6]">
+                <ProductsFilter
+                    categoriesList={categoriesList}
+                    categories={categories}
+                    setCategories={setCategories}
+                    supermarkets={superMarkets}
+                    setSupermarkets={setSupermarkets}
+                    priceRange={maxPrice}
+                    setPriceRange={setPriceRange}
+                    maxPrice={100000}
+                />
+
+                {
+                    !session &&
+                    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                         <ModalContent className="py-10">
                             <ModalHeader className="">
                                 <p className="text-[#434343] text-4xl text-center w-full">:(</p>
@@ -97,61 +116,42 @@ export default function ProductsPage({ searchParams }: any) {
                         </ModalContent>
 
                     </Modal>
-                    :
-                    <>
-
-                        <HeroWithBg title="Favoritos" BgImage="/images/products/products-bg.png" />
-
-                        <div className="flex flex-col lg:flex-row w-full grow bg-[#F6F6F6]">
-                            <ProductsFilter
-                                categoriesList={categoriesList}
-                                categories={categories}
-                                setCategories={setCategories}
-                                supermarkets={superMarkets}
-                                setSupermarkets={setSupermarkets}
-                                priceRange={maxPrice}
-                                setPriceRange={setPriceRange}
-                                maxPrice={100000}
-                            />
+                }
 
 
-                            {
-                                products.length === 0 ?
-                                    <div className="flex flex-col gap-12 w-full items-center justify-center grow py-24 px-4">
-                                        <img src="/images/heart.svg" alt="corazon" />
+                {
+                    products.length === 0 ?
+                        <div className="flex flex-col gap-12 w-full items-center justify-center grow py-24 px-4">
+                            <img src="/images/heart.svg" alt="corazon" />
 
-                                        <div className="flex flex-col gap-3 text-center">
-                                            <h3 className={`font-semibold ${quicksand.className} text-2xl text-[#434343]`}>No haz agregado nada aún</h3>
-                                            <p className={`${quicksand.className} font-medium text-lg text-[#646464]`}>Aprovecha tus favoritos para guardar productos que podrías comprar nuevamente</p>
-                                        </div>
+                            <div className="flex flex-col gap-3 text-center">
+                                <h3 className={`font-semibold ${quicksand.className} text-2xl text-[#434343]`}>No haz agregado nada aún</h3>
+                                <p className={`${quicksand.className} font-medium text-lg text-[#646464]`}>Aprovecha tus favoritos para guardar productos que podrías comprar nuevamente</p>
+                            </div>
 
-                                        <Link href="/products" className="bg-[#01CC5E] text-white text-center px-8 py-2 font-bold rounded-md">Empezar a agregar productos</Link>
+                            <Link href="/products" className="bg-[#01CC5E] text-white text-center px-8 py-2 font-bold rounded-md">Empezar a agregar productos</Link>
+                        </div>
+                        :
+                        <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
+                            <div className="flex">
+                                <h1 className={`${dmserif} text-5xl text-center md:text-start md:text-6xl`}>Tus favoritos</h1>
+                            </div>
+
+                            <div className="flex flex-wrap gap-10 justify-center md:justify-start">
+                                {loading ?
+                                    <div className="flex w-full justify-center">
+                                        <Spinner size="lg" />
                                     </div>
                                     :
-                                    <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
-                                        <div className="flex">
-                                            <h1 className={`${dmserif} text-5xl text-center md:text-start md:text-6xl`}>Tus favoritos</h1>
-                                        </div>
-
-                                        <div className="flex flex-wrap gap-10 justify-center md:justify-start">
-                                            {loading ?
-                                                <div className="flex w-full justify-center">
-                                                    <Spinner size="lg" />
-                                                </div>
-                                                :
-                                                products.map(product =>
-                                                    <ProductCard key={product.id} product={product} />
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                            }
-
+                                    products.map(product =>
+                                        <ProductCard key={product.id} product={product} />
+                                    )
+                                }
+                            </div>
                         </div>
-                    </>
-            }
+                }
 
-
+            </div>
         </main>
     )
 }
