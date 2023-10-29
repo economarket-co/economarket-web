@@ -25,18 +25,18 @@ export default function CategoryCard(props: CategoryCardProps) {
     return (
         <Link href={`/products/?category=${props.id}`}>
             <Card
-                className='hover:font-semibold cursor-pointer hover:-translate-y-6'
+                className='hover:font-semibold cursor-pointer hover:-translate-y-6 w-[100px] md:w-[150px] xl:w-[200px] h-[114px] md:h-[140px] xl:h-[180px]'
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
-                <CardBody className='p-0 h-[190px] w-[200px]'>
+                <CardBody className='p-0  h-[90px] lg:h-[180px] '>
                     <img className='h-full object-cover' src={props.img} alt={props.title} />
                 </CardBody>
                 <CardFooter
-                    className='flex justify-center'
+                    className='flex justify-center max-w-full h-[40px] lg:h-[70px]  '
                     style={{ backgroundColor: hovered ? "white" : props.color, color: hovered ? props.color : "white" }}
                 >
-                    <p className={`${dmserif.className} text-xl text-center w-ful`}>{props.title}</p>
+                    <p className={`${dmserif.className} break-words text-xs lg:text-sm xl:text-xl text-center max-w-full`}>{props.title}</p>
                 </CardFooter>
             </Card>
         </Link>
