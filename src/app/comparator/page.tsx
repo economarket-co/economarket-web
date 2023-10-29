@@ -36,13 +36,13 @@ export default function Comparator({ searchParams }: any) {
                     price = product.productPrices2[0].priceOlimpica
                     break;
                 case SuperMarket.Exito:
-                    price =  product.productPrices2[0].priceExito
+                    price = product.productPrices2[0].priceExito
                     break;
                 case SuperMarket.Jumbo:
                     price = product.productPrices2[0].priceJumbo
                     break;
                 default:
-                    price =null;
+                    price = null;
                     break;
             }
 
@@ -87,7 +87,9 @@ export default function Comparator({ searchParams }: any) {
 
                 <div className="flex flex-col items-center h-full gap-6">
 
-                    <SearchBar setProduct={setProduct} nonNavbar />
+                    <div className="w-[300px] md:w-[550px] lg:w-[700px]">
+                        <SearchBar setProduct={setProduct} nonNavbar />
+                    </div>
 
                     {
 
