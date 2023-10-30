@@ -1,26 +1,42 @@
+"use client";
 import { quicksand } from "@/fonts";
+import { useEffect, useState } from "react";
 
 export default function Allies() {
-    return (
-      <div className='flex flex-col flex-items justify-center items-center text-white relative md:min-h-[400px] lg:min-h-[600px]'>
-        <img src="/images/allies-bg.png" className='absolute min-w-full min-h-full max-w-full max-h-[300px] -z-10' />
+  const [imageUrl, setImageUrl] = useState("/images/allies-bg.png");
 
-        <div className='mx-auto py-5 flex flex-col gap-8 items-center z-50 max-w-[1000px]'>
-          <img src="/images/logo-white.png" />
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 768) {
+        setImageUrl("/images/allies-bg-mobile.png");
+      } else {
+        setImageUrl("/images/allies-bg.png");
+      }
+    })
 
-          <div className={`text-[18px] px-4 font-medium text-center ${quicksand.className} max-w-[500px] lg:max-w-[700px] grow`}>
-            Economarket es tu socio para una experiencia de compra ganadora. Colaboramos con reconocidos supermercados
-            de cadena como Éxito, Carulla, Jumbo y Olímpica para ofrecerte una herramienta que te permite encontrar
-            los mejores precios. Nos dedicamos a simplificar tu vida diaria, ahorrándote tiempo y dinero
-            con transparencia y seguridad.
-          </div>
-          <div className='flex flex-col lg:flex-row justify-between gap-10'>
-            <img src="/images/logo-exito.svg" />
-            <img src="/images/logo-jumbo.svg" />
-            <img src="/images/logo-carulla.svg" />
-            <img src="/images/logo-olimpica.svg" />
-          </div>
+    if (window.innerWidth < 768) setImageUrl("/images/allies-bg-mobile.png");
+  }, []);
+  
+  return (
+    <div className='flex flex-col flex-items justify-center items-center text-white relative md:min-h-[400px] lg:min-h-[600px]'>
+      <img src={imageUrl} className='absolute min-w-full min-h-full max-w-full max-h-[300px] -z-10' />
+
+      <div className='mx-auto py-5 flex flex-col gap-8 items-center z-50  max-w-[1000px]'>
+        <img src="/images/logo-white.png" className="h-[55px] md:h-[80px] " />
+
+        <div className={`text-sm md:text-[18px] px-4 font-medium text-center ${quicksand.className} max-w-[300px] md:max-w-[500px] lg:max-w-[700px] grow`}>
+          Economarket es tu socio para una experiencia de compra ganadora. Colaboramos con reconocidos supermercados
+          de cadena como Éxito, Carulla, Jumbo y Olímpica para ofrecerte una herramienta que te permite encontrar
+          los mejores precios. Nos dedicamos a simplificar tu vida diaria, ahorrándote tiempo y dinero
+          con transparencia y seguridad.
+        </div>
+        <div className='grid grid-cols-2 items-center justify-center md:flex md:flex-row lg:justify-between gap-10'>
+          <img src="/images/logo-exito.svg" className="w-[80px]" />
+          <img src="/images/logo-jumbo.svg" className="w-[80px]" />
+          <img src="/images/logo-carulla.svg" className="w-[80px] " />
+          <img src="/images/logo-olimpica.svg" className="w-[80px]" />
         </div>
       </div>
-    )
-  }
+    </div>
+  )
+}
