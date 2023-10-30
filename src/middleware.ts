@@ -1,5 +1,6 @@
 import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 import { NextResponse } from 'next/server'
+import path from 'path'
 
 export async function middleware(req: any) {
   const res = NextResponse.next()
@@ -7,6 +8,8 @@ export async function middleware(req: any) {
   const { data: {session}} = await supabase.auth.getSession()
 
   const pathname = req.nextUrl.pathname as string;
+
+  if (pathname === "/" ) return NextResponse.redirect(new URL('/v1', req.url))
 
   // if (pathname === "/dashboard" || pathname === '/') return NextResponse.redirect(new URL('/dashboard/meetings', req.url))
 

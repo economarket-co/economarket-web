@@ -32,7 +32,7 @@ export default function Hero() {
           En Economarket puedes comparar los precios del mismo producto en diferentes supermercados. Añade productos a tu carrito y encuentra los precios perfectos para tu mercado.
         </div>
         <div >
-          <Link href="/products">
+          <Link href="/v1/products">
             <button className={`bg-[#F28705] text-white text-lg rounded-md px-6 py-2 shadow-md ${dmserif.className} font-bold`}>Empieza a mercar</button>
           </Link>
         </div>

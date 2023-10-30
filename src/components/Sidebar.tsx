@@ -12,16 +12,16 @@ export default function Sidebar() {
         {
             links: [
                 { name: 'Inicio', href: '/' },
-                { name: 'Categorias', href: '/categories' },
-                { name: 'Comparador de precios', href: '/comparator' },
-                { name: 'Todos los productos', href: '/products' },
+                { name: 'Categorias', href: '/v1/categories' },
+                { name: 'Comparador de precios', href: '/v1/comparator' },
+                { name: 'Todos los productos', href: '/v1/products' },
             ]
         },
         {
             links: [
-                { name: 'Usuario', href: '/login' },
-                { name: 'Favoritos', href: '/favorites' },
-                { name: 'Carrito de compras', href: '/cart' },
+                { name: 'Usuario', href: '/v1/login' },
+                { name: 'Favoritos', href: '/v1/favorites' },
+                { name: 'Carrito de compras', href: '/v1/cart' },
             ]
         }
     ]

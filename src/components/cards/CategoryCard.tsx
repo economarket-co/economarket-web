@@ -23,7 +23,7 @@ export default function CategoryCard(props: CategoryCardProps) {
     };
 
     return (
-        <Link href={`/products/?category=${props.id}`}>
+        <Link href={`/v1/products/?category=${props.id}`}>
             <Card
                 className='hover:font-semibold cursor-pointer hover:-translate-y-6 w-[100px] md:w-[150px] xl:w-[200px] h-[114px] md:h-[140px] xl:h-[180px]'
                 onMouseEnter={handleMouseEnter}

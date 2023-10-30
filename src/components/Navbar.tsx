@@ -53,7 +53,7 @@ export default function CustomNavbar() {
 
                 <div className='flex md:gap-3 items-center'>
                     <SideBar />
-                    <Link href="/">
+                    <Link href="/v1">
                         <IconButton>
                             <Image
                                 alt='logo'
@@ -71,7 +71,7 @@ export default function CustomNavbar() {
                 <div className='hidden lg:flex'>
                     {
                         !session ?
-                            <Link href="/auth/signin">
+                            <Link href="/v1/auth/signin">
                                 <IconButton sx={{ color: "white" }}>
                                     <PersonIcon />
                                 </IconButton>
@@ -84,12 +84,12 @@ export default function CustomNavbar() {
                     }
 
 
-                    <Link href={'/favorites'}>
+                    <Link href={'/v1/favorites'}>
                         <IconButton sx={{ color: "white" }}>
                             <Favorite />
                         </IconButton>
                     </Link>
-                    <Link href="/cart">
+                    <Link href="/v1/cart">
                         <IconButton sx={{ color: "white" }}>
                             <Badge badgeContent={cartItems.length} color="secondary">
                                 <ShoppingCart />
