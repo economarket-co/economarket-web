@@ -1,6 +1,6 @@
 "use client";
 import Form from "@/components/forms/Form";
-import { uploadFilesFromClient } from "@/utils/uploadFilesFromClient";
+import { Selection } from "@nextui-org/react";
 import { Category } from "@prisma/client";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 export default function EditCategoryPage({ params }: any) {
     const [name, setName] = useState("");
     const [categoriesList, setCategoriesList] = useState<Category[]>([]);
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<Selection>(new Set([]));
     const [loading, setLoading] = useState(false);
 
     const fields = [
@@ -37,6 +37,11 @@ export default function EditCategoryPage({ params }: any) {
                 }
             });
 
+            const subCategory = await axios.get(`/api/subCategories/${params.id}`);
+
+            setName(subCategory.data.name);
+            setCategories(new Set([subCategory.data.category.id.toString()]));
+
             setCategoriesList(categoriesList);
         } catch (error) {
             console.error(error);
@@ -52,10 +57,11 @@ export default function EditCategoryPage({ params }: any) {
            
             const body = {
                 name,
+                // @ts-ignore
                 categoryId:  parseInt(Array.from(categories)[0])
             }
 
-            axios.post(`/api/subCategories`, body);
+            axios.patch(`/api/subCategories/${params.id}`, body);
 
             toast.success("Sub Categoría editada correctamente");
             window.location.href = "/admin/subCategories";
@@ -70,7 +76,8 @@ export default function EditCategoryPage({ params }: any) {
     return (
         <main>
             <Form
-                title="Agregar Sub Categoría"
+                title="Editar Sub Categoría"
+                // @ts-ignore
                 fields={fields}
                 handleSubmit={handleSubmit}
                 loading={loading}

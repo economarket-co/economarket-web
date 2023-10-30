@@ -32,7 +32,7 @@ export async function getSubCategory(id: number) {
     });
 }
 
-export async function createSubCategory(data: any) {
+export async function createSubCategory(data: { name: string, categoryId: number }) {
     return await prisma.subCategory.create({
         data
     });

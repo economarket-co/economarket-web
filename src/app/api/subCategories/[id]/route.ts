@@ -1,5 +1,4 @@
 import { deleteSubCategory, getSubCategory, updateSubCategory } from "@/controllers/SubCategory.controller";
-import prisma from "@/db/clien";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }: any) {
