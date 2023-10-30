@@ -15,9 +15,7 @@ export default function BasketCard(props: BasketCardProps) {
     function hadleBuy() {
 
         props.cartProducts.forEach(product => {
-            setTimeout(() => {
-                window.open(product.link, '_blank');
-            }, 1000);
+            window.open(product.link, '_blank');
         })
     }
 
@@ -28,7 +26,7 @@ export default function BasketCard(props: BasketCardProps) {
             <img src={props.image} alt={props.image} className="w-full h-[140px] lg:h-[120px] object-fill" />
 
             <div className="flex flex-col gap-14 py-8 px-4">
-                <div className="flex flex-col gap-5 h-[500px] overflow-y-auto">
+                <div className="flex flex-col gap-5 max-h-[500px] overflow-y-auto">
                     {
                         props.cartProducts.map((product) => {
 
