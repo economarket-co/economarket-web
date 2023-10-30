@@ -1,15 +1,17 @@
 "use client";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Selection } from "@nextui-org/react";
 import { Card, Title } from "@tremor/react";
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { FormEvent } from "react";
+import { SelectField } from "../fields/SelectField";
 
 interface FieldProps {
     label: string;
     placeholder: string;
     isRequired?: boolean;
     type?: string;
-    value: string | File;
+    value: string | File | string[];
     onChange: any
+    options?: any[];
 }
 
 interface FormProps {
@@ -63,6 +65,17 @@ function Field(props: FieldProps) {
                         onChange={(e) => props.onChange(e.target.files?.[0])}
                     />
                 ) :
+
+                props.options ? 
+                    <SelectField
+                        label="Categoría"
+                        isRequired={props.isRequired}
+                        placeholder={props.placeholder}
+                        value={props.value as Selection}
+                        onSelectionChange={props.onChange}
+                        options={props.options}
+                    />
+                :
                     <Input
                         isRequired={props.isRequired}
                         //@ts-ignore
@@ -72,6 +85,9 @@ function Field(props: FieldProps) {
                         value={props.value}
                         onValueChange={props.onChange}
                     />
+
+
+
 
             }
 

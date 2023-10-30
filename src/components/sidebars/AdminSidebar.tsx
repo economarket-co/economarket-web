@@ -19,6 +19,7 @@ export default function AdminSideBar() {
     const adminLinks = [
         { name: 'Dashboard', icon: '/icons/home.svg', href: '/admin' },
         { name: 'Categorias', icon: '/icons/reports.svg', href: '/admin/categories' },
+        { name: 'Sub categorias', icon: '/icons/reports.svg', href: '/admin/subCategories' },
         { name: 'Productos', icon: '/icons/products.svg', href: '/admin/products' },
     ]
 
