@@ -22,7 +22,6 @@ export async function GET(req: NextRequest, { params }: any) {
         console.error(error);
         return NextResponse.json({ error }, { status: 500})
     }
-
 }
 
 export async function PUT(req: NextRequest, res: NextResponse) {

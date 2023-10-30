@@ -24,7 +24,8 @@ export default function ProductsPage() {
         try {
             const response = await axios.get("/api/products", {
                 params: {
-                    name: productName
+                    name: productName,
+                    isForAdmin: true
                 }
             });
             setProducts(response.data);
@@ -47,7 +48,7 @@ export default function ProductsPage() {
                             input: "text-small",
                             inputWrapper: "h-8 font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
                         }}
-                        placeholder="Busca por nombre, categoria o subcategoria"
+                        placeholder="Busca por nombre"
                         size="md"
                         startContent={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -57,10 +58,10 @@ export default function ProductsPage() {
                     />
                 </Card>
                 <BasicTable
-                    title="Sub Categoría"
+                    title="Productos"
                     columns={colums}
                     data={products}
-                    entity="subCategories"
+                    entity="products"
                     allowControls={true}
                     allowActions={true}
                     setData={setProducts}

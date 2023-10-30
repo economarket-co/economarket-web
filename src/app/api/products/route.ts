@@ -1,4 +1,4 @@
-import { createProduct, getFavoritesProducts, getProducts } from "@/controllers/Product.controller";
+import { createProduct, getAllProducts, getFavoritesProducts, getProducts } from "@/controllers/Product.controller";
 import { SuperMarket } from "@prisma/client";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -17,6 +17,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const maxPrice = req.nextUrl.searchParams.get('maxPrice') || undefined;
     const category = req.nextUrl.searchParams.get('category') || undefined;
     const favorites = req.nextUrl.searchParams.get('favorites') || undefined; // only fetch favorite products
+    const isForAdmin = req.nextUrl.searchParams.get('isForAdmin') || undefined; // only fetch favorite products
     try {
         if (!categories && category ) categories = [category];
 
@@ -28,6 +29,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
             favorites: favorites === 'true' ? true : undefined,
             maxPrice: maxPrice ? Number(maxPrice) : undefined
         }
+        
+        if (isForAdmin) return NextResponse.json(await getAllProducts(filters), { status: 200});
 
         const products = filters.favorites ? await getFavoritesProducts(filters) : await  getProducts(filters);
 

@@ -13,9 +13,36 @@ type filtersForMany = {
 }
 
 type filtersForOne = {
-    id:  number
+    id: number
     superMarkets?: SuperMarket[]
     userId?: string
+}
+
+export async function getAllProducts(filters: filtersForMany) {
+    const products = await prisma.product.findMany({
+        where: {
+            name: {
+                contains: filters.name || "",
+                mode: "insensitive"
+            },
+        },
+        include: {
+            productPrices2: {
+                orderBy: {
+                    createdAt: "desc"
+                },
+                take: 1
+            },
+            SubCategory: {
+                include: {
+                    category: true
+                }
+            },
+            favorites: true
+        }
+    });
+
+    return products;
 }
 
 export async function getProducts(filters: filtersForMany) {
@@ -114,7 +141,7 @@ export async function getFavoritesProducts(filters: filtersForMany) {
                     }
                 }
             },
-            
+
             favorites: {
                 some: {
                     userId: filters.userId || undefined
