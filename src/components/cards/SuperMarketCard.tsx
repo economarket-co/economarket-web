@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/app/utils"
+import { formatCurrency } from "@/utils"
 import { quicksand } from "@/fonts"
 import { Card, CardBody, CardFooter } from "@nextui-org/react"
 

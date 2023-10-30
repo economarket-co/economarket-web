@@ -1,4 +1,4 @@
-import { formatCurrency } from "@/app/utils"
+import { formatCurrency } from "@/utils"
 import { quicksand } from "@/fonts"
 import { Button } from "@nextui-org/react"
 import { SuperMarket } from "@prisma/client"

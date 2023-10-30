@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import { formatCurrency } from "@/app/utils";
+import { formatCurrency } from "@/utils";
 import { Checkbox, CheckboxGroup, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 import { quicksand } from "@/fonts";
 
