@@ -37,9 +37,9 @@ export default function Footer() {
                 <h4 className={`${quicksand.className} font-semibold`}>Contáctanos</h4>
 
                 <div className="flex flex-col gap-2 overflow-hidden">
-                    <SocialLInk href="https://wa.me/573006724574" content="3006724574" icon="/icons/whatsapp.svg" />
-                    <SocialLInk href="mailto:economarket@gmail.com" content="@economarket" icon="/icons/email.svg" />
-                    <SocialLInk href="mailto:economarket@gmail.com" content="economarket@gmail.com" icon="/icons/browser.svg" />
+                    <SocialLInk href="https://wa.me/573006724574" content="3006724574" icon="/icons/whatsapp.png" />
+                    <SocialLInk href="mailto:economarket@gmail.com" content="@economarket" icon="/icons/email.png" />
+                    <SocialLInk href="mailto:economarket@gmail.com" content="economarket@gmail.com" icon="/icons/browser.png" />
                 </div>
 
 
