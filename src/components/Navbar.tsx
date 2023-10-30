@@ -34,7 +34,7 @@ export default function CustomNavbar() {
         try {
             const res = await axios.post('/api/auth/signout');
 
-            window.location.href = "/auth/signin";
+            window.location.href = "/v1/auth/signin";
         } catch (error) {
             console.error(error);
             toast.error("Error al cerrar sesión");

@@ -114,7 +114,7 @@ export default function ProductsPage({ searchParams }: any) {
                             </ModalBody>
 
                             <ModalFooter className="flex justify-center">
-                                <Link className="bg-[#033E8C] text-white py-2 px-8 rounded-lg text-lg" href="/auth/signin">Iniciar sesión</Link>
+                                <Link className="bg-[#033E8C] text-white py-2 px-8 rounded-lg text-lg" href="/v1/auth/signin">Iniciar sesión</Link>
                             </ModalFooter>
                         </ModalContent>
 
