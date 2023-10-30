@@ -100,7 +100,7 @@ model CartItem {
   product   ProductPrice @relation(fields: [productId], references: [id])
 }
 
-model NewsLetter {
+model Subscription {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   createdAt DateTime @default(now())
