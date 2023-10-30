@@ -133,8 +133,13 @@ export default function ProductsPage({ searchParams }: any) {
                         </div>
                         :
                         <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
-                            <div className="flex">
-                                <h1 className={`${dmserif} text-5xl text-center md:text-start md:text-6xl`}>Tus favoritos</h1>
+                            <div className="flex justify-between">
+                                <div>
+                                    <button onClick={e => window.history.back()}>
+                                        <img src="/icons/back.svg" alt="back" className="w-6 h-6" />
+                                    </button>
+                                    <h1 className={`${dmserif} text-5xl text-center md:text-start md:text-6xl`}>Tus favoritos</h1>
+                                </div>
                             </div>
 
                             <div className="flex flex-wrap gap-10 justify-center md:justify-start">
