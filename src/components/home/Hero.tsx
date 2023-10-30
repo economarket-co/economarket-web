@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <div className={`flex flex-col flex-items justify-center items-center overflow-hidden 
-        text-white relative py-16 h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px]`}
+        text-white relative py-16 h-[400px] lg:h-[500px] 2xl:h-[700px]`}
     >
       <video
         src="/videos/home-bg.mp4"
