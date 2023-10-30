@@ -39,6 +39,9 @@ export async function getAllProducts(filters: filtersForMany) {
                 }
             },
             favorites: true
+        },
+        orderBy: {
+            name: "asc"
         }
     });
 
@@ -246,10 +249,10 @@ export async function createProduct(data: any) {
     return product;
 }
 
-export async function updateProduct(data: any) {
+export async function updateProduct(id: number, data: any) {
     const product = await prisma.product.update({
         where: {
-            id: data.id
+            id: id
         },
         data
     });

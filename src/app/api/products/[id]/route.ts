@@ -1,4 +1,4 @@
-import { getProduct, updateProduct } from "@/controllers/Product.controller";
+import { deleteProduct, getProduct, updateProduct } from "@/controllers/Product.controller";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -24,11 +24,12 @@ export async function GET(req: NextRequest, { params }: any) {
     }
 }
 
-export async function PUT(req: NextRequest, res: NextResponse) {
+export async function PATCH(req: NextRequest, { params }: any) {
     const {...data} = await req.json();
+    const { id } = params;
 
     try {
-        const product = await updateProduct(data);
+        const product = await updateProduct( Number(id), data);
         return NextResponse.json(product, { status: 200})
     } catch (error) {
         console.error(error);
@@ -36,11 +37,11 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     }
 }
 
-export async function DELETE(req: NextRequest, res: NextResponse) {
-    const {...data} = await req.json();
+export async function DELETE(req: NextRequest, { params }: any) {
+    const { id } = params
 
     try {
-        const product = await updateProduct(data);
+        const product = await deleteProduct(Number(id));
         return NextResponse.json(product, { status: 200})
     } catch (error) {
         console.error(error);
