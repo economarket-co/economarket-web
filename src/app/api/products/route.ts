@@ -18,6 +18,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const category = req.nextUrl.searchParams.get('category') || undefined;
     const favorites = req.nextUrl.searchParams.get('favorites') || undefined; // only fetch favorite products
     const isForAdmin = req.nextUrl.searchParams.get('isForAdmin') || undefined; // only fetch favorite products
+    const sort = req.nextUrl.searchParams.get('sort') || undefined; // only fetch favorite products
+
     try {
         if (!categories && category ) categories = [category];
 
@@ -27,7 +29,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
             categories, 
             superMarkets: superMarkets as SuperMarket[],
             favorites: favorites === 'true' ? true : undefined,
-            maxPrice: maxPrice ? Number(maxPrice) : undefined
+            maxPrice: maxPrice ? Number(maxPrice) : undefined,
+            sort: sort ? sort : undefined
         }
         
         if (isForAdmin) return NextResponse.json(await getAllProducts(filters), { status: 200});

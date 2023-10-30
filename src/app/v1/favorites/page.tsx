@@ -9,6 +9,7 @@ import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
 import { Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { dmserif, quicksand } from "@/fonts";
+import SortButton from "@/components/buttons/SortButton";
 
 export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
@@ -20,6 +21,7 @@ export default function ProductsPage({ searchParams }: any) {
 
     const [categoriesList, setCategoriesList] = useState<[]>([]);
     const [supermarketsList, setSupermarketsList] = useState<[]>([]);
+    const [sort, setSort] = useState<string>('');
 
     const [session, setSession] = useState<Session | null>();
 
@@ -65,6 +67,7 @@ export default function ProductsPage({ searchParams }: any) {
                     ids: searchParams.id,
                     category: searchParams.category,
                     favorites: true,
+                    sort: sort
                 }
             })
 
@@ -134,11 +137,20 @@ export default function ProductsPage({ searchParams }: any) {
                         :
                         <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
                             <div className="flex justify-between">
-                                <div>
-                                    <button onClick={e => window.history.back()}>
-                                        <img src="/icons/back.svg" alt="back" className="w-6 h-6" />
-                                    </button>
-                                    <h1 className={`${dmserif} text-5xl text-center md:text-start md:text-6xl`}>Tus favoritos</h1>
+                                <div className="flex flex-col-reverse gap-4 md:flex-row justify-between w-full md:items-center px-6">
+                                    <div className="flex items-center gap-2 justify-center md:justify-start">
+                                        <button onClick={e => window.history.back()}>
+                                            <img src="/icons/back.svg" alt="back" className="w-6 md:w-10 h-6 md:h-10" />
+                                        </button>
+                                        <h1 className={`${dmserif.className} text-4xl text-start md:text-start md:text-5xl`}>Todos los productos</h1>
+                                    </div>
+
+                                    {/* todo: improve this */}
+                                    <SortButton
+                                        ascSort={() => setSort('name')}
+                                        descSort={() => setSort('favorites')}
+                                        recentSort={() => console.log('recent')}
+                                    />
                                 </div>
                             </div>
 

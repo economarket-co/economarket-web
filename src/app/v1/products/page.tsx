@@ -8,6 +8,7 @@ import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import HeroWithBg from "@/components/HeroWithBg";
 import { ProductFull } from "@/odt/Product/productFull";
 import { dmserif } from "@/fonts";
+import SortButton from "@/components/buttons/SortButton";
 
 export default function ProductsPage({ searchParams }: any) {
     const [products, setProducts] = useState<ProductFull[]>([]);
@@ -19,6 +20,7 @@ export default function ProductsPage({ searchParams }: any) {
 
     const [categoriesList, setCategoriesList] = useState<[]>([]);
     const [supermarketsList, setSupermarketsList] = useState<[]>([]);
+    const [sort, setSort] = useState<string>('');
 
     useEffect(() => {
         fetchFilters();
@@ -26,7 +28,7 @@ export default function ProductsPage({ searchParams }: any) {
 
     useEffect(() => {
         fetchData();
-    }, [categories, superMarkets, maxPrice])
+    }, [categories, superMarkets, maxPrice, sort])
 
     async function fetchFilters() {
         try {
@@ -55,7 +57,8 @@ export default function ProductsPage({ searchParams }: any) {
                     superMarkets: superMarkets.length > 0 ? superMarkets.join(',') : undefined,
                     maxPrice: maxPrice,
                     ids: searchParams.id,
-                    category: searchParams.category
+                    category: searchParams.category,
+                    sort: sort
                 }
             })
 
@@ -86,14 +89,21 @@ export default function ProductsPage({ searchParams }: any) {
                     maxPrice={100000}
                 />
 
-                <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
-                    <div className="flex justify-between">
-                        <div className="flex items-center">
+                <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-10 md:py-16 grow">
+                    <div className="flex flex-col-reverse gap-4 md:flex-row justify-between w-full md:items-center px-6">
+                        <div className="flex items-center gap-2 justify-center md:justify-start">
                             <button onClick={e => window.history.back()}>
-                                <img src="/icons/back.svg" alt="back" className="w-6 h-6" />
+                                <img src="/icons/back.svg" alt="back" className="w-6 md:w-10 h-6 md:h-10" />
                             </button>
-                            <h1 className={`${dmserif.className} text-5xl text-center md:text-start md:text-6xl`}>Todos los productos</h1>
+                            <h1 className={`${dmserif.className} text-4xl text-start md:text-start md:text-5xl`}>Todos los productos</h1>
                         </div>
+
+                        {/* todo: improve this */}
+                        <SortButton
+                            ascSort={() => setSort('name')}
+                            descSort={() => setSort('favorites')}
+                            recentSort={() => console.log('recent')}
+                        />
                     </div>
 
                     <div className="flex flex-wrap gap-10 justify-center md:justify-start">

@@ -9,7 +9,8 @@ type filtersForMany = {
     superMarkets?: SuperMarket[]
     userId?: string,
     favorites?: boolean
-    maxPrice: number | undefined
+    maxPrice: number | undefined,
+    sort?: string
 }
 
 type filtersForOne = {
@@ -121,6 +122,10 @@ export async function getProducts(filters: filtersForMany) {
                     userId: filters.userId || undefined
                 }
             }
+        },
+        orderBy: {
+            ...(filters.sort === 'name' && { name: "asc" }),
+            ...(filters.sort === 'favorites' && { favorites: { _count: 'desc' } })
         }
     });
 
