@@ -19,7 +19,7 @@ export default function RootLayout({
             <Providers>
                 <body className={`flex min-h-screen`}>
                     <AdminSidebar/>
-                    <div className='flex grow w-full px-4 py-4'>
+                    <div className='flex grow w-full px-4 py-4 justify-center'>
                         {children}
                     </div>
                 </body>
