@@ -94,11 +94,11 @@ export default function Comparator({ searchParams }: any) {
                     {
 
                         product &&
-                        <div className="flex flex-col xl:flex-row gap-8 mt-10">
+                        <div className="flex flex-col items-center xl:flex-row gap-8 mt-10">
                             <div className="flex flex-col gap-6">
                                 <img
                                     src={product.image}
-                                    className="rounded-lg h-[300px] md:h-[490px] w-[300px] md:w-[490px] object-fill"
+                                    className="rounded-lg h-[300px] lg:h-[490px] w-[300px] lg:w-[490px] object-fill"
                                     alt={product.name}
                                     style={{ boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.25)" }}
                                 />
@@ -106,8 +106,8 @@ export default function Comparator({ searchParams }: any) {
                             </div>
 
                             <div className="flex flex-col gap-4">
-                                <p className={`${quicksand.className} text-2xl text-[#646464]`}>{product.name}</p>
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-5">
+                                <p className={`${quicksand.className} text-center lg:text-st text-lg md:text-xl lg:text-2xl text-[#646464]`}>{product.name}</p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-5">
                                     {
                                         prices.map(ofert =>
                                             <SuperMarketCard
