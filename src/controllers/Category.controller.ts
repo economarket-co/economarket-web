@@ -6,3 +6,11 @@ export async function getCategories() {
 
     return categories;
 }
+
+export async function createCategory(data: any) {
+    const category = await prisma.category.create({
+        data
+    });
+
+    return category;
+}

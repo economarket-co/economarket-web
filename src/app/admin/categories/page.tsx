@@ -56,10 +56,10 @@ export default function Products() {
                     />
                 </Card>
                 <BasicTable
-                    title="Productos"
+                    title="Categorias"
                     columns={colums}
                     data={products}
-                    entity="products"
+                    entity="categories"
                     allowControls={true}
                     allowActions={true}
                     setData={setProducts}

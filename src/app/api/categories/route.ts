@@ -1,4 +1,4 @@
-import { getCategories } from "@/controllers/Category.controller";
+import { createCategory, getCategories } from "@/controllers/Category.controller";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -16,5 +16,18 @@ export async function GET(req: NextRequest) {
     } catch (error) {
         console.error(error);
         return NextResponse.json({ error }, { status: 500})
+    }
+}
+
+export async function POST(req: NextRequest) {
+    const { ...data } = await req.json();
+
+    try {
+        const category = await createCategory(data);
+
+        return NextResponse.json(category);
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ error }, { status: 500 });
     }
 }

@@ -38,11 +38,11 @@ export default function BasicTable(props: FormProps) {
 
     function HandleAdd() {
         // redirect to add page
-        window.location.href = `/dashboard/${props.entity}/add`
+        window.location.href = `/admin/${props.entity}/add`
     }
 
     function handleEdit(id: string) {
-        window.location.href = `/dashboard/${props.entity}/${id}`
+        window.location.href = `/admin/${props.entity}/${id}`
     }
 
     async function handleDelete() {
