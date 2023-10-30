@@ -82,7 +82,7 @@ export default function SearchBar(props: SearchBarProps) {
                                     </button>
                                     :
                                     <a
-                                        href={`/comparator?productId=${product.id}`}
+                                        href={`/v1/comparator?productId=${product.id}`}
                                         key={product.id}
                                         className="flex gap-4 items-center py-2 hover:bg-gray-100"
                                     >
