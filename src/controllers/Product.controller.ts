@@ -35,8 +35,6 @@ export async function getProducts(filters: filtersForMany) {
                     }
                 }
             },
-            
-
             OR: [
                 {
                     productPrices2: {
@@ -210,4 +208,34 @@ export async function getProduct(filters: filtersForOne) {
     });
 
     return products;
+}
+
+
+export async function createProduct(data: any) {
+    const product = await prisma.product.create({
+        data
+    });
+
+    return product;
+}
+
+export async function updateProduct(data: any) {
+    const product = await prisma.product.update({
+        where: {
+            id: data.id
+        },
+        data
+    });
+
+    return product;
+}
+
+export async function deleteProduct(id: number) {
+    const product = await prisma.product.delete({
+        where: {
+            id
+        }
+    });
+
+    return product;
 }

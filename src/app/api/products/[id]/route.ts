@@ -1,4 +1,4 @@
-import { getProduct } from "@/controllers/Product.controller";
+import { getProduct, updateProduct } from "@/controllers/Product.controller";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -23,4 +23,28 @@ export async function GET(req: NextRequest, { params }: any) {
         return NextResponse.json({ error }, { status: 500})
     }
 
+}
+
+export async function PUT(req: NextRequest, res: NextResponse) {
+    const {...data} = await req.json();
+
+    try {
+        const product = await updateProduct(data);
+        return NextResponse.json(product, { status: 200})
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ error }, { status: 500})
+    }
+}
+
+export async function DELETE(req: NextRequest, res: NextResponse) {
+    const {...data} = await req.json();
+
+    try {
+        const product = await updateProduct(data);
+        return NextResponse.json(product, { status: 200})
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ error }, { status: 500})
+    }
 }

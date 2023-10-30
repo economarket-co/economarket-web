@@ -1,4 +1,4 @@
-import { getFavoritesProducts, getProducts } from "@/controllers/Product.controller";
+import { createProduct, getFavoritesProducts, getProducts } from "@/controllers/Product.controller";
 import { SuperMarket } from "@prisma/client";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -36,5 +36,16 @@ export async function GET(req: NextRequest, res: NextResponse) {
         console.error(error);
         return NextResponse.json({ error }, { status: 500})
     }
-    
+}
+
+export async function POST(req: NextRequest, res: NextResponse) {
+    const {...data} = await req.json();
+
+    try {
+        const product = await createProduct(data);
+        return NextResponse.json(product, { status: 200})
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ error }, { status: 500})
+    }
 }
