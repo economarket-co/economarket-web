@@ -44,8 +44,6 @@ export default function Cart() {
         setNotAvaibleCount(count.length);
     }
 
-    let cheapes = 0;
-
     async function getSupermarketsBasket() {
         const supermarkets = [SuperMarket.Exito, SuperMarket.Carulla, SuperMarket.Jumbo, SuperMarket.Olimpica];
 
@@ -63,8 +61,6 @@ export default function Cart() {
         const baskets: any[] = [];
         for (const supermarket of supermarkets) {
             let products = [];
-
-            let total = 0;
 
             switch (supermarket) {
                 case SuperMarket.Exito:
@@ -118,7 +114,7 @@ export default function Cart() {
 
             let products_copy = [];
 
-            
+
 
             for (const product of products) {
                 products_copy.push({
@@ -128,7 +124,7 @@ export default function Cart() {
                 })
             }
 
-            total = products.reduce((total: number, product: any) => {
+            const total = products_copy.reduce((total: number, product: any) => {
                 return total + (product.price * product.quantity);
             }, 0);
 
@@ -136,9 +132,28 @@ export default function Cart() {
                 supermarket,
                 products: products_copy,
                 image: `/images/supermarkets/${supermarket}.png`,
-                isCheapest: total < cheapes
+                total,
+                isCheapest: false
             });
         }
+
+        baskets.sort((a, b) => {
+            if (a.products.length > b.products.length) {
+                return -1;
+            } else if (a.products.length < b.products.length) {
+                return 1;
+            } else {
+                if (a.total > b.total) {
+                    return 1;
+                } else if (a.total < b.total) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        baskets[0].isCheapest = true;
 
         setCartItemsBySuperMarket(baskets);
     }
@@ -197,7 +212,7 @@ export default function Cart() {
                             cartItemsBySuperMarket.map((basket: any, index: number) => {
                                 return (<BasketCard
                                     key={`${basket.supermarket}-${index}`}
-                                    isBestOption={basket.isCheapest}
+                                    isBestOption={!allInOnerMarket ? basket.isCheapest : false}
                                     image={basket.image}
                                     cartProducts={basket.products}
                                     supermarket={basket.supermarket}
