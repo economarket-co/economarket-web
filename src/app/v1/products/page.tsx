@@ -90,7 +90,7 @@ export default function ProductsPage({ searchParams }: any) {
                 />
 
                 <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-10 md:py-16 grow">
-                    <div className="flex flex-col-reverse gap-4 md:flex-row justify-between w-full md:items-center px-6">
+                    <div className="flex flex-col-reverse gap-4 md:flex-row justify-between w-full md:items-center lgpx-6">
                         <div className="flex items-center gap-2 justify-center md:justify-start">
                             <button onClick={e => window.history.back()}>
                                 <img src="/icons/back.svg" alt="back" className="w-6 md:w-10 h-6 md:h-10" />
@@ -106,7 +106,7 @@ export default function ProductsPage({ searchParams }: any) {
                         />
                     </div>
 
-                    <div className="flex flex-wrap gap-10 justify-center md:justify-start">
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-10 md:justify-start">
                         {loading ?
                             <div className="flex w-full justify-center">
                                 <Spinner size="lg" />
