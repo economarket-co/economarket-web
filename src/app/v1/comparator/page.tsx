@@ -59,16 +59,18 @@ export default function Comparator({ searchParams }: any) {
     async function fetchProduct() {
         const id = searchParams.productId;
 
-        if (!id) return
+        const url = id ? `/api/products/${id}` : `/api/products`;
 
         try {
-            const product = await axios.get(`/api/products/${id}`, {
+            const product = await axios.get(url, {
                 params: {
-                    ids: id
+                    ids: id ? id : undefined,
+                    limit: 1,
+                    sort: 'favorites'
                 }
             })
 
-            setProduct(product.data);
+            setProduct(id ? product.data : product.data[0]);
         } catch (error) {
             console.error();
             toast.error('Error al cargar el producto');

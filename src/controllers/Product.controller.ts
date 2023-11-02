@@ -10,7 +10,8 @@ type filtersForMany = {
     userId?: string,
     favorites?: boolean
     maxPrice: number | undefined,
-    sort?: string
+    sort?: string,
+    limit?: string
 }
 
 type filtersForOne = {
@@ -126,7 +127,8 @@ export async function getProducts(filters: filtersForMany) {
         orderBy: {
             ...(filters.sort === 'name' && { name: "asc" }),
             ...(filters.sort === 'favorites' && { favorites: { _count: 'desc' } })
-        }
+        },
+        take: filters.limit ? Number(filters.limit) : undefined
     });
 
     return products;
@@ -194,6 +196,7 @@ export async function getFavoritesProducts(filters: filtersForMany) {
                 }
             ]
         },
+        take: filters.limit ? Number(filters.limit) : undefined,
         include: {
             productPrices2: {
                 orderBy: {
