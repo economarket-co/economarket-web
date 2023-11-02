@@ -29,7 +29,7 @@ export default function Categories() {
             <div className='flex flex-col flex-items justify-center text-white relative py-16 overflow-hidden'>
                 <img src="/images/categories/categories-bg.png" className='absolute min-w-full min-h-full max-w-full -z-10' />
 
-                <div className="flex gap-3 md:gap-4 items-center text-white px-4 md:px-16 lg:gap-10">
+                <div className="flex gap-3 items-center text-white px-4 md:px-16 md:gap-10">
                     <h1 className={`${dmserif.className} text-4xl md:text-6xl max-w-[140px] md:max-w-[200px] w-fit`}>Siempre frescos</h1>
 
                     <Divider orientation="vertical" className="bg-white" />
