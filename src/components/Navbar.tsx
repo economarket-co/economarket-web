@@ -63,7 +63,7 @@ export default function CustomNavbar() {
                 <div className='flex md:gap-3 items-center'>
                     {
                         !isMobile && (
-                            <SideBar isMobile={false} />
+                            <SideBar isMobile={false} session={session} />
                         )
                     }
                     <Link href="/v1">
@@ -83,7 +83,7 @@ export default function CustomNavbar() {
 
                 {
                     isMobile && (
-                        <SideBar isMobile={true} />
+                        <SideBar isMobile={true} session={session} />
                     )
                 }
 
