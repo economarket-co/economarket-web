@@ -21,6 +21,7 @@ import { quicksand } from '@/fonts';
 export default function CustomNavbar() {
     const { cartItems } = useContext(CartContext);
     const [session, setSession] = useState<Session>();
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const supabase = createClientComponentClient();
@@ -29,6 +30,12 @@ export default function CustomNavbar() {
                 if (session) setSession(session);
             }
         );
+
+        setIsMobile(window.innerWidth < 1024);
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.innerWidth < 1024);
+        });
     }, [])
 
     async function handleSignout() {
@@ -51,10 +58,14 @@ export default function CustomNavbar() {
             }}
             className={`${quicksand.className}`}
         >
-            <Toolbar className='flex gap-2 md:justify-between items-center py-3 px-3 md:px-8'>
+            <Toolbar className='flex gap-3 md:justify-between items-center py-3 px-3 md:px-8'>
 
                 <div className='flex md:gap-3 items-center'>
-                    <SideBar />
+                    {
+                        !isMobile && (
+                            <SideBar isMobile={false} />
+                        )
+                    }
                     <Link href="/v1">
                         <IconButton>
                             <Image
@@ -62,7 +73,7 @@ export default function CustomNavbar() {
                                 width={90}
                                 height={45}
                                 src="/icons/logo.png"
-                                className='cursor-pointer w-[50px] h-[24px] md:[75px] md:h-[36px] lg:w-[80px] lg:h-[37px]'
+                                className='cursor-pointer w-[70px] h-[30px] md:[75px] md:h-[36px] lg:w-[80px] lg:h-[37px]'
                             />
                         </IconButton>
                     </Link>
@@ -70,7 +81,13 @@ export default function CustomNavbar() {
 
                 <SearchBar />
 
-                <div className='hidden lg:flex'>
+                {
+                    isMobile && (
+                        <SideBar isMobile={true} />
+                    )
+                }
+
+                <div className='hidden lg:flex items-center'>
                     {
                         !session ?
                             <Link href="/v1/auth/signin">

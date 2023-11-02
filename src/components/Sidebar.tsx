@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import { quicksand } from '@/fonts';
 
-export default function Sidebar() {
+export default function Sidebar(props: { isMobile: boolean }) {
     const [open, setOpen] = useState(false)
 
     const sections = [
@@ -29,10 +29,10 @@ export default function Sidebar() {
         <>
             <MenuIcon 
                 onClick={() => setOpen(true)} 
-                className='text-white  md:w-[50px] md:h-[40px]' 
+                className='text-white  md:w-[50px] md:h-[40px] order-3 lg:order-first' 
             />
             <Drawer
-                anchor='left'
+                anchor={props.isMobile ? 'right' : 'left'}
                 open={open}
                 onClose={() => setOpen(false)}
             >
