@@ -27,14 +27,25 @@ export default function ProductsPage({ searchParams }: any) {
 
     const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
 
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+
+
     useEffect(() => {
         fetchFilters();
+
+        function handleResize() {
+            setIsMobile(window.innerWidth < 1024);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
     }, [])
 
     useEffect(() => {
         if (!session) return onOpen();
         fetchData();
-    }, [categories, superMarkets, maxPrice])
+    }, [categories, superMarkets, maxPrice, session, sort])
 
     async function fetchFilters() {
         try {
@@ -88,8 +99,9 @@ export default function ProductsPage({ searchParams }: any) {
 
             <HeroWithBg title="Favoritos" BgImage="/images/products/products-bg.png" />
 
-            <div className="flex flex-col lg:flex-row w-full grow bg-[#F6F6F6]">
+            <div className="flex flex-col lg:flex-row w-full grow bg-[rgb(246,246,246)]">
                 <ProductsFilter
+                    setSort={setSort}
                     categoriesList={categoriesList}
                     categories={categories}
                     setCategories={setCategories}
@@ -136,22 +148,23 @@ export default function ProductsPage({ searchParams }: any) {
                         </div>
                         :
                         <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">
-                            <div className="flex justify-between">
-                                <div className="flex flex-col-reverse gap-4 md:flex-row justify-between w-full md:items-center px-6">
-                                    <div className="flex items-center gap-2 justify-center md:justify-start">
-                                        <button onClick={e => window.history.back()}>
-                                            <img src="/icons/back.svg" alt="back" className="w-6 md:w-10 h-6 md:h-10" />
-                                        </button>
-                                        <h1 className={`${dmserif.className} text-4xl text-start md:text-start md:text-5xl`}>Todos los productos</h1>
-                                    </div>
+                            <div className="flex flex-col-reverse gap-4 md:flex-row justify-between w-full md:items-center lgpx-6">
+                                <div className="flex items-center gap-2 justify-center md:justify-start">
+                                    <button onClick={e => window.history.back()}>
+                                        <img src="/icons/back.svg" alt="back" className="w-6 md:w-10 h-6 md:h-10" />
+                                    </button>
+                                    <h1 className={`${dmserif.className} text-4xl text-start md:text-start md:text-5xl`}>Todos los productos</h1>
+                                </div>
 
-                                    {/* todo: improve this */}
+                                {/* todo: improve this */}
+                                {
+                                    !isMobile &&
                                     <SortButton
                                         ascSort={() => setSort('name')}
                                         descSort={() => setSort('favorites')}
                                         recentSort={() => console.log('recent')}
                                     />
-                                </div>
+                                }
                             </div>
 
                             <div className="flex flex-wrap gap-10 justify-center md:justify-start">

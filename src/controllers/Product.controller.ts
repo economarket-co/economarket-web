@@ -214,6 +214,10 @@ export async function getFavoritesProducts(filters: filtersForMany) {
                     userId: filters.userId || undefined
                 }
             }
+        },
+        orderBy: {
+            ...(filters.sort === 'name' && { name: "asc" }),
+            ...(filters.sort === 'favorites' && { favorites: { _count: 'desc' } })
         }
     });
 
