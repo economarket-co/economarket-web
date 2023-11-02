@@ -47,12 +47,12 @@ export default function SearchBar(props: SearchBarProps) {
             <Input
                 value={productName}
                 onValueChange={setProductName}
-                className={`z-50 ${props.nonNavbar && 'shadow-lg'} `}
+                className={`z-50 ${props.nonNavbar && 'shadow-lg'}`}
                 classNames={{
                     base: "w-full  h-8 z-50",
-                    mainWrapper: "h-4 z-50",
-                    input: "text-xs md:text-base",
-                    inputWrapper: `h-8 font-normal text-default-500 bg-white ${props.nonNavbar && 'border'}`
+                    mainWrapper: "h-10 z-50",
+                    input: "text-xs md:text-base px-2",
+                    inputWrapper: `h-8 xl:h-12 font-normal text-default-500 bg-white ${props.nonNavbar && 'border'}`
                 }}
                 placeholder="¿Qué producto estás buscando?"
                 size="sm"
