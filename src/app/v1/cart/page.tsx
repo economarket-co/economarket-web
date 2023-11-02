@@ -153,7 +153,7 @@ export default function Cart() {
             }
         });
 
-        baskets[0].isCheapest = true;
+        baskets[0].isCheapest = baskets[0].total > 0 ? true : false;
 
         setCartItemsBySuperMarket(baskets);
     }
