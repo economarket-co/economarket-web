@@ -7,16 +7,20 @@ import toast from "react-hot-toast";
 
 export default function Footer() {
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
     
     async function handleSubmit(e: any) {
         e.preventDefault();
         
         try {
+            setLoading(true);
             const res = await axios.post("/api/newsletter", { email });
 
             toast.success("Gracias por suscribirte");
         } catch (error) {
             toast.error("Ha ocurrido un error");
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -61,6 +65,7 @@ export default function Footer() {
                     />
 
                     <button
+                        disabled={loading}
                         type="submit" 
                         className="text-white py-[10px] px-[20px] lg:px-[30px] bg-[#12A455] rounded-md font-semibold text-xs lg:text-base"
                     >
