@@ -25,7 +25,7 @@ export default function Footer() {
             w-full  
             grid grid-cols-2  gap-5 md:gap-16 px-6 md:px-10 
             md:flex md:justify-center md:items-start lg:gap-12 py-6
-            bg-[#033E8C]  justify-self-end self-end`}
+            bg-[#033E8C]  justify-self-end self-end ${quicksand.className}` }
         >
             <div className="flex flex-col gap-4 md:mx-auto">
                 <img src='/icons/logo.png' alt="Logo" className="w-[73px] h-[36px] md:w-[100px] md:h-[50px] lg:w-[100px] lg:h-[50px]" />
@@ -37,7 +37,7 @@ export default function Footer() {
                 <h4 className={`${quicksand.className} font-semibold`}>Contáctanos</h4>
 
                 <div className="flex flex-col gap-2 overflow-hidden">
-                    <SocialLInk href="https://wa.me/573006724574" content="3006724574" icon="/icons/whatsapp.png" />
+                    <SocialLInk href="https://wa.me/573006724574" content="3006724574" icon="/icons/whatsapp2.png" />
                     <SocialLInk href="mailto:economarket@gmail.com" content="@economarket" icon="/icons/email.png" />
                     <SocialLInk href="mailto:economarket@gmail.com" content="economarket@gmail.com" icon="/icons/browser.png" />
                 </div>

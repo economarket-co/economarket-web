@@ -71,7 +71,7 @@ export default function ProductsPage({ searchParams }: any) {
                 }
             })
 
-            // delete id from searchParams
+            // delete id from searchParams  
             delete searchParams.category;
             delete searchParams.id;
             setProducts(res.data)

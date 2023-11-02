@@ -16,6 +16,7 @@ import { Session, createClientComponentClient } from '@supabase/auth-helpers-nex
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import { quicksand } from '@/fonts';
 
 export default function CustomNavbar() {
     const { cartItems } = useContext(CartContext);
@@ -48,6 +49,7 @@ export default function CustomNavbar() {
                 boxShadow: "none",
                 width: "100%"
             }}
+            className={`${quicksand.className}`}
         >
             <Toolbar className='flex gap-2 md:justify-between items-center py-3 px-3 md:px-8'>
 
