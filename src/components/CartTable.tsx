@@ -2,6 +2,7 @@
 import { CartContext } from "@/Context/CartContext";
 import { quicksand } from "@/fonts";
 import { cartItemWithProduct } from "@/types/cartItem"
+import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
@@ -15,7 +16,7 @@ export default function CartTable(props: CartTableProps) {
     return (
         <div className={`flex flex-col gap-4 bg-white w-[90%]  md:w-[600px] max-h-[800px] overflow-y-auto rounded-xl px-10 py-4 ${quicksand.className}text-[#646464]`}>
             {
-                cartItems.length > 0  ?
+                cartItems.length > 0 ?
                     <>
                         <div className="flex justify-between font-semibold">
                             <p>Producto</p>
@@ -45,8 +46,9 @@ export default function CartTable(props: CartTableProps) {
                             }
                         </div>
                     </>
-                    : 
-                    <div className="flex flex-col gap-8 py-16 text-center justify-center items-center">
+                    :
+                    <div className="flex flex-col gap-4 py-16 text-center justify-center items-center">
+                        <Image width={67.5} height={67.5} src="/icons/empty_basket.svg" alt="Canasta Vacia" className="" />
                         <h3 className={`${quicksand.className} font-semibold text-[#434343]`}>¡Empieza a agregar productos!</h3>
                         <p className={`${quicksand.className} font-medium text-[#646464]`}>Suma productos y descubre la manera más conveniente de comprarlos</p>
 
