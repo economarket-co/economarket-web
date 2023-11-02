@@ -22,8 +22,18 @@ export default function ProductsPage({ searchParams }: any) {
     const [supermarketsList, setSupermarketsList] = useState<[]>([]);
     const [sort, setSort] = useState<string>('');
 
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+
     useEffect(() => {
         fetchFilters();
+
+        function handleResize() {
+            setIsMobile(window.innerWidth < 1024);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
     }, [])
 
     useEffect(() => {
@@ -87,6 +97,7 @@ export default function ProductsPage({ searchParams }: any) {
                     priceRange={maxPrice}
                     setPriceRange={setPriceRange}
                     maxPrice={100000}
+                    setSort={setSort}
                 />
 
                 <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-10 md:py-16 grow">
@@ -99,11 +110,14 @@ export default function ProductsPage({ searchParams }: any) {
                         </div>
 
                         {/* todo: improve this */}
-                        <SortButton
-                            ascSort={() => setSort('name')}
-                            descSort={() => setSort('favorites')}
-                            recentSort={() => console.log('recent')}
-                        />
+                        {
+                            !isMobile && 
+                            <SortButton
+                                ascSort={() => setSort('name')}
+                                descSort={() => setSort('favorites')}
+                                recentSort={() => console.log('recent')}
+                            />
+                        }
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-4 md:gap-10 md:justify-start">

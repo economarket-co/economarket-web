@@ -1,8 +1,7 @@
 "use client";
-import { Button } from "@nextui-org/react";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "@/Context/CartContext";
-import { Product, ProductPrice } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { CreateCardItem } from "@/odt/CardItem/createCardItem.odt";
 import { motion } from "framer-motion";
 

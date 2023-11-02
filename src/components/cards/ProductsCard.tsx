@@ -43,7 +43,7 @@ export default function ProductCard(props: ProductCardProps) {
     }
 
     return (
-        <Card className='w-[150px] lg:w-[230px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
+        <Card className='w-[170px] lg:w-[230px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
             <CardBody className='relative p-0 h-[112px] lg:h-[224px] border-b'>
                 <img className='h-full object-fill' src={props.product.image} alt={props.product.name} />
                 <motion.button

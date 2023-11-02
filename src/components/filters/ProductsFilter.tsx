@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { formatCurrency } from "@/utils";
 import { Checkbox, CheckboxGroup, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 import { quicksand } from "@/fonts";
+import SortButton from "../buttons/SortButton";
 
 type ProductsFilterProps = {
     categoriesList: any[];
@@ -13,6 +14,7 @@ type ProductsFilterProps = {
     maxPrice: number;
     priceRange: number;
     setPriceRange: (priceRange: number) => void;
+    setSort: (sort: string) => void;
 }
 
 export default function ProductsFilter(props: ProductsFilterProps) {
@@ -50,6 +52,13 @@ export default function ProductsFilter(props: ProductsFilterProps) {
 
                 <div className={`${!isActive ? 'hidden' : 'flex flex-col divide-y-1'}`}>
                     <div className="flex flex-col gap-4 py-7">
+                        <SortButton
+                            ascSort={() => props.setSort('name')}
+                            descSort={() => props.setSort('favorites')}
+                            recentSort={() => console.log('recent')}
+                        />
+
+
                         <h4 className={`${quicksand.className} text-xl`}>Categoría</h4>
 
                         <CheckboxGroup
@@ -59,7 +68,6 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                         >
                             {
                                 props.categoriesList.map((category: any) => {
-                                    console.log(category)
                                     return (
                                         <Checkbox
                                             key={category.id.toString()}
