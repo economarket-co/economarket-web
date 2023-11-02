@@ -43,11 +43,11 @@ export default function BasketCard(props: BasketCardProps) {
                                     <div key={product.id} className="flex justify-between items-center gap-1">
                                         <div className="flex gap-3 items-center max-w-[60%] ">
                                             <img src={product.product.image} alt="producto" className="h-12 w-12 object-fill" />
-                                            <p className="text-[12px] xl:text-[14px] text-start">{product.product.name}</p>
+                                            <p className="text-[12px] md:text-[14px] text-start">{product.product.name}</p>
                                         </div>
 
                                         <div className="flex gap-2 items-center">
-                                            <p className="flex gap-2 text-[12px] xl:text-[14px] ">
+                                            <p className="flex gap-2 text-[12px] md:text-[14px] ">
                                                 <span>{formatCurrency(product.price)}</span>
                                                 <span>x</span>
                                                 <span>{product.quantity}</span>
