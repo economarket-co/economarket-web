@@ -1,6 +1,5 @@
 import { dmserif, poppins, quicksand } from '@/fonts';
 import sales from '@/mock/sales.json';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Sales() {

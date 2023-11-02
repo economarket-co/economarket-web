@@ -125,3 +125,14 @@ enum SuperMarket {
   Exito
   Jumbo
 }
+
+model Offer {
+  id       Int      @id @default(autoincrement())
+  title    String
+  content  String
+  image    String
+  link     String
+  size     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
