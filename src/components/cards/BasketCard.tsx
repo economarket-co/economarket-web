@@ -70,7 +70,7 @@ export default function BasketCard(props: BasketCardProps) {
                             props.cartProducts.map((product) => {
 
                                 return (
-                                    <div className="flex flex-col gap-2" key={product.id}>
+                                    <div className={`flex flex-col gap-2 ${quicksand.className}`} key={product.id}>
 
                                         <div key={product.id} className="flex justify-between items-center gap-3">
                                             <div className={`flex gap-3 items-center ${product.avaible ? "w-[55%]" : "w-[80%] "} `}>
