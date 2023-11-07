@@ -46,7 +46,7 @@ export default function Form(props: FormProps) {
 
                 <div className="flex justify-end gap-4">
                     <Button size="md" color="danger" variant="light" onPress={HandleCancel}>Descartar</Button>
-                    <Button type="submit" size="md" color="primary" isLoading={props.loading}>Agregar</Button>
+                    <Button type="submit" size="md" color="primary" isLoading={props.loading}>Guardar</Button>
                 </div>
             </form>
         </Card>

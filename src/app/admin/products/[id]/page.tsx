@@ -75,6 +75,7 @@ export default function EditProductPage({ params }: any) {
         e.preventDefault();
 
         setLoading(true);
+        
         try {
 
             const body = {
@@ -87,12 +88,12 @@ export default function EditProductPage({ params }: any) {
                 linkExito,
                 linkJumbo,
                 linkOlimpica,
-                image: await uploadFilesFromClient('products', image as File)
+                image: typeof image === 'string' ? image :await uploadFilesFromClient('products', image as File)
             }
 
             axios.patch(`/api/products/${params.id}`, body);
 
-            toast.success("Producto creado correctamente");
+            toast.success("Información almacenada correctamente");
             window.location.href = "/admin/products";
         } catch (error) {
             console.error(error);
