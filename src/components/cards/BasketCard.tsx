@@ -49,7 +49,6 @@ export default function BasketCard(props: BasketCardProps) {
                         </>
                     )
                     }
-
                 </ModalContent>
             </Modal>
             {

@@ -24,13 +24,13 @@ export default function Allies() {
       <div className='mx-auto py-5 flex flex-col gap-8 items-center z-50  max-w-[1000px]'>
         <img src="/images/logo-white.png" className="h-[55px] md:h-[80px] " />
 
-        <div className={`text-sm md:text-[18px] px-4 font-medium text-center ${quicksand.className} max-w-[300px] md:max-w-[500px] lg:max-w-[700px] grow`}>
+        <div className={`text-sm md:text-[18px] px-4 font-medium text-center ${quicksand.className} max-w-[360px] md:max-w-[500px] lg:max-w-[700px] grow`}>
           Economarket es tu socio para una experiencia de compra ganadora. Colaboramos con reconocidos supermercados
           de cadena como Éxito, Carulla, Jumbo y Olímpica para ofrecerte una herramienta que te permite encontrar
           los mejores precios. Nos dedicamos a simplificar tu vida diaria, ahorrándote tiempo y dinero
           con transparencia y seguridad.
         </div>
-        <div className='grid grid-cols-2 items-center justify-center md:flex md:flex-row lg:justify-between gap-10'>
+        <div className='grid grid-cols-2 items-center justify-center md:flex md:flex-row lg:justify-between gap-6 md:gap-10'>
           <img src="/images/logo-exito.svg" className="w-[80px]" />
           <img src="/images/logo-jumbo.svg" className="w-[80px]" />
           <img src="/images/logo-carulla.svg" className="w-[80px] " />

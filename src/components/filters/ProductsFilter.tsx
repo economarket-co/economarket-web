@@ -155,7 +155,6 @@ export default function ProductsFilter(props: ProductsFilterProps) {
             <div className="flex flex-col gap-4 py-7">
                 <h4 className={`${quicksand.className} text-xl`}>Rango de precios</h4>
 
-
                 <input
                     id="default-range"
                     type="range"
