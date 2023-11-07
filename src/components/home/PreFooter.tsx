@@ -13,8 +13,8 @@ export default function PreFooter() {
         className='absolute min-w-full min-h-full max-w-full object-fill max-h-[1100px]'
       />
 
-      <div className='mx-auto px-2 flex flex-col justify-between h-3/5 py-6 gap-8 items-center z-50 max-w-[1000px] text-white'>
-        <div className='text-center'>
+      <div className='mx-auto px-2 flex flex-col justify-between h-3/5 pt-10 gap-8 items-center z-50 max-w-[1000px] text-white'>
+        <div className='text-center xl:pt-10'>
           <p className={`${quicksand.className} text-sm md:text-lg xl:text-2xl text-white`}>Encontrar el mejor precio</p>
           <p className={`${dmserif.className} text-2xl md:text-4xl xl:text-6xl font-semibold`}>En solo tres pasos</p>
         </div>
