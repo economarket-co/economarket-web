@@ -87,7 +87,9 @@ export default function Sidebar(props: { isMobile: boolean, session: any }) {
             <ListItem disablePadding>
                 <Link href={props.href}>
                     <ListItemButton onClick={handleClick} >
-                        <Typography className={`${quicksand.className} font-medium text-black`} >
+                        <Typography className={`${quicksand.className} font-medium text-black`} 
+                            style={{ fontFamily: quicksand.style.fontFamily }}
+                        >
                             {props.label}
                         </Typography>
                     </ListItemButton>
