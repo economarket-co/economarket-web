@@ -56,6 +56,7 @@ model Product {
   SubCategory     SubCategory     @relation(fields: [subCategoryId], references: [id])
   productPrices   ProductPrice[]
   productPrices2  ProductPrice2[]
+  productOffers   ProductOffer[]
 }
 
 model ProductPrice {
@@ -135,4 +136,14 @@ model Offer {
   size     Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ProductOffer {
+  id       Int      @id @default(autoincrement())
+  productID Int
+  price Float
+  supermarket SuperMarket
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product Product @relation(fields: [productID], references: [id])
 }

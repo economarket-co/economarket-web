@@ -18,10 +18,10 @@ export default function Allies() {
   }, []);
   
   return (
-    <div className='flex flex-col flex-items justify-center items-center text-white relative md:min-h-[400px] lg:min-h-[600px]'>
+    <div className='flex flex-col flex-items  md:justify-center items-center text-white relative min-h-[700px] md:min-h-[400px] lg:min-h-[600px]'>
       <img src={imageUrl} className='absolute min-w-full min-h-full max-w-full max-h-[300px] -z-10' />
 
-      <div className='mx-auto py-5 flex flex-col gap-8 items-center z-50  max-w-[1000px]'>
+      <div className='mx-auto pt-24 md:py-5 flex flex-col gap-8 items-center z-50  max-w-[1000px]'>
         <img src="/images/logo-white.png" className="h-[55px] md:h-[80px] " />
 
         <div className={`text-sm md:text-[18px] px-4 font-medium text-center ${quicksand.className} max-w-[360px] md:max-w-[500px] lg:max-w-[700px] grow`}>
