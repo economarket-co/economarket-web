@@ -18,7 +18,7 @@ export async function PATCH(req: NextRequest, { params }: any) {
     const { id } = params;
 
     try {
-        const offer = await updateOffer({ id, ...data});
+        const offer = await updateOffer({ id: Number(id), ...data});
         return NextResponse.json(offer, { status: 200})
     } catch (error) {
         console.error(error);
