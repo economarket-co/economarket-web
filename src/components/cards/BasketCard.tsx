@@ -40,30 +40,46 @@ export default function BasketCard(props: BasketCardProps) {
                             props.cartProducts.map((product) => {
 
                                 return (
-                                    <div key={product.id} className="flex justify-between items-center gap-3">
-                                        <div className="flex gap-3 items-center w-[55%] ">
-                                            <img src={product.product.image} alt="producto" className="h-12 w-12 object-fill" />
-                                            <p className="text-[12px] md:text-[12.893px] text-start">{product.product.name}</p>
-                                        </div>
+                                    <div className="flex flex-col gap-2">
 
-                                        <div className="flex gap-2 items-center">
-                                            <p className="flex gap-2 text-[12px] md:text-[12.893px] ">
+                                        <div key={product.id} className="flex justify-between items-center gap-3">
+                                            <div className={`flex gap-3 items-center ${product.avaible ? "w-[55%]" : "w-[80%] "} `}>
+                                                <img src={product.product.image} alt="producto" className="h-12 w-12 object-fill" />
+                                                <p className="text-[12px] md:text-[12.893px] text-start">{product.product.name}</p>
                                                 {
-                                                    product.avaible && (
-                                                        <>
-                                                            <span>{formatCurrency(product.price)}</span>
-
-                                                            <span>x</span>
-                                                        </>
-                                                    )
+                                                    !product.avaible &&
+                                                    <img src="/icons/error.svg" className="w-6 h-6" />
                                                 }
-                                                <span>{product.quantity}</span>
-                                            </p>
-                                            {
-                                                product.avaible && <Link href={product.link} target="_blank"><img src="/icons/external-link.svg" className="h-6 w-6" /></Link>
-                                            }
+                                            </div>
 
+                                            <div className="flex gap-2 items-center">
+                                                <p className="flex gap-2 text-[12px] md:text-[12.893px] ">
+                                                    {
+                                                        product.avaible && (
+                                                            <>
+                                                                <span>{formatCurrency(product.price)}</span>
+
+                                                                <span>x</span>
+                                                            </>
+                                                        )
+                                                    }
+                                                    <span>{product.quantity}</span>
+                                                </p>
+                                                {
+                                                    product.avaible && <Link href={product.link} target="_blank"><img src="/icons/external-link.svg" className="h-6 w-6" /></Link>
+                                                }
+                                            </div>
                                         </div>
+
+                                        <div>
+                                            {
+                                                !product.avaible &&
+                                                <p className="text-start text-[9.75px] md:text-[11px]">
+                                                    La referencia de este producto es distinta en este supermercado. Puedes eliminarla desde tu carrito
+                                                </p>
+                                            }
+                                        </div>
+
                                     </div>
                                 )
                             })

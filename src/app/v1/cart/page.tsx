@@ -128,7 +128,7 @@ export default function Cart() {
             })
         }
         
-        return updatedCartItems.filter((item: any) => {
+        const products = updatedCartItems.filter((item: any) => {
             if (!item.product) return false;
 
             const price = item.product.productPrices2[0];
@@ -137,6 +137,13 @@ export default function Cart() {
 
             return IsCheapestp(price, price['price' + supermarket]);
         });
+
+        return products.map((item: any) => {
+            return {
+                ...item,
+                avaible: true
+            }
+        })
     }
 
     async function getProducts() {
