@@ -11,9 +11,9 @@ export default function HotSalesAdminPage() {
     const [productName, setProductName] = useState("");
 
     const colums = [
-        { name: "Nombre", key: "name" },
-        { name: "Categoría", key: "SubCategory.category.name"},
-        { name: "Sub Categoría", key: "SubCategory.name"}
+        { name: "Titulo", key: "title" },
+        { name: "Tamaño del banner", key: "size"},
+        { name: "Redirrecionamiento", key: "link"},
     ]
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function HotSalesAdminPage() {
             setProducts(response.data);
         } catch (error) {
             console.error(error);
-            toast.error("Error al obtener los productos");
+            toast.error("Error al obtener las ofertas");
         }
     }
 
@@ -53,10 +53,10 @@ export default function HotSalesAdminPage() {
                     />
                 </Card>
                 <BasicTable
-                    title="Productos"
+                    title="Anuncios de ofertas"
                     columns={colums}
                     data={products}
-                    entity="products"
+                    entity="offers"
                     allowControls={true}
                     allowActions={true}
                     setData={setProducts}

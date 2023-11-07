@@ -1,12 +1,19 @@
 import { dmserif, poppins, quicksand } from '@/fonts';
-import sales from '@/mock/sales.json';
 import Link from 'next/link';
 
-export default function Sales() {
+type Sale = {
+    title: string;
+    content: string;
+    image: string;
+    size: number;
+    link?: string;
+}
+
+export default function Sales(props: { sales: Sale[] }) {
     return (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mx-auto max-w-[80%] my-16">
             {
-                sales.map((sale, index) => (
+                props.sales.map((sale, index) => (
                     <div
                         key={index}
                         className='flex relative rounded-md h-[300px] md:h-[246px] lg:h-[329px]' 
