@@ -1,4 +1,5 @@
 "use client";
+import ProductCard from "@/components/cards/ProductsCard";
 import Form from "@/components/forms/Form";
 import { uploadFilesFromClient } from "@/utils/uploadFilesFromClient";
 import { Selection } from "@nextui-org/react";
@@ -29,10 +30,10 @@ export default function EditProductPage({ params }: any) {
         { label: "Sub Categoria", placeholder: "Selecciona una sub categoría", isRequired: true, type: "select", value: categories, options: subCategoriesList, onChange: setCategories },
         { label: "Unidad de medida", placeholder: "Ingresa la unidad de medida ej: Gr, Ml etc...", isRequired: true, type: "text", value: unit, onChange: setUnit },
         { label: "Cantidad por unidad", placeholder: "Ingresa la cantidad por unidad", isRequired: true, type: "number", value: quantityPerUnit, onChange: setQuantityPerUnit },
-        { label: "Link Carulla", placeholder: "Ingresa el link de Carulla", isRequired: true, type: "text", value: linkCarulla, onChange: setLinkCarulla},
-        { label: "Link Exito", placeholder: "Ingresa el link de Exito", isRequired: true, type: "text", value: linkExito, onChange: setLinkExito},
-        { label: "Link Jumbo", placeholder: "Ingresa el link de Jumbo", isRequired: true, type: "text", value: linkJumbo, onChange: setLinkJumbo},
-        { label: "Link Olimpica", placeholder: "Ingresa el link de Olimpica", isRequired: true, type: "text", value: linkOlimpica, onChange: setLinkOlimpica},
+        { label: "Link Carulla", placeholder: "Ingresa el link de Carulla", isRequired: true, type: "text", value: linkCarulla, onChange: setLinkCarulla },
+        { label: "Link Exito", placeholder: "Ingresa el link de Exito", isRequired: true, type: "text", value: linkExito, onChange: setLinkExito },
+        { label: "Link Jumbo", placeholder: "Ingresa el link de Jumbo", isRequired: true, type: "text", value: linkJumbo, onChange: setLinkJumbo },
+        { label: "Link Olimpica", placeholder: "Ingresa el link de Olimpica", isRequired: true, type: "text", value: linkOlimpica, onChange: setLinkOlimpica },
         { label: "Imagen", placeholder: "Selecciona una imagen", isRequired: true, type: "file", value: image as File, onChange: setImage }
     ]
 
@@ -102,13 +103,35 @@ export default function EditProductPage({ params }: any) {
     }
 
     return (
-        <main>
+        <main className="flex items-center gap-8 ">
             <Form
-                title="Agregar Producto"
+                title="Editar Producto"
                 // @ts-ignore
                 fields={fields}
                 handleSubmit={handleSubmit}
                 loading={loading}
+            />
+
+            <ProductCard
+                product={
+                    {
+                        id: 1,
+                        name,
+                        unit,
+                        quantityPerUnit: parseInt(quantityPerUnit),
+                        image: typeof image === 'string' ? image as string : image ? URL.createObjectURL(image as File) : "",
+                        linkCarulla: "",
+                        linkExito: "",
+                        linkJumbo: "",
+                        linkOlimpica: "",
+                        subCategoryId: 1,
+                        productPrices2: [],
+                        favorites: [],
+                        createdAt: new Date(),
+                        updatedAt: new Date()
+                    }
+                }
+                isForPreview
             />
         </main>
     )
