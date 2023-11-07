@@ -1,4 +1,5 @@
 "use client";
+import CategoryCard from "@/components/cards/CategoryCard";
 import Form from "@/components/forms/Form";
 import { uploadFilesFromClient } from "@/utils/uploadFilesFromClient";
 import { Category } from "@prisma/client";
@@ -49,19 +50,16 @@ export default function EditCategoryPage({ params }: any) {
 
         setLoading(true);
         try {
-
-            const imagePath = await uploadFilesFromClient('categories', image as File);
-             
             const body = {
                 name,
                 color,
-                image: imagePath
+                image:typeof image === 'string' ? image :await uploadFilesFromClient('products', image as File)
             }
 
             axios.patch(`/api/categories/${params.id}`, body);
 
             toast.success("Categoría editada correctamente");
-            // window.location.href = "/admin/categories";
+            window.location.href = "/admin/categories";
         } catch (error) {
             console.error(error);
             toast.error("Error al editar la categoría");
@@ -71,13 +69,22 @@ export default function EditCategoryPage({ params }: any) {
     }
 
     return (
-        <main>
+        <main className="flex justify-center items-start gap-8">
             <Form
-                title="Agregar categoría"
+                title="Editar categoría"
                 fields={fields}
                 handleSubmit={handleSubmit}
                 loading={loading}
             />
+
+            <div className="mt-10">
+                <CategoryCard
+                    id={1}
+                    img={typeof image === 'string' ? image as string : image ? URL.createObjectURL(image as File) : ""}
+                    title={name}
+                    color={color}
+                />
+            </div>
         </main>
     )
 }

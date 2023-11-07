@@ -1,5 +1,6 @@
 "use client";
 
+import CategoryCard from "@/components/cards/CategoryCard";
 import Form from "@/components/forms/Form";
 import { uploadFilesFromClient } from "@/utils/uploadFilesFromClient";
 import axios from "axios";
@@ -9,7 +10,7 @@ import toast from "react-hot-toast";
 export default function AddCategoryPage() {
     const [name, setName] = useState("");
     const [color, setColor] = useState("");
-    const [image, setImage ] = useState<File>();
+    const [image, setImage] = useState<File>();
     const [loading, setLoading] = useState(false);
 
     const fields = [
@@ -29,7 +30,7 @@ export default function AddCategoryPage() {
                 name,
                 color,
                 image: imagePath
-            }   
+            }
 
             const response = await axios.post("/api/categories", body);
             toast.success("Categoría agregada correctamente");
@@ -43,13 +44,21 @@ export default function AddCategoryPage() {
     }
 
     return (
-        <main>
+        <main className="flex justify-center items-start gap-8">
             <Form
                 title="Agregar categoría"
                 fields={fields}
                 handleSubmit={handleAdd}
                 loading={loading}
             />
+            <div className="mt-10">
+                <CategoryCard
+                    id={1}
+                    img={image ? URL.createObjectURL(image) : ""}
+                    title={name}
+                    color={color}
+                />
+            </div>
         </main>
     )
 }
