@@ -4,11 +4,13 @@ import { CartContext } from "@/Context/CartContext";
 import { Product } from "@prisma/client";
 import { CreateCardItem } from "@/odt/CardItem/createCardItem.odt";
 import { motion } from "framer-motion";
+import { RestaurantRounded } from "@mui/icons-material";
 
 type AddToCartButtonProps = {
     priceId?: number,
     quantity: number,
-    product: Product
+    product: Product,
+    isForPreview?: boolean
 }
 
 export default function AddToCartButton(props: AddToCartButtonProps) {
@@ -22,6 +24,7 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
     }
 
     useEffect(() => {
+        if (props.isForPreview) return;
         const item = cartItems.find(item => item.product.id === props.product.id);
         setItem(item);
     }, [cartItems])

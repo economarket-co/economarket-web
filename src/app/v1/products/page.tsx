@@ -31,6 +31,7 @@ export default function ProductsPage({ searchParams }: any) {
             setIsMobile(window.innerWidth < 1024);
         }
 
+        setIsMobile(window.innerWidth < 1024);
         window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);

@@ -40,7 +40,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
 
     if (isMobile) {
         return (
-            <div className="bg-white px-4"
+            <div className={`${quicksand.className} bg-white px-4`}
             >
                 <button
                     onClick={(e) =>
@@ -70,6 +70,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                                 props.categoriesList.map((category: any) => {
                                     return (
                                         <Checkbox
+                                            className={`${quicksand.className}`}
                                             key={category.id.toString()}
                                             value={category.id.toString()}
                                             isSelected={props.categories.includes(category.id.toString())}
@@ -86,9 +87,8 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                         </CheckboxGroup>
                     </div>
 
-                    <div className="flex flex-col gap-4 py-7">
+                    <div className={`${quicksand.className} flex flex-col gap-4 py-7`}>
                         <h4 className={`${quicksand.className} text-xl`}>Rango de precios</h4>
-
 
                         <input
                             id="default-range"
