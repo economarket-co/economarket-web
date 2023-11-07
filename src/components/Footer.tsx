@@ -1,4 +1,4 @@
-"use client";
+    "use client";
 import { quicksand } from "@/fonts";
 import { Button, Input } from "@nextui-org/react"
 import axios from "axios";
@@ -41,7 +41,7 @@ export default function Footer() {
                 <h4 className={`${quicksand.className} font-semibold`}>Contáctanos</h4>
 
                 <div className="flex flex-col gap-2 overflow-hidden">
-                    <SocialLInk href="https://wa.me/573006724574" content="3006724574" icon="/icons/whatsapp2.png" />
+                    <SocialLInk href="https://wa.me/573006724574" content="3006724574" icon="/icons/WhatsApp2.png" />
                     <SocialLInk href="mailto:economarket@gmail.com" content="@economarket" icon="/icons/email.png" />
                     <SocialLInk href="mailto:economarket@gmail.com" content="economarket@gmail.com" icon="/icons/browser.png" />
                 </div>

@@ -31,7 +31,7 @@ export default function Allies() {
           con transparencia y seguridad.
         </div>
         <div className='grid grid-cols-2 items-center justify-center md:flex md:flex-row lg:justify-between gap-6 md:gap-10'>
-          <img src="/images/logo-exito.svg" className="w-[80px]" />
+          <img src="/images/exito.png" className="w-[80px]" />
           <img src="/images/logo-jumbo.svg" className="w-[80px]" />
           <img src="/images/logo-carulla.svg" className="w-[80px] " />
           <img src="/images/logo-olimpica.svg" className="w-[80px]" />
