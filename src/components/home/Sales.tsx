@@ -1,5 +1,8 @@
+"use client";
 import { dmserif, poppins, quicksand } from '@/fonts';
+import axios from 'axios';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 type Sale = {
     title: string;

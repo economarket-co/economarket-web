@@ -8,15 +8,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-import sales from "@/mock/sales.json";
-
 export default function EditCategoryPage({ params }: any) {
     const [loading, setLoading] = useState(false);
-    const [offer, setOffer] = useState<any>({ title: "", content: "", image: null, size: [] });
+    const [offer, setOffer] = useState<any>({ title: "", content: "", image: null, size: [], link: "" });
 
     const [offers, setOffers] = useState<any[]>([]);
 
     const [sizeOptions, setSizeOptions] = useState<any[]>([]);
+
+    const [categorieList, setCategoriesList] = useState<any[]>([]);
+    const [categories, setCategories] = useState([]);
 
     const fields = [
         {
@@ -30,16 +31,22 @@ export default function EditCategoryPage({ params }: any) {
                 setOffer({ ...offer, size: value })
             }
         },
+        { label: "Redireccionamiento", placeholder: "Selecciona la categoría de redireccionamiento", isRequired: true, type: "select", value: categories, options: categorieList, onChange: setCategories },
         { label: "Imagen", placeholder: "Selecciona una imagen", isRequired: true, type: "file", value: offer.image as File, onChange: (value: any) => setOffer({ ...offer, image: value }) },
+
     ]
 
     useEffect(() => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        setOffer({ ...offer, link: `/v1/products?category=${Array.from(categories)[0]}` })
+    }, [categories])
+
     async function fetchData() {
         try {
-            const response = await axios.get("/api/subCategories");
+            const response = await axios.get("/api/categories");
 
             const categoriesList = response.data.map((category: Category) => {
                 return {
@@ -47,6 +54,8 @@ export default function EditCategoryPage({ params }: any) {
                     value: category.id
                 }
             });
+
+            setCategoriesList(categoriesList)
 
             setSizeOptions([1, 2, 3, 4].map((size) => {
                 return {
@@ -73,7 +82,7 @@ export default function EditCategoryPage({ params }: any) {
                 title: offer.title,
                 content: offer.content,
                 size: parseInt(Array.from(offer.size)[0] as string),
-                link: "",
+                link: offer.link,
                 image: await uploadFilesFromClient('offers', offer.image as File)
             }
 
