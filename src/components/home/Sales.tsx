@@ -19,13 +19,13 @@ export default function Sales(props: { sales: Sale[] }) {
                 props.sales.map((sale, index) => (
                     <div
                         key={index}
-                        className='flex relative rounded-md h-[300px] md:h-[246px] lg:h-[329px]' 
+                        className='flex relative rounded-md h-[210px] md:h-[280px] lg:h-[329px]' 
                         style={{ gridColumn: `span ${sale.size}` }}
                     >
                         <img src={sale.image} className='rounded-md w-full -z-10 object-fill' alt={sale.image} />
                         <div className="flex flex-col justify-end h-full text-white gap-2 px-6 py-6 absolute">
-                            <div className={`${dmserif.className} text-2xl md:text-3xl xl:text-5xl`}>{sale.title}</div>
-                            <div className={`${poppins.className} text-sm xl:text-xl`}>{sale.content}</div>
+                            <div className={`${dmserif.className} text-[20.738px] md:text-3xl xl:text-5xl`}>{sale.title}</div>
+                            <div className={`${poppins.className} text-[10px] md:text-sm xl:text-xl`}>{sale.content}</div>
                             <div className="text-sm">
                                 {
                                     sale.link &&
