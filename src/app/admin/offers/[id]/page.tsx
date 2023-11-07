@@ -3,7 +3,7 @@ import ProductCard from "@/components/cards/ProductsCard";
 import Form from "@/components/forms/Form";
 import Sales from "@/components/home/Sales";
 import { uploadFilesFromClient } from "@/utils/uploadFilesFromClient";
-import { Category } from "@prisma/client";
+import { Category, Offer } from "@prisma/client";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -24,11 +24,9 @@ export default function EditCategoryPage({ params }: any) {
             isRequired: true, type: "text", value: offer.title,
             onChange: (value: any) => setOffer({ ...offer, title: value })
         },
-        { label: "Descripción", placeholder: "Ingresa la descripción de la oferta", isRequired: false, type: "text", value: offer.content, onChange: (value: any) => setOffer({ ...offer, content: value }) },
+        { label: "Descripción", placeholder: "Ingresa la descripción de la oferta", isRequired: true, type: "text", value: offer.content, onChange: (value: any) => setOffer({ ...offer, content: value }) },
         {
-            label: "Tamaño", placeholder: "Selecciona el tamaño del banner", isRequired: true, type: "select", value: offer.size, options: sizeOptions, onChange: (value: any) => {
-                setOffer({ ...offer, size: value })
-            }
+            label: "Tamaño", placeholder: "Selecciona el tamaño del banner", isRequired: true, type: "select", value: offer.size, options: sizeOptions, onChange: (value: any) => { setOffer({ ...offer, size: value }) }
         },
         { label: "Imagen", placeholder: "Selecciona una imagen", isRequired: true, type: "file", value: offer.image as File, onChange: (value: any) => setOffer({ ...offer, image: value }) },
     ]
@@ -55,8 +53,12 @@ export default function EditCategoryPage({ params }: any) {
                 }
             }));
 
-            const sales = await axios.get('/api/offers');
+            const sales = await axios.get("/api/offers");
 
+            const sale = await sales.data.filter((sale: Offer) => sale.id == params.id)[0];
+            sale.size = new Set([sale.size])
+
+            setOffer(sale);
             setOffers(sales.data)
         } catch (error) {
             console.error(error);
@@ -74,10 +76,10 @@ export default function EditCategoryPage({ params }: any) {
                 content: offer.content,
                 size: parseInt(Array.from(offer.size)[0] as string),
                 link: "",
-                image: await uploadFilesFromClient('offers', offer.image as File)
+                image: typeof offer.image === "string" ? offer.image : await uploadFilesFromClient('offers', offer.image as File)
             }
 
-            axios.post(`/api/offers`, body);
+            axios.patch(`/api/offers`, body);
 
             toast.success("Oferta creada correctamente");
             window.location.href = "/admin/offers";
@@ -100,13 +102,11 @@ export default function EditCategoryPage({ params }: any) {
 
             <Sales
                 sales={
-                    [...offers,
-                    {
+                    [{
                         ...offer,
-                        image: offer.image ? URL.createObjectURL(offer.image) : "",
+                        image: typeof offer.image === "string" ? offer.image : offer.image ? URL.createObjectURL(offer.image) : "",
                         size: Array.from(offer.size)[0] || 1
-                    }
-                    ]
+                    }]
                 }
             />
 
