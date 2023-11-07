@@ -57,7 +57,7 @@ export default function PreFooter() {
         <div className='flex flex-col gap-4 xl:gap-7 text-center'>
           <h3 className={`text-[#033E8C] ${dmserif.className} text-2xl md:text-3xl lg:text-4xl xl:text-6xl`}>{`Así que cuentanos`}</h3>
 
-          <div className="min-w-[330px] md:min-w-[400px] lg:min-w-[440px] xl:min-w-[680px]">
+          <div className="min-w-[250px] md:min-w-[400px] lg:min-w-[440px] xl:min-w-[680px]">
             <SearchBar nonNavbar />
           </div>
         </div>
