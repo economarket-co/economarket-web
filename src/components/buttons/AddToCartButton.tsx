@@ -4,7 +4,6 @@ import { CartContext } from "@/Context/CartContext";
 import { Product } from "@prisma/client";
 import { CreateCardItem } from "@/odt/CardItem/createCardItem.odt";
 import { motion } from "framer-motion";
-import { RestaurantRounded } from "@mui/icons-material";
 
 type AddToCartButtonProps = {
     priceId?: number,

@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import { formatCurrency } from "@/utils";
-import { Checkbox, CheckboxGroup, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
+import { Checkbox, CheckboxGroup, Input } from "@nextui-org/react";
 import { quicksand } from "@/fonts";
 import SortButton from "../buttons/SortButton";
 
@@ -100,6 +100,12 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                             onChange={handlePriceRange}
                         />
 
+                        <Input type="number"
+                            //@ts-ignore
+                            value={props.priceRange}
+                            onChange={handlePriceRange}
+                        />
+
                         <p>{formatCurrency(props.priceRange)} - {formatCurrency(props.maxPrice)}</p>
                     </div>
 
@@ -159,6 +165,13 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                     className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                     onChange={handlePriceRange}
                 />
+
+                <Input type="number"
+                    //@ts-ignore
+                    value={props.priceRange}
+                    onChange={handlePriceRange}
+                />
+
 
                 <p>{formatCurrency(0)} - {formatCurrency(props.priceRange)}</p>
             </div>
