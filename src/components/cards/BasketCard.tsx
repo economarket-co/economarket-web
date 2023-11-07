@@ -29,7 +29,7 @@ export default function BasketCard(props: BasketCardProps) {
                 </div>
             }
 
-            <div className={`${quicksand.className} rounded-3xl overflow-hidden md:w-[500px] lg:w-[287.225px] h-fit ${props.isBestOption && 'rounded-t-none border-3 border-[#01CC5E]'} relative`}
+            <div className={`${quicksand.className} rounded-3xl overflow-hidden md:w-[287.225px] h-fit ${props.isBestOption && 'rounded-t-none border-3 border-[#01CC5E]'} relative`}
                 style={{ boxShadow: "0px 3.72755px 19.56966px 0px rgba(0, 0, 0, 0.25)" }}
             >
                 <img src={props.image} alt={props.image} className="w-full h-[140px] lg:h-[71.289px] xl:h-[120px] object-fill" />
