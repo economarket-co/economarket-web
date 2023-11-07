@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/utils"
 import { quicksand } from "@/fonts"
-import { Button } from "@nextui-org/react"
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react"
 import { SuperMarket } from "@prisma/client"
 import Link from "next/link"
 
@@ -12,15 +12,46 @@ type BasketCardProps = {
 }
 
 export default function BasketCard(props: BasketCardProps) {
+    const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
+    
     function hadleBuy() {
 
         props.cartProducts.forEach(product => {
-            window.open(product.link, '_blank');
+            if (product.avaible) {
+                window.open(product.link, '_blank');
+            }
         })
     }
 
     return (
         <div className="flex flex-col">
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="w-[800px]">
+                <ModalContent className={` ${quicksand.className} flex flex-col items-center`} >
+                    {(onClose) => (
+                        <> 
+                            <ModalHeader className={`flex flex-col items-center text-center gap-4 text-[#434343]`}>
+                                <img src="/icons/icon-info.svg" alt="" className="w-24 h-24"/>    
+                                <p className="text-[26px]">Vamos a abrir links a todos los productos</p>
+                            </ModalHeader>
+                            <ModalBody className={`text-[18px] px-10 text-center`}>
+                                Al elegir comprar el carrito te ayudaremos a encontrar los productos en este supermercado ¿Quieres abrir las páginas?
+                            </ModalBody >
+                            <ModalFooter className="flex items-center gap-4">
+                                <button 
+                                    className="bg-[#01CC5E] text-white py-2 px-8 rounded-lg text-base"
+                                    onClick={hadleBuy}    
+                                >Abrir páginas</button>
+                                <button 
+                                    className="bg-[#B6B6B6] text-white py-2 px-8 rounded-lg text-base" 
+                                    onClick={() => onClose()}
+                                >Seguir comprando</button>
+                            </ModalFooter>
+                        </>
+                    )
+                    }
+
+                </ModalContent>
+            </Modal>
             {
                 props.isBestOption &&
                 <div className={`bg-[#01CC5E] text-lg ${quicksand.className} rounded-t-xl py-5 text-white flex gap-4 justify-center`}>
@@ -96,7 +127,7 @@ export default function BasketCard(props: BasketCardProps) {
                                     }, 0))
                                 }</p>
                         </div>
-                        <button onClick={hadleBuy} className={`${quicksand.className} font-semibold text-sm md:text-[15.75px] py-4 px-4 text-white bg-[#01CC5E] rounded-md`}>Comprar la lista</button>
+                        <button onClick={onOpen} className={`${quicksand.className} font-semibold text-sm md:text-[15.75px] py-4 px-4 text-white bg-[#01CC5E] rounded-md`}>Comprar la lista</button>
                     </div>
 
                 </div>
