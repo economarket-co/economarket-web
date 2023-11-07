@@ -1,7 +1,7 @@
 "use client";
 import { Button, Input, Selection } from "@nextui-org/react";
 import { Card, Title } from "@tremor/react";
-import { FormEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import { SelectField } from "../fields/SelectField";
 
 interface FieldProps {
@@ -54,6 +54,11 @@ export default function Form(props: FormProps) {
 }
 
 function Field(props: FieldProps) {
+    function handleSetImage(e: ChangeEvent<HTMLInputElement>) {
+        if (!e.target.files?.[0]) return;
+
+        props.onChange(e.target.files?.[0])
+    }
     return (
         <div className="flex gap-6 items-center">
             <label className="text-sm font-semibold w-1/5">{props.label}</label>
@@ -62,7 +67,7 @@ function Field(props: FieldProps) {
                     <input
                         type="file"
                         className="w-full"
-                        onChange={(e) => props.onChange(e.target.files?.[0])}
+                        onChange={handleSetImage}
                     />
                 ) :
 
@@ -85,10 +90,6 @@ function Field(props: FieldProps) {
                         value={props.value}
                         onValueChange={props.onChange}
                     />
-
-
-
-
             }
 
         </div>

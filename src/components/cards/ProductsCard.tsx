@@ -10,6 +10,7 @@ import { quicksand } from "@/fonts";
 
 type ProductCardProps = {
     product: ProductFull,
+    isForPreview?: boolean
 }
 
 export default function ProductCard(props: ProductCardProps) {
@@ -19,6 +20,7 @@ export default function ProductCard(props: ProductCardProps) {
     const [loading, setLoading] = useState(false);
 
     async function handleAddFavorite() {
+        if (props.isForPreview) return;
         setLoading(true);
         setIsFavorite(!isFavorite);
 
@@ -38,7 +40,6 @@ export default function ProductCard(props: ProductCardProps) {
             console.log(error);
             toast.error("Ha ocurrido un error")
         }
-
         setLoading(false);
     }
 
@@ -73,16 +74,21 @@ export default function ProductCard(props: ProductCardProps) {
                     <img src='/icons/price-tag.svg'  />
                     <p className={`${quicksand.className} text-[9px] lg:text-xs text-[#646464]`}>
                         {
+                            !props.isForPreview ?
                             `${productPrice?.priceCarulla ? 'Carulla, ' : ''} 
                             ${productPrice?.priceExito ? 'Éxito, ' : ''} 
                             ${productPrice?.priceJumbo ? 'Jumbo,' : ''} 
                             ${productPrice?.priceOlimpica ? 'Olimpica' : ''}`
+
+                            :
+                            "Carulla, Éxito, Jumbo, Olimpica"
                         }
                     </p>
                 </div>
                 <AddToCartButton
                     product={props.product}
                     quantity={1}
+                    isForPreview={props.isForPreview}
                 />
             </CardFooter>
         </Card>

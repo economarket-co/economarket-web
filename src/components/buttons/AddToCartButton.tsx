@@ -29,11 +29,17 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
         setItem(item);
     }, [cartItems])
 
+    function handleAddToCart() {
+        if (props.isForPreview) return;
+
+        item ? null : addToCart(product, props.quantity)
+    }
+
     return (
         <motion.button
             onMouseEnter={e => setHover(true)}
             onMouseLeave={e => setHover(false)}
-            onClick={e => item ? null : addToCart(product, props.quantity)}
+            onClick={handleAddToCart}
             className={`w-full rounded-md flex gap-2 items-center justify-center py-2 px-4
                 text-[9px] lg:text-[14px] xl:text-xl font-medium
             `}

@@ -44,11 +44,6 @@ export default function EditCategoryPage({ params }: any) {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(image)
-    }, [image])
-
-
     async function fetchData() {
         try {
             const response = await axios.get("/api/subCategories");
@@ -106,29 +101,28 @@ export default function EditCategoryPage({ params }: any) {
                 loading={loading}
             />
 
-            <Card className='w-[150px] lg:w-[230px] border shrink-0' style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)" }}>
-                <CardBody className='relative p-0 h-[112px] lg:h-[224px] border-b'>
-                    <img className='h-full object-fill' src={`${image ? URL.createObjectURL(image) : ''}`} alt={name} />
-                </CardBody>
-                <CardFooter className='flex flex-col gap-2 px-4 items-start overflow-x-hidden'>
-                    {/* <Tooltip content={props.product.name} placement="bottom"> */}
-                    <p className={`${quicksand.className} text-[9px] lg:text-xs text-[#343434] overflow-clip`}>{name}</p>
-                    {/* </Tooltip> */}
-                    <p className={`${quicksand.className} text-xs text-[#646464] `}>{quantityPerUnit} {unit}</p>
-                    <div className="flex gap-2">
-                        <img src='/icons/price-tag.svg' />
-                        <p className={`${quicksand.className} text-[9px] lg:text-xs text-[#646464]`}>
-                            Carrulla, Exito, Olimpica, Jumbo
-                        </p>
-                    </div>
-                    
-                    <AddToCartButton
-                        //@ts-ignore
-                        product={null}
-                        quantity={1}
-                    />
-                </CardFooter>
-            </Card>
+            <ProductCard 
+                
+                product={
+                    {   
+                        id: 1,
+                        name,
+                        unit,
+                        quantityPerUnit: parseInt(quantityPerUnit),
+                        image: image ? URL.createObjectURL(image) : "",
+                        linkCarulla: "",
+                        linkExito: "",
+                        linkJumbo: "",
+                        linkOlimpica: "",
+                        subCategoryId: 1,
+                        productPrices2: [],
+                        favorites: [],
+                        createdAt: new Date(),
+                        updatedAt: new Date()
+                    }
+                }
+                isForPreview
+            />
         </main>
     )
 }
