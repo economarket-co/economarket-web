@@ -62,59 +62,9 @@ export default function Cart() {
         for (const supermarket of supermarkets) {
             let products = [];
 
-            switch (supermarket) {
-                case SuperMarket.Exito:
-                    products = updatedCartItems.filter((item: any) => {
-                        if (!allInOnerMarket) {
-                            return item?.product?.productPrices2[0].priceExito
-                        }
-
-                        //check if product is cheaper in another supermarket
-                        const product = item.product.productPrices2[0];
-                        return IsCheapestp(product, product.priceExito);
-
-                    });
-                    break;
-                case SuperMarket.Carulla:
-                    products = updatedCartItems.filter((item: any) => {
-                        if (!allInOnerMarket) {
-                            return item?.product?.productPrices2[0].priceCarulla
-                        }
-
-                        //check if product is cheaper in another supermarket
-                        const product = item.product.productPrices2[0];
-                        return IsCheapestp(product, product.priceCarulla);
-                    });
-                    break;
-                case SuperMarket.Jumbo:
-                    products = updatedCartItems.filter((item: any) => {
-                        if (!allInOnerMarket) {
-                            return item?.product?.productPrices2[0].priceJumbo
-                        }
-
-                        //check if product is cheaper in another supermarket
-                        const product = item.product.productPrices2[0];
-                        return IsCheapestp(product, product.priceJumbo) && product.priceJumbo;
-
-                    });
-
-                    break;
-                case SuperMarket.Olimpica:
-                    products = updatedCartItems.filter((item: any) => {
-                        if (!allInOnerMarket) {
-                            return item?.product?.productPrices2[0].priceOlimpica
-                        }
-
-                        //check if product is cheaper in another supermarket
-                        const product = item.product.productPrices2[0];
-                        return IsCheapestp(product, product.priceOlimpica);
-                    });
-                    break;
-            }
+            products = await getProductPrice(updatedCartItems, supermarket);
 
             let products_copy = [];
-
-
 
             for (const product of products) {
                 products_copy.push({
@@ -137,10 +87,22 @@ export default function Cart() {
             });
         }
 
-        baskets.sort((a, b) => {
-            if (a.products.length > b.products.length) {
+        
+        sortBaskets(baskets);
+
+        baskets[0].isCheapest = baskets[0].total > 0 ? true : false;
+
+        setCartItemsBySuperMarket(baskets);
+    }
+
+    async function sortBaskets(baskets: any[]) {
+        return baskets.sort((a, b) => {
+            const aAvailableProducts = a.products.filter((product: any) => product.avaible).length;
+            const bAvailableProducts = b.products.filter((product: any) => product.avaible).length;
+
+            if (aAvailableProducts > bAvailableProducts) {
                 return -1;
-            } else if (a.products.length < b.products.length) {
+            } else if (aAvailableProducts < bAvailableProducts) {
                 return 1;
             } else {
                 if (a.total > b.total) {
@@ -152,10 +114,29 @@ export default function Cart() {
                 }
             }
         });
+    }
 
-        baskets[0].isCheapest = baskets[0].total > 0 ? true : false;
+    async function getProductPrice(updatedCartItems: any[], supermarket: SuperMarket) {
+        if (!allInOnerMarket) {
+            return updatedCartItems.map((item: any) => {
+                if (!allInOnerMarket) {
+                    return {
+                        ...item,
+                        avaible: item?.product?.productPrices2[0]['price' + supermarket] ? true : false
+                    }
+                }
+            })
+        }
+        
+        return updatedCartItems.filter((item: any) => {
+            if (!item.product) return false;
 
-        setCartItemsBySuperMarket(baskets);
+            const price = item.product.productPrices2[0];
+
+            if (!price) return false;
+
+            return IsCheapestp(price, price['price' + supermarket]);
+        });
     }
 
     async function getProducts() {

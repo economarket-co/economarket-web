@@ -48,11 +48,21 @@ export default function BasketCard(props: BasketCardProps) {
 
                                         <div className="flex gap-2 items-center">
                                             <p className="flex gap-2 text-[12px] md:text-[12.893px] ">
-                                                <span>{formatCurrency(product.price)}</span>
-                                                <span>x</span>
+                                                {
+                                                    product.avaible && (
+                                                        <>
+                                                            <span>{formatCurrency(product.price)}</span>
+
+                                                            <span>x</span>
+                                                        </>
+                                                    )
+                                                }
                                                 <span>{product.quantity}</span>
                                             </p>
-                                            <Link href={product.link} target="_blank"><img src="/icons/external-link.svg" className="h-6 w-6" /></Link>
+                                            {
+                                                product.avaible && <Link href={product.link} target="_blank"><img src="/icons/external-link.svg" className="h-6 w-6" /></Link>
+                                            }
+
                                         </div>
                                     </div>
                                 )
