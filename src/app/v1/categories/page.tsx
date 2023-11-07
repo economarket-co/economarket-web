@@ -26,7 +26,7 @@ export default function Categories() {
 
     return (
         <main className="flex min-w-full flex-col overflow-hidden ">
-            <div className='flex flex-col flex-items justify-center text-white relative py-16 overflow-hidden'>
+            <div className='flex flex-col flex-items justify-center text-white relative py-8 md:py-16 overflow-hidden'>
                 <img src="/images/categories/categories-bg.png" className='absolute min-w-full min-h-full max-w-full -z-10' />
 
                 <div className="flex gap-3 items-center text-white px-4 md:px-16 md:gap-10">
@@ -63,18 +63,20 @@ export default function Categories() {
             <div className={`
                 flex flex-col text-start gap-6
                 md:flex-row md:justify-between md:items-center lg:text-start
-                text-white relative py-16 overflow-hidden`
+                text-white relative py-2 md:py-8 xl:py-16 overflow-hidden`
             }
             >
                 <img src="/images/categories/categories-bg-2.png" className='absolute min-w-full min-h-full max-w-full -z-10' />
-            
-                <div className={`${quicksand.className} px-4 md:px-8 pt-8 md:pt-0 text-sm md:text-xl lg:text-3xl`}>
-                    <p className="">Estás buscando algo más?</p>
-                    <p>Mira todos los productos que manejamos!</p>
-                </div>
 
-                <div className="px-4 md:px-10">
-                    <LinkButton href="/products" text="Ver todos los productos" />
+                <div className="py-4 flex flex-col gap-4  md:flex-row md:justify-between md:items-center lg:text-start">
+                    <div className={`${quicksand.className} px-4 md:px-8 text-sm md:text-xl lg:text-3xl`}>
+                        <p className="">Estás buscando algo más?</p>
+                        <p>Mira todos los productos que manejamos!</p>
+                    </div>
+
+                    <div className="px-4 md:px-10">
+                        <LinkButton href="/products" text="Ver todos los productos" />
+                    </div>
                 </div>
             </div>
         </main>
