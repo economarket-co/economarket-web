@@ -73,7 +73,7 @@ export default function CustomNavbar() {
                                 width={90}
                                 height={45}
                                 src="/icons/logo.png"
-                                className='cursor-pointer w-[70px] h-[30px] md:[75px] md:h-[36px] lg:w-[80px] lg:h-[37px]'
+                                className='cursor-pointer w-[85px] h-[28px] md:[75px] md:h-[36px] lg:w-[80px] lg:h-[37px]'
                             />
                         </IconButton>
                     </Link>
