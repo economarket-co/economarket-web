@@ -23,10 +23,10 @@ export default function EditCategoryPage({ params }: any) {
     const [linkOlimpica, setLinkOlimpica] = useState("");
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState<File>();
-    const [offertCarulla, setOffertCarulla] = useState("");
-    const [offertExito, setOffertExito] = useState("");
-    const [offertJumbo, setOffertJumbo] = useState("");
-    const [offertOlimpica, setOffertOlimpica] = useState("");
+    const [offerCarulla, setOfferCarulla] = useState("");
+    const [offerExito, setOfferExito] = useState("");
+    const [offerJumbo, setOfferJumbo] = useState("");
+    const [offerOlimpica, setOfferOlimpica] = useState("");
 
     const fields = [
         {
@@ -42,10 +42,10 @@ export default function EditCategoryPage({ params }: any) {
         { label: "Link Jumbo", placeholder: "Ingresa el link de Jumbo", isRequired: true, type: "text", value: linkJumbo, onChange: setLinkJumbo },
         { label: "Link Olimpica", placeholder: "Ingresa el link de Olimpica", isRequired: true, type: "text", value: linkOlimpica, onChange: setLinkOlimpica },
         { label: "Imagen", placeholder: "Selecciona una imagen", isRequired: true, type: "file", value: image as File, onChange: setImage },
-        { label: "Descueto Carulla", placeholder: "Ingresa el descuento de Carulla", isRequired: true, type: "number", value: offertCarulla, onChange: setOffertCarulla },
-        { label: "Descueto Exito", placeholder: "Ingresa el descuento de Exito", isRequired: true, type: "number", value: offertExito, onChange: setOffertExito },
-        { label: "Descueto Jumbo", placeholder: "Ingresa el descuento de Jumbo", isRequired: true, type: "number", value: offertJumbo, onChange: setOffertJumbo },
-        { label: "Descueto Olimpica", placeholder: "Ingresa el descuento de Olimpica", isRequired: true, type: "number", value: offertOlimpica, onChange: setOffertOlimpica },
+        { label: "Descuento Carulla", placeholder: "Ingresa el descuento de Carulla", isRequired: false, type: "number", value: offerCarulla, onChange: setOfferCarulla },
+        { label: "Descuento Exito", placeholder: "Ingresa el descuento de Exito", isRequired: false, type: "number", value: offerExito, onChange: setOfferExito },
+        { label: "Descuento Jumbo", placeholder: "Ingresa el descuento de Jumbo", isRequired: false, type: "number", value: offerJumbo, onChange: setOfferJumbo },
+        { label: "Descuento Olimpica", placeholder: "Ingresa el descuento de Olimpica", isRequired: false, type: "number", value: offerOlimpica, onChange: setOfferOlimpica },
     ]
 
     useEffect(() => {
@@ -85,6 +85,10 @@ export default function EditCategoryPage({ params }: any) {
                 linkExito,
                 linkJumbo,
                 linkOlimpica,
+                offerCarulla: offerCarulla != "0" ? parseInt(offerCarulla) : null,
+                offerExito:  offerExito != "0" ? parseInt(offerExito) : null,
+                offerJumbo: offerJumbo != "0" ? parseInt(offerJumbo) : null,
+                offerOlimpica: offerOlimpica != "0" ? parseInt(offerOlimpica) : null,
                 image: await uploadFilesFromClient('products', image as File)
             }
 
@@ -122,6 +126,10 @@ export default function EditCategoryPage({ params }: any) {
                         linkExito: "",
                         linkJumbo: "",
                         linkOlimpica: "",
+                        offerCarulla: parseInt(offerCarulla),
+                        offerExito: parseInt(offerExito),
+                        offerJumbo: parseInt(offerJumbo),
+                        offerOlimpica: parseInt(offerOlimpica),
                         subCategoryId: 1,
                         productPrices2: [],
                         favorites: [],

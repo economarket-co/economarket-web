@@ -50,6 +50,10 @@ model Product {
   linkExito       String?
   linkJumbo       String?
   linkOlimpica    String?
+  offerCarulla    Int?
+  offerExito      Int?
+  offerJumbo      Int?
+  offerOlimpica   Int?
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   favorites       Favorites[]

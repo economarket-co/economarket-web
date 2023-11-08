@@ -18,6 +18,10 @@ export default function EditProductPage({ params }: any) {
     const [linkExito, setLinkExito] = useState("");
     const [linkJumbo, setLinkJumbo] = useState("");
     const [linkOlimpica, setLinkOlimpica] = useState("");
+    const [offerCarulla, setOfferCarulla] = useState("");
+    const [offerExito, setOfferExito] = useState("");
+    const [offerJumbo, setOfferJumbo] = useState("");
+    const [offerOlimpica, setOfferOlimpica] = useState("");
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState<File>();
 
@@ -34,7 +38,11 @@ export default function EditProductPage({ params }: any) {
         { label: "Link Exito", placeholder: "Ingresa el link de Exito", isRequired: true, type: "text", value: linkExito, onChange: setLinkExito },
         { label: "Link Jumbo", placeholder: "Ingresa el link de Jumbo", isRequired: true, type: "text", value: linkJumbo, onChange: setLinkJumbo },
         { label: "Link Olimpica", placeholder: "Ingresa el link de Olimpica", isRequired: true, type: "text", value: linkOlimpica, onChange: setLinkOlimpica },
-        { label: "Imagen", placeholder: "Selecciona una imagen", isRequired: true, type: "file", value: image as File, onChange: setImage }
+        { label: "Imagen", placeholder: "Selecciona una imagen", isRequired: true, type: "file", value: image as File, onChange: setImage },
+        { label: "Descuento Carulla", placeholder: "Ingresa el descuento de Carulla", isRequired: false, type: "number", value: offerCarulla, onChange: setOfferCarulla },
+        { label: "Descuento Exito", placeholder: "Ingresa el descuento de Exito", isRequired: false, type: "number", value: offerExito, onChange: setOfferExito },
+        { label: "Descuento Jumbo", placeholder: "Ingresa el descuento de Jumbo", isRequired: false, type: "number", value: offerJumbo, onChange: setOfferJumbo },
+        { label: "Descuento Olimpica", placeholder: "Ingresa el descuento de Olimpica", isRequired: false, type: "number", value: offerOlimpica, onChange: setOfferOlimpica },
     ]
 
     useEffect(() => {
@@ -54,6 +62,10 @@ export default function EditProductPage({ params }: any) {
             setLinkJumbo(product.data.linkJumbo);
             setLinkOlimpica(product.data.linkOlimpica);
             setImage(product.data.image);
+            product.data.offerCarulla !== null && setOfferCarulla(product.data.offerCarulla.toString());
+            product.data.offerExito !== null && setOfferExito(product.data.offerExito.toString());
+            product.data.offerJumbo !== null && setOfferJumbo(product.data.offerJumbo.toString());
+            product.data.offerOlimpica !== null && setOfferOlimpica(product.data.offerOlimpica.toString());
 
             const response = await axios.get("/api/subCategories");
 
@@ -75,7 +87,7 @@ export default function EditProductPage({ params }: any) {
         e.preventDefault();
 
         setLoading(true);
-        
+
         try {
 
             const body = {
@@ -88,7 +100,11 @@ export default function EditProductPage({ params }: any) {
                 linkExito,
                 linkJumbo,
                 linkOlimpica,
-                image: typeof image === 'string' ? image :await uploadFilesFromClient('products', image as File)
+                offerCarulla: offerCarulla != "0" ? parseInt(offerCarulla) : null,
+                offerExito: offerExito != "0" ? parseInt(offerExito) : null,
+                offerJumbo: offerJumbo != "0" ? parseInt(offerJumbo) : null,
+                offerOlimpica: offerOlimpica != "0" ? parseInt(offerOlimpica) : null,
+                image: typeof image === 'string' ? image : await uploadFilesFromClient('products', image as File)
             }
 
             axios.patch(`/api/products/${params.id}`, body);
@@ -125,6 +141,10 @@ export default function EditProductPage({ params }: any) {
                         linkExito: "",
                         linkJumbo: "",
                         linkOlimpica: "",
+                        offerCarulla: parseInt(offerCarulla),
+                        offerExito: parseInt(offerExito),
+                        offerJumbo: parseInt(offerJumbo),
+                        offerOlimpica: parseInt(offerOlimpica),
                         subCategoryId: 1,
                         productPrices2: [],
                         favorites: [],
