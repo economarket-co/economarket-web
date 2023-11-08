@@ -75,7 +75,7 @@ export default function Categories() {
                     </div>
 
                     <div className="px-4 md:px-10">
-                        <LinkButton href="/products" text="Ver todos los productos" />
+                        <LinkButton href="/v1/products" text="Ver todos los productos" />
                     </div>
                 </div>
             </div>

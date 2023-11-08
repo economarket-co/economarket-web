@@ -142,7 +142,7 @@ export default function ProductsPage({ searchParams }: any) {
                                 <p className={`${quicksand.className} font-medium text-lg text-[#646464]`}>Aprovecha tus favoritos para guardar productos que podrías comprar nuevamente</p>
                             </div>
 
-                            <Link href="/products" className="bg-[#01CC5E] text-white text-center px-8 py-2 font-bold rounded-md">Empezar a agregar productos</Link>
+                            <Link href="/v1/products" className="bg-[#01CC5E] text-white text-center px-8 py-2 font-bold rounded-md">Empezar a agregar productos</Link>
                         </div>
                         :
                         <div className="flex flex-col gap-10 items-center lg:items-start md:px-20 py-16 grow">

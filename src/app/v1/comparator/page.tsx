@@ -83,7 +83,7 @@ export default function Comparator({ searchParams }: any) {
 
             <div className="flex flex-col items-center px-4 py-20 gap-16 min-h-full grow">
                 <div className="flex flex-col gap-3 text-center">
-                    <h2 className={`${quicksand.className} text-xl md:text-3xl font-semibold`}>Escoge un producto y  compáralo en nuestros supermercado</h2>
+                    <h2 className={`${quicksand.className} text-xl md:text-3xl font-semibold`}>Escoge un producto y  compáralo en nuestros supermercados</h2>
                     <p className={`${quicksand.className} md:text-lg font-medium text-[#646464]`}>Suma productos y descubre la manera más conveniente de comprarlos</p>
                 </div>
 

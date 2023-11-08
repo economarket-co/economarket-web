@@ -18,7 +18,11 @@ type OfferInput = {
 }
 
 export async function getOffers() {
-    const offers = await prisma.offer.findMany({});
+    const offers = await prisma.offer.findMany({
+        orderBy: {
+            id: "asc"
+        }
+    });
     return offers;
 }
 

@@ -187,7 +187,7 @@ export default function Cart() {
                                 :
                                 <>
                                     <p className="text-lg text-[#434343]">Dividiendo tus compras en supermercados</p>
-                                    <p className="text-[#9D9D9D]">Presiona el switch para ver el precio de toda la compra en cada supermercado</p>
+                                    <p className="text-[#9D9D9D]">Presiona el switch para seleccionar la mejor combinación precio, dividiendo tu compra en varios supermercados</p>
                                 </>
 
                         }
