@@ -11,6 +11,7 @@ export default function Hero() {
         className='absolute min-w-full h-[600px] lg:h-[800px] max-w-none object-cover'
         autoPlay
         loop
+        controls={false}
       />
 
       <div
