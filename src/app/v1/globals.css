@@ -21,6 +21,7 @@
   
   *::-webkit-scrollbar-thumb {
     /* background-color: var(--primary); */
+    opacity: 0.75;
     border-radius: 5px;
   }
 
