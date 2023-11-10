@@ -27,6 +27,7 @@ model Category {
   color         String
   image         String
   subCategories SubCategory[]
+  products      Product[]
 }
 
 model SubCategory {
@@ -35,7 +36,6 @@ model SubCategory {
   categoryId Int
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  products   Product[]
   category   Category  @relation(fields: [categoryId], references: [id])
 }
 
@@ -45,7 +45,7 @@ model Product {
   image           String
   quantityPerUnit Int
   unit            String
-  subCategoryId   Int
+  CategoryId      Int?
   linkCarulla     String?
   linkExito       String?
   linkJumbo       String?
@@ -57,10 +57,10 @@ model Product {
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   favorites       Favorites[]
-  SubCategory     SubCategory     @relation(fields: [subCategoryId], references: [id])
   productPrices   ProductPrice[]
   productPrices2  ProductPrice2[]
   productOffers   ProductOffer[]
+  productCategory Category?       @relation(fields: [CategoryId], references: [id])
 }
 
 model ProductPrice {

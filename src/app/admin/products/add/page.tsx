@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 
 export default function EditCategoryPage({ params }: any) {
     const [name, setName] = useState("");
-    const [subCategoriesList, setSubCategoriesList] = useState<Category[]>([]);
+    const [categoriesList, setCategoriesList] = useState<Category[]>([]);
     const [categories, setCategories] = useState([]);
     const [unit, setUnit] = useState("");
     const [quantityPerUnit, setQuantityPerUnit] = useState("");
@@ -34,7 +34,7 @@ export default function EditCategoryPage({ params }: any) {
             isRequired: true, type: "text", value: name,
             onChange: (e: any) => setName(e)
         },
-        { label: "Sub Categoria", placeholder: "Selecciona una sub categoría", isRequired: true, type: "select", value: categories, options: subCategoriesList, onChange: setCategories },
+        { label: "Categoria", placeholder: "Selecciona una categoría", isRequired: true, type: "select", value: categories, options: categoriesList, onChange: setCategories },
         { label: "Unidad de medida", placeholder: "Ingresa la unidad de medida ej: Gr, Ml etc...", isRequired: true, type: "text", value: unit, onChange: setUnit },
         { label: "Cantidad por unidad", placeholder: "Ingresa la cantidad por unidad", isRequired: true, type: "number", value: quantityPerUnit, onChange: setQuantityPerUnit },
         { label: "Link Carulla", placeholder: "Ingresa el link de Carulla", isRequired: true, type: "text", value: linkCarulla, onChange: setLinkCarulla },
@@ -54,7 +54,7 @@ export default function EditCategoryPage({ params }: any) {
 
     async function fetchData() {
         try {
-            const response = await axios.get("/api/subCategories");
+            const response = await axios.get("/api/categories");
 
             const categoriesList = response.data.map((category: Category) => {
                 return {
@@ -63,7 +63,7 @@ export default function EditCategoryPage({ params }: any) {
                 }
             });
 
-            setSubCategoriesList(categoriesList);
+            setCategoriesList(categoriesList);
         } catch (error) {
             console.error(error);
             toast.error("Error al obtener las categorías");
@@ -130,7 +130,7 @@ export default function EditCategoryPage({ params }: any) {
                         offerExito: parseInt(offerExito),
                         offerJumbo: parseInt(offerJumbo),
                         offerOlimpica: parseInt(offerOlimpica),
-                        subCategoryId: 1,
+                        CategoryId: 1,
                         productPrices2: [],
                         favorites: [],
                         createdAt: new Date(),

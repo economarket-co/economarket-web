@@ -31,7 +31,7 @@ export default function EditProductPage({ params }: any) {
             isRequired: true, type: "text", value: name,
             onChange: (e: any) => setName(e)
         },
-        { label: "Sub Categoria", placeholder: "Selecciona una sub categoría", isRequired: true, type: "select", value: categories, options: subCategoriesList, onChange: setCategories },
+        { label: "Categoría", placeholder: "Selecciona una categoría", isRequired: true, type: "select", value: categories, options: subCategoriesList, onChange: setCategories },
         { label: "Unidad de medida", placeholder: "Ingresa la unidad de medida ej: Gr, Ml etc...", isRequired: true, type: "text", value: unit, onChange: setUnit },
         { label: "Cantidad por unidad", placeholder: "Ingresa la cantidad por unidad", isRequired: true, type: "number", value: quantityPerUnit, onChange: setQuantityPerUnit },
         { label: "Link Carulla", placeholder: "Ingresa el link de Carulla", isRequired: true, type: "text", value: linkCarulla, onChange: setLinkCarulla },
@@ -53,8 +53,9 @@ export default function EditProductPage({ params }: any) {
     async function fetchData() {
         try {
             const product = await axios.get(`/api/products/${params.id}`);
+            console.log(product);
             setName(product.data.name);
-            setCategories(new Set([product.data.subCategoryId.toString()]));
+            setCategories(new Set([product.data.CategoryId?.toString()]));
             setUnit(product.data.unit);
             setQuantityPerUnit(product.data.quantityPerUnit);
             setLinkCarulla(product.data.linkCarulla);
@@ -67,7 +68,7 @@ export default function EditProductPage({ params }: any) {
             product.data.offerJumbo !== null && setOfferJumbo(product.data.offerJumbo.toString());
             product.data.offerOlimpica !== null && setOfferOlimpica(product.data.offerOlimpica.toString());
 
-            const response = await axios.get("/api/subCategories");
+            const response = await axios.get("/api/categories");
 
             const categoriesList = response.data.map((category: Category) => {
                 return {
@@ -93,7 +94,7 @@ export default function EditProductPage({ params }: any) {
             const body = {
                 name,
                 // @ts-ignore
-                subCategoryId: parseInt(Array.from(categories)[0]),
+                CategoryId: parseInt(Array.from(categories)[0]),
                 unit,
                 quantityPerUnit: parseInt(quantityPerUnit),
                 linkCarulla,
@@ -145,7 +146,7 @@ export default function EditProductPage({ params }: any) {
                         offerExito: parseInt(offerExito),
                         offerJumbo: parseInt(offerJumbo),
                         offerOlimpica: parseInt(offerOlimpica),
-                        subCategoryId: 1,
+                        CategoryId: 1,
                         productPrices2: [],
                         favorites: [],
                         createdAt: new Date(),

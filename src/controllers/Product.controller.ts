@@ -35,11 +35,7 @@ export async function getAllProducts(filters: filtersForMany) {
                 },
                 take: 1
             },
-            SubCategory: {
-                include: {
-                    category: true
-                }
-            },
+            productCategory: true,
             favorites: true
         },
         orderBy: {
@@ -60,11 +56,9 @@ export async function getProducts(filters: filtersForMany) {
             id: {
                 in: filters.ids?.map((id) => Number(id)) || undefined
             },
-            SubCategory: {
-                category: {
-                    id: {
-                        in: filters.categories?.map((id) => Number(id)) || undefined
-                    }
+            productCategory: {
+                id: {
+                    in: filters.categories?.map((id) => Number(id)) || undefined
                 }
             },
             OR: [
@@ -113,11 +107,7 @@ export async function getProducts(filters: filtersForMany) {
                 },
                 take: 1
             },
-            SubCategory: {
-                include: {
-                    category: true
-                }
-            },
+            productCategory: true,
             favorites: {
                 where: {
                     userId: filters.userId || undefined
@@ -144,11 +134,9 @@ export async function getFavoritesProducts(filters: filtersForMany) {
             id: {
                 in: filters.ids?.map((id) => Number(id)) || undefined
             },
-            SubCategory: {
-                category: {
-                    id: {
-                        in: filters.categories?.map((id) => Number(id)) || undefined
-                    }
+            productCategory: {
+                id: {
+                    in: filters.categories?.map((id) => Number(id)) || undefined
                 }
             },
 
@@ -204,11 +192,7 @@ export async function getFavoritesProducts(filters: filtersForMany) {
                 },
                 take: 1
             },
-            SubCategory: {
-                include: {
-                    category: true
-                }
-            },
+            productCategory: true,
             favorites: {
                 where: {
                     userId: filters.userId || undefined
@@ -236,11 +220,7 @@ export async function getProduct(filters: filtersForOne) {
                 },
                 take: 1
             },
-            SubCategory: {
-                include: {
-                    category: true
-                }
-            },
+            productCategory: true,
             favorites: {
                 where: {
                     userId: filters.userId || undefined

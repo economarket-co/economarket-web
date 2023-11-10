@@ -12,8 +12,7 @@ export default function ProductsPage() {
 
     const colums = [
         { name: "Nombre", key: "name" },
-        { name: "Categoría", key: "SubCategory.category.name"},
-        { name: "Sub Categoría", key: "SubCategory.name"}
+        { name: "Categoría", key: "productCategory.name"},
     ]
 
     useEffect(() => {
@@ -28,6 +27,7 @@ export default function ProductsPage() {
                     isForAdmin: true
                 }
             });
+            console.log(response.data);
             setProducts(response.data);
         } catch (error) {
             console.error(error);
