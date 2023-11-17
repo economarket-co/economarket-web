@@ -1,18 +1,41 @@
+"use client";
 import { dmserif, quicksand } from "@/fonts";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function Hero() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    //@ts-ignore
+    const playPromise = videoRef.current?.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        //@ts-ignore
+        .then(_ => { })
+        .catch((error: any) => {
+          // Autoplay was prevented
+          console.error('Autoplay prevented:', error);
+        });
+    }
+  }, []);
+
   return (
     <div className={`flex flex-col flex-items justify-center items-center overflow-hidden 
         text-white relative py-16 h-[400px] lg:h-[500px] 2xl:h-[700px]`}
     >
       <video
-        src="/videos/home-bg.mp4"
+        ref={videoRef}
         className='absolute min-w-full h-[600px] lg:h-[800px] max-w-none object-cover'
-        autoPlay
-        loop
+        autoPlay={true}
+        loop={true}
         controls={false}
-      />
+        playsInline
+        muted
+      >
+        <source src="/videos/home-bg.mp4" type="video/mp4" />
+      </video>
 
       <div
         className="absolute min-w-full h-[600px] lg:h-[800px] max-w-none"

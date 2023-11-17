@@ -16,12 +16,21 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
     const { addToCart, cartItems } = useContext(CartContext);
     const [item, setItem] = useState<any>(null);
     const [hover, setHover] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     const product: CreateCardItem = {
         product: props.product,
         quantity: props.quantity,
         priceId: props.priceId
     }
+
+    useEffect(() =>{
+        setIsMobile(window.innerWidth < 1024);
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.innerWidth < 1024);
+        })
+    }, [])
 
     useEffect(() => {
         if (props.isForPreview) return;
@@ -37,17 +46,17 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
 
     return (
         <motion.button
-            onMouseEnter={e => setHover(true)}
-            onMouseLeave={e => setHover(false)}
+            onMouseEnter={e => {!isMobile && setHover(true)}}
+            onMouseLeave={e => {!isMobile && setHover(false)}}
             onClick={handleAddToCart}
             className={`w-full rounded-md flex gap-2 items-center justify-center py-2 px-4
                 text-[9px] lg:text-[14px] xl:text-xl font-medium
             `}
             style={{ boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)", backgroundColor: item ? "white" : "#01CC5E", color: item ? "#01CC5E" : "white" }}
             transition={{ duration: 0.3 }}
-            whileHover={{
-                backgroundColor: "white",
-                color: "#01CC5E",
+            whileHover={isMobile ? {} :{
+                backgroundColor: !isMobile ? "white" : "white",
+                color: !isMobile? "#01CC5E" : "#01CC5E",
                 scale: 1.05,
             }}
         >   {
@@ -77,7 +86,7 @@ export default function AddToCartButton(props: AddToCartButtonProps) {
                     <>
                         <span className="text-base">Agregar</span>
                         {
-                            hover ?
+                            !isMobile && hover ?
                                 <motion.img
                                     src="/icons/add-to-cart-green.svg"
                                     className="w-6 h-6"
