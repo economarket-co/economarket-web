@@ -106,7 +106,7 @@ export default function ProductsFilter(props: ProductsFilterProps) {
                             onChange={handlePriceRange}
                         />
 
-                        <p>{formatCurrency(0)} - {formatCurrency(props.maxPrice)}</p>
+                        <p>{formatCurrency(0)} - {formatCurrency(props.priceRange)}</p>
                     </div>
 
                     <div className="flex flex-col gap-4 py-7">
