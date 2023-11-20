@@ -28,9 +28,9 @@ export default function Signin() {
     }
 
     return (
-        <div className="flex w-full justify-end relative overflow-y-hidden">
-            <img src='/images/login-bg.jpeg' className={`absolute w-full max-h-full z-[-10] object-fit ${quicksand.className}`} />
-            <form onSubmit={handleSignup} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-5 border rounded-md py-8 bg-white">
+        <div className="flex w-full justify-end relative">
+            <img src='/images/login-bg.jpeg' className="absolute w-full max-h-full z-[-10] object-cover" />
+            <form onSubmit={handleSignup} className="flex w-full lg:w-1/2 flex-col justify-center items-center gap-6 border rounded-md py-16 xl:min-h-[800px] bg-white">
                 <h1 className={`${quicksand.className} text-lg md:text-[26px] font-semibold`}>Crea una cuenta para ti</h1>
 
                 <TextField

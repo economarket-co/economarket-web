@@ -60,7 +60,7 @@ export default function Signin() {
 
                 <div className="flex flex-col lg:flex-row items-center gap-2 text-sm md:text-base lg:text-lg">
                     <span className="text-inputText">{`¿Aún no tienes una cuenta?`}</span>
-                    <a href="/auth/signup" className="text-green-600">Registrate</a>
+                    <a href="/v1/auth/signup" className="text-green-600">Registrate</a>
                 </div>
 
                 <div className="flex flex-col gap-4 justify-center items-center xl:flex-row">
