@@ -78,7 +78,7 @@ export default function EditCategoryPage({ params }: any) {
 
             const body = {
                 name,
-                subCategoryId: parseInt(Array.from(categories)[0]),
+                CategoryId: parseInt(Array.from(categories)[0]),
                 unit,
                 quantityPerUnit: parseInt(quantityPerUnit),
                 linkCarulla,
