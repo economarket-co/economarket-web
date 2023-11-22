@@ -92,7 +92,7 @@ export default function EditCategoryPage({ params }: any) {
                 image: await uploadFilesFromClient('products', image as File)
             }
 
-            axios.post(`/api/products`, body);
+            const product = await axios.post(`/api/products`, body);
 
             toast.success("Producto creado correctamente");
             window.location.href = "/admin/products";
