@@ -52,7 +52,7 @@ export default function CartTable(props: CartTableProps) {
                         <h3 className={`${quicksand.className} font-semibold text-[#434343]`}>¡Empieza a agregar productos!</h3>
                         <p className={`${quicksand.className} font-medium text-[#646464]`}>Suma productos y descubre la manera más conveniente de comprarlos</p>
 
-                        <Link href="/products" className="bg-[#01CC5E] text-white px-4 py-2 rounded-md">ver todos los productos</Link>
+                        <Link href="/v1/products" className="bg-[#01CC5E] text-white px-4 py-2 rounded-md">ver todos los productos</Link>
                     </div>
             }
 
