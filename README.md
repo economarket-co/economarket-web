@@ -36,7 +36,7 @@ npm install
 ``` 
 
 ## Run development enviroment
-Go to project root and run 
+Go to project root and run  
 ```bash
 npm run dev
 ``` 
