@@ -8,146 +8,104 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(uuid())
+  id        String      @id(map: "user_pkey") @default(uuid())
   email     String?     @unique
   fullName  String
   phone     String?
+  createdAt DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt DateTime    @default(now()) @updatedAt @db.Timestamp(6)
   isAdmin   Boolean     @default(false)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @default(now()) @updatedAt
   cart      Cart?
   favorites Favorites[]
 }
 
 model Category {
-  id            Int           @id @default(autoincrement())
+  id            Int           @id(map: "category_pkey") @default(autoincrement())
   name          String
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime      @updatedAt @db.Timestamp(6)
   color         String
   image         String
-  subCategories SubCategory[]
   products      Product[]
+  subCategories SubCategory[]
 }
 
 model SubCategory {
-  id         Int       @id @default(autoincrement())
+  id         Int      @id(map: "subcategory_pkey") @default(autoincrement())
   name       String
   categoryId Int
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  category   Category  @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime @updatedAt @db.Timestamp(6)
+  category   Category @relation(fields: [categoryId], references: [id], map: "subcategory_categoryid_fkey")
 }
 
 model Product {
-  id              Int             @id @default(autoincrement())
+  id              Int             @id(map: "product_pkey") @default(autoincrement())
   name            String
   image           String
   quantityPerUnit Int
   unit            String
-  CategoryId      Int?
   linkCarulla     String?
   linkExito       String?
   linkJumbo       String?
   linkOlimpica    String?
+  createdAt       DateTime        @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime        @updatedAt @db.Timestamp(6)
   offerCarulla    Int?
   offerExito      Int?
   offerJumbo      Int?
   offerOlimpica   Int?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
+  CategoryId      Int?
   favorites       Favorites[]
-  productPrices   ProductPrice[]
+  productCategory Category?       @relation(fields: [CategoryId], references: [id], map: "product_categoryid_fkey")
   productPrices2  ProductPrice2[]
-  productOffers   ProductOffer[]
-  productCategory Category?       @relation(fields: [CategoryId], references: [id])
-}
-
-model ProductPrice {
-  id          Int         @id @default(autoincrement())
-  productId   Int
-  price       Float
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  superMarket SuperMarket
-  cartItems   CartItem[]
-  proudct     Product     @relation(fields: [productId], references: [id])
 }
 
 model ProductPrice2 {
-  id            Int      @id @default(autoincrement())
+  id            Int      @id(map: "productprice2_pkey") @default(autoincrement())
   productId     Int
   priceExito    Int?
   priceOlimpica Int?
   priceJumbo    Int?
   priceCarulla  Int?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt
-  proudct       Product  @relation(fields: [productId], references: [id])
+  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt @db.Timestamp(6)
+  proudct       Product  @relation(fields: [productId], references: [id], map: "productprice2_productid_fkey")
 }
 
 model Cart {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  userEmail String?    @unique
-  user      User?      @relation(fields: [userEmail], references: [email])
-  cartItems CartItem[]
-}
-
-model CartItem {
-  id        Int          @id @default(autoincrement())
-  quantity  Int
-  cartId    Int
-  productId Int
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  Card      Cart         @relation(fields: [cartId], references: [id])
-  product   ProductPrice @relation(fields: [productId], references: [id])
+  id        Int      @id(map: "cart_pkey") @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt @db.Timestamp(6)
+  userEmail String?  @unique
+  user      User?    @relation(fields: [userEmail], references: [email], map: "cart_useremail_fkey")
 }
 
 model Subscription {
-  id        Int      @id @default(autoincrement())
+  id        Int      @id(map: "subscription_pkey") @default(autoincrement())
   email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt @db.Timestamp(6)
 }
 
 model Favorites {
   userId    String
   productId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt @db.Timestamp(6)
+  product   Product  @relation(fields: [productId], references: [id], map: "favorites_productid_fkey")
+  user      User     @relation(fields: [userId], references: [id], map: "favorites_userid_fkey")
 
-  @@id([userId, productId])
-}
-
-enum SuperMarket {
-  Olimpica
-  Carulla
-  Exito
-  Jumbo
+  @@id([userId, productId], map: "favorites_pkey")
 }
 
 model Offer {
-  id       Int      @id @default(autoincrement())
-  title    String
-  content  String
-  image    String
-  link     String
-  size     Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ProductOffer {
-  id       Int      @id @default(autoincrement())
-  productID Int
-  price Float
-  supermarket SuperMarket
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product Product @relation(fields: [productID], references: [id])
+  id        Int      @id(map: "offer_pkey") @default(autoincrement())
+  title     String
+  content   String
+  image     String
+  link      String
+  size      Int
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt @db.Timestamp(6)
 }
