@@ -83,7 +83,17 @@ export default function CustomNavbar() {
 
                 {
                     isMobile && (
-                        <SideBar isMobile={true} session={session} />
+                        <>
+                            <Link href="/v1/cart">
+                                <IconButton sx={{ color: "white" }}>
+                                    <Badge badgeContent={cartItems.length} color="secondary">
+                                        <ShoppingCart />
+                                    </Badge>
+                                </IconButton>
+                            </Link>
+                            
+                            <SideBar isMobile={true} session={session} />
+                        </>
                     )
                 }
 
