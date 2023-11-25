@@ -50,7 +50,7 @@ export default function CustomNavbar() {
     }
 
     return (
-        <AppBar position="static"
+        <AppBar position="fixed"
             sx={{
                 backgroundColor: "#033E8C",
                 boxShadow: "none",
