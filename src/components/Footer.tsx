@@ -1,5 +1,5 @@
-    "use client";
-import { quicksand } from "@/fonts";
+"use client";
+import { poppins, quicksand } from "@/fonts";
 import { Button, Input } from "@nextui-org/react"
 import axios from "axios";
 import { useState } from "react";
@@ -8,10 +8,10 @@ import toast from "react-hot-toast";
 export default function Footer() {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
-    
+
     async function handleSubmit(e: any) {
         e.preventDefault();
-        
+
         try {
             setLoading(true);
             const res = await axios.post("/api/newsletter", { email });
@@ -29,7 +29,7 @@ export default function Footer() {
             w-full  
             grid grid-cols-2  gap-5 md:gap-16 px-6 md:px-10 
             md:flex md:justify-center md:items-start lg:gap-12 py-6
-            bg-[#033E8C]  justify-self-end self-end ${quicksand.className}` }
+            bg-[#033E8C]  justify-self-end self-end ${quicksand.className}`}
         >
             <div className="flex flex-col gap-4 md:mx-auto">
                 <img src='/icons/logo.png' alt="Logo" className="w-[73px] h-[36px] md:w-[100px] md:h-[50px] lg:w-[100px] lg:h-[50px]" />
@@ -56,22 +56,27 @@ export default function Footer() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="flex flex-row gap-2 col-span-2 w-full">
-                    <Input 
-                        value={email} 
-                        onValueChange={setEmail} 
-                        type="email" 
-                        placeholder="Correo electrónico" 
+                    <Input
+                        value={email}
+                        onValueChange={setEmail}
+                        type="email"
+                        placeholder="Correo electrónico"
                         className="text-black"
                     />
 
                     <button
                         disabled={loading}
-                        type="submit" 
+                        type="submit"
                         className="text-white py-[10px] px-[20px] lg:px-[30px] bg-[#12A455] rounded-md font-semibold text-xs lg:text-base"
                     >
                         Suscribete
                     </button>
+
                 </form>
+
+                <p className={`w-[270px] lg:w-[400px] ${poppins.className} text-xs`}>
+                    {`Al hacer click en "Registrate"`}, aceptas nuestros <a href="/v1/privacy" target="_blank" className="text-blue-400 font-medium">terminos y condiciones</a>
+                </p>
             </div>
         </div>
     )
