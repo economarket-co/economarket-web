@@ -182,12 +182,12 @@ export default function Cart() {
                             !allInOnerMarket ?
                                 <>
                                     <p className="text-lg text-[#434343]">Comprando todo en el mismo supermercado</p>
-                                    <p className="text-[#9D9D9D]">Presiona el switch para ver los precios dividiendo la compra por supermercados</p>
+                                    <p className="text-[#9D9D9D]">Presiona el switch para encontrar la mejor combinación precio, incluso si los productos se adquieren en distintos lugares.</p>
                                 </>
                                 :
                                 <>
                                     <p className="text-lg text-[#434343]">Dividiendo tus compras en supermercados</p>
-                                    <p className="text-[#9D9D9D]">Presiona el switch para seleccionar la mejor combinación precio, dividiendo tu compra en varios supermercados</p>
+                                    <p className="text-[#9D9D9D]">Presiona el switch para encontrar la mejor combinación precio, comprando todo en un mismo lugar.</p>
                                 </>
 
                         }

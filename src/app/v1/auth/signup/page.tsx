@@ -57,7 +57,7 @@ export default function Signin() {
                 />
 
                 <p className={`w-[270px] lg:w-[400px] ${poppins.className} text-xs`}>
-                    Al hacer click en "Registrate", aceptas nuestros <a href="#" className="text-blue-400 font-medium">terminos y condiciones</a>
+                    {`Al hacer click en "Registrate"`}, aceptas nuestros <a href="#" className="text-blue-400 font-medium">terminos y condiciones</a>
                 </p>
 
                 <button
