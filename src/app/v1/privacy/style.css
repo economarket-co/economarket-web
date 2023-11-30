@@ -1,0 +1,20 @@
+h1 {
+    font-size: large;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+h2 {
+    font-size: medium;
+    font-weight: 500;
+    /* padding-bottom: 5px; */
+}
+
+p {
+    font-size: small;
+    font-weight: 400;
+}

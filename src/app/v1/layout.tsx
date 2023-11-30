@@ -24,7 +24,7 @@ export default function RootLayout({
       <Providers>
         <body className={`flex flex-col min-h-screen`}>
           <CustomNavbar />
-          <div className='flex grow'>
+          <div className='flex grow pt-[68px] lg:pt-[77px]'>
             {children}
           </div>
           <Footer />
