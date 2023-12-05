@@ -10,6 +10,7 @@ import BasketCard from "@/components/cards/BasketCard";
 import CartResume from "@/components/CartResume";
 import CartTable from "@/components/CartTable";
 import SuggestionsSection from "@/components/SuggestionsSection";
+import { dmserif, quicksand } from "@/fonts";
 
 export default function Cart() {
     const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
@@ -181,13 +182,13 @@ export default function Cart() {
                         {
                             !allInOnerMarket ?
                                 <>
-                                    <p className="text-lg text-[#434343]">Comprando todo en el mismo supermercado</p>
-                                    <p className="text-[#9D9D9D]">Presiona el switch para encontrar la mejor combinación precio, incluso si los productos se adquieren en distintos lugares.</p>
+                                    <p className={`${dmserif.className} text-lg text-[#434343]`}>Comprando todo en el mismo supermercado</p>
+                                    <p className={`${quicksand.className} text-[#9D9D9D]`}>Presiona el switch para encontrar la mejor combinación precio, incluso si los productos se adquieren en distintos lugares.</p>
                                 </>
                                 :
                                 <>
-                                    <p className="text-lg text-[#434343]">Dividiendo tus compras en supermercados</p>
-                                    <p className="text-[#9D9D9D]">Presiona el switch para encontrar la mejor combinación precio, comprando todo en un mismo lugar.</p>
+                                    <p className={`${dmserif.className} text-lg text-[#434343]`}>Dividiendo tus compras en supermercados</p>
+                                    <p className={` ${quicksand.className} text-[#9D9D9D]`}>Presiona el switch para encontrar la mejor combinación precio, comprando todo en un mismo lugar.</p>
                                 </>
 
                         }
