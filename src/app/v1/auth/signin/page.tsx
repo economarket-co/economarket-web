@@ -65,10 +65,6 @@ export default function Signin() {
 
                 <div className="flex flex-col gap-4 justify-center items-center xl:flex-row">
                     <SocialNetWorkButton provider="google" />
-                    <span className="text-[#B0BAC3] text-lg">
-                        - O -
-                    </span>
-                    <SocialNetWorkButton provider="facebook" />
                 </div>
             </form>
         </div>
