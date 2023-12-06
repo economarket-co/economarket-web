@@ -42,8 +42,8 @@ export default function Footer() {
 
                 <div className="flex flex-col gap-2 overflow-hidden">
                     <SocialLInk href="https://wa.me/573006724574" content="3006724574" icon="/icons/WhatsApp2.png" />
-                    <SocialLInk href="mailto:economarket@gmail.com" content="@economarket" icon="/icons/email.png" />
-                    <SocialLInk href="mailto:economarket@gmail.com" content="economarket@gmail.com" icon="/icons/browser.png" />
+                    <SocialLInk href="mailto:economarketdigital@gmail.com" content="economarketdigital@gmail.com" icon="/icons/email.png" />
+                    <SocialLInk href="https://www.instagram.com/economarket.col/" content="@economarket.col" icon="/icons/browser.png" />
                 </div>
 
 
